@@ -173,7 +173,7 @@
 <meta property="og:image" content="https://loopvoid.github.io/2018/10/15/自动微分法/%E8%AE%A1%E7%AE%97%E5%9B%BE6.png">
 <meta property="og:image" content="https://loopvoid.github.io/2018/10/15/自动微分法/%E8%AE%A1%E7%AE%97%E5%9B%BE7.png">
 <meta property="og:image" content="https://loopvoid.github.io/2018/10/15/自动微分法/%E8%AE%A1%E7%AE%97%E5%9B%BE8.png">
-<meta property="og:updated_time" content="2019-08-06T07:45:08.655Z">
+<meta property="og:updated_time" content="2019-08-06T07:57:48.256Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="自动微分法">
 <meta name="twitter:description" content="几种微分求解的方法 手动求解法(Manual Differentiation) 数值微分法(Numerical Differentiation) 符号微分法(Symbolic Differentiation) 自动微分法(Automatic Differentiation)  自动微分在数学和计算代数领域，automatic differentiation (AD)又称为 algorithmic">
@@ -535,7 +535,7 @@
 <p>然后对该计算图求解偏导数：</p>
 <p><img src="//loopvoid.github.io/2018/10/15/自动微分法/%E8%AE%A1%E7%AE%97%E5%9B%BE4.png" alt="计算图4.png"></p>
 <p>由链式法则得到：$$\frac{\partial y}{\partial  x_1}=\frac{\partial y}{\partial  d}\frac{\partial d}{\partial  c}\frac{\partial c}{\partial  x_1}+\frac{\partial y}{\partial  d}\frac{\partial d}{\partial  x_1}$$</p>
-<p>结合计算图中对应的值可知：$$\frac{\partial y}{\partial  x_1}=1<em>1</em>1+1*1=2$$</p>
+<p>结合计算图中对应的值可知：$\frac{\partial y}{\partial  x_1}=1\times1\times1+1\times1=2$</p>
 <h3 id="例2："><a href="#例2：" class="headerlink" title="例2："></a>例2：</h3><p>对于下列函数：$$f(x_1,x_2)=ln(x_1)+x_1*x_2-sin(x_2)$$</p>
 <p>转化为计算图：</p>
 <p><img src="//loopvoid.github.io/2018/10/15/自动微分法/%E8%AE%A1%E7%AE%97%E5%9B%BE5.png" alt="计算图5.png"></p>
@@ -560,8 +560,7 @@
 <p>  $$\frac{y}{v_0}=\bar{v_2}\frac{dv_2}{dv_0}+\bar{v_3}\frac{dv_3}{dv_0}$$</p>
 <p>和backpropagation算法一样，我们必须记住前向时当前节点发出的边，然后在反向传播时，可以搜集所有受到当前节点影响的节点。 </p>
 <p>如上的计算过程，对于像神经网络这种模型，输入通常是上万到上百万维，而输出损失函数是1维的模型，则只需要一遍反向模式计算过程，便可以求出输出对于各个输入的导数，从而轻松求取梯度用于后续优化更新。</p>
-<p>#参考</p>
-<p>AD:</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>AD:</p>
 <ul>
 <li><a href="https://arxiv.org/pdf/1502.05767.pdf" target="_blank" rel="noopener">Automatic differentiation in machine learning: a survey</a></li>
 <li><a href="http://www.met.reading.ac.uk/~swrhgnrj/publications/adept.pdf" target="_blank" rel="noopener">Fast Reverse-Mode Automatic Differentiation using Expression</a></li>
@@ -954,7 +953,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#几种微分求解的方法"><span class="nav-number">1.</span> <span class="nav-text">几种微分求解的方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#自动微分"><span class="nav-number">2.</span> <span class="nav-text">自动微分</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#AD基本原理"><span class="nav-number">3.</span> <span class="nav-text">AD基本原理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#链式法则"><span class="nav-number">3.1.</span> <span class="nav-text">链式法则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#正向链式法则计算图"><span class="nav-number">3.2.</span> <span class="nav-text">正向链式法则计算图</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#例1："><span class="nav-number">3.2.1.</span> <span class="nav-text">例1：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#例2："><span class="nav-number">3.2.2.</span> <span class="nav-text">例2：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#反向链式法则计算图"><span class="nav-number">3.3.</span> <span class="nav-text">反向链式法则计算图</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#几种微分求解的方法"><span class="nav-number">1.</span> <span class="nav-text">几种微分求解的方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#自动微分"><span class="nav-number">2.</span> <span class="nav-text">自动微分</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#AD基本原理"><span class="nav-number">3.</span> <span class="nav-text">AD基本原理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#链式法则"><span class="nav-number">3.1.</span> <span class="nav-text">链式法则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#正向链式法则计算图"><span class="nav-number">3.2.</span> <span class="nav-text">正向链式法则计算图</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#例1："><span class="nav-number">3.2.1.</span> <span class="nav-text">例1：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#例2："><span class="nav-number">3.2.2.</span> <span class="nav-text">例2：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#反向链式法则计算图"><span class="nav-number">3.3.</span> <span class="nav-text">反向链式法则计算图</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">4.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>
