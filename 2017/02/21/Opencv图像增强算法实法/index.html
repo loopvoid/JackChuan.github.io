@@ -154,28 +154,35 @@
 
 
   
-  <meta name="keywords" content="YenChuan's Blog">
+  <meta name="keywords" content="Opencv,图像增强,">
 
 
-<meta name="description" content="Learn and record.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Chuan·Yen">
-<meta property="og:url" content="https://loopvoid.github.io/archives/2019/08/index.html">
+<meta name="description" content="增强图像中的有用信息，它可以是一个失真的过程，其目的是要改善图像的视觉效果，针对给定图像的应用场合，有目的地强调图像的整体或局部特性，将原来不清晰的图像变得清晰或强调某些感兴趣的特征，扩大图像中不同物体特征之间的差别，抑制不感兴趣的特征，使之改善图像质量、丰富信息量，加强图像判读和识别效果，满足某些特殊分析的需要。 直方图均衡化图像增强图像对比度增强的方法可以分成两类:一类是直接对比度增强方法;另">
+<meta name="keywords" content="Opencv,图像增强">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Opencv图像增强算法实现(直方图均衡化、Laplace、Log、Gamma)">
+<meta property="og:url" content="https://loopvoid.github.io/2017/02/21/Opencv图像增强算法实法/index.html">
 <meta property="og:site_name" content="Chuan·Yen">
-<meta property="og:description" content="Learn and record.">
+<meta property="og:description" content="增强图像中的有用信息，它可以是一个失真的过程，其目的是要改善图像的视觉效果，针对给定图像的应用场合，有目的地强调图像的整体或局部特性，将原来不清晰的图像变得清晰或强调某些感兴趣的特征，扩大图像中不同物体特征之间的差别，抑制不感兴趣的特征，使之改善图像质量、丰富信息量，加强图像判读和识别效果，满足某些特殊分析的需要。 直方图均衡化图像增强图像对比度增强的方法可以分成两类:一类是直接对比度增强方法;另">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://loopvoid.github.io/.io//elephant_hist.jpg">
+<meta property="og:image" content="https://loopvoid.github.io/.io//cow_laplace.jpg">
+<meta property="og:image" content="https://loopvoid.github.io/.io//darknight_log.jpg">
+<meta property="og:image" content="https://loopvoid.github.io/.io//gamma_cvt.jpg">
+<meta property="og:updated_time" content="2019-08-06T07:04:24.811Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chuan·Yen">
-<meta name="twitter:description" content="Learn and record.">
+<meta name="twitter:title" content="Opencv图像增强算法实现(直方图均衡化、Laplace、Log、Gamma)">
+<meta name="twitter:description" content="增强图像中的有用信息，它可以是一个失真的过程，其目的是要改善图像的视觉效果，针对给定图像的应用场合，有目的地强调图像的整体或局部特性，将原来不清晰的图像变得清晰或强调某些感兴趣的特征，扩大图像中不同物体特征之间的差别，抑制不感兴趣的特征，使之改善图像质量、丰富信息量，加强图像判读和识别效果，满足某些特殊分析的需要。 直方图均衡化图像增强图像对比度增强的方法可以分成两类:一类是直接对比度增强方法;另">
+<meta name="twitter:image" content="https://loopvoid.github.io/.io//elephant_hist.jpg">
 
 
 
-  <link rel="alternate" href="/" title="Chuan·Yen" type="application/atom+xml">
+  <link rel="alternate" href="/atom.xml" title="Chuan·Yen" type="application/atom+xml">
 
 
 
 
-  <link rel="canonical" href="https://loopvoid.github.io/archives/2019/08/">
+  <link rel="canonical" href="https://loopvoid.github.io/2017/02/21/Opencv图像增强算法实法/">
 
 
 
@@ -184,7 +191,7 @@
     sidebar: "",
   };
 </script>
-  <title>Archive | Chuan·Yen</title>
+  <title>Opencv图像增强算法实现(直方图均衡化、Laplace、Log、Gamma) | Chuan·Yen</title>
   
 
 
@@ -241,7 +248,7 @@
     
   
 
-  <div class="container sidebar-position-right page-archive">
+  <div class="container sidebar-position-right page-post-detail">
     <div class="headband"></div>
 
 
@@ -366,77 +373,231 @@
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
 
-      
-      <span class="archive-page-counter">
-        
-        
-         
-        
-        OK! 41 posts in total. Keep on posting.
-      </span>
-      
-
-      
-
-        
-        
-        
-
-        
-          
-          <div class="collection-title">
-            <h2 class="archive-year" id="archive-year-2019">2019</h2>
-          </div>
-        
-        
-
-        
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://loopvoid.github.io/2017/02/21/Opencv图像增强算法实法/">
 
-      <h3 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Chuan Yen">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/tt.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Chuan·Yen">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2019/08/06/Opencv图像增强算法实法/" itemprop="url">
-              
-                <span itemprop="name">Opencv图像增强算法实现(直方图均衡化、Laplace、Log、Gamma)</span>
-              
-            </a>
         
-      </h3>
+          <h2 class="post-title" itemprop="name headline">Opencv图像增强算法实现(直方图均衡化、Laplace、Log、Gamma)</h2>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-08-06T13:57:11+08:00" content="2019-08-06">
-          08-06
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-21T20:40:13+08:00">2017-02-21</time>
+            
 
-    </header>
-  </article>
+            
+            
 
+            
+          </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Opencv/" itemprop="url" rel="index"><span itemprop="name">Opencv</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             Views: 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
+      
 
+      
+        <p>增强图像中的有用信息，它可以是一个失真的过程，其目的是要改善图像的视觉效果，针对给定图像的应用场合，有目的地强调图像的整体或局部特性，将原来不清晰的图像变得清晰或强调某些感兴趣的特征，扩大图像中不同物体特征之间的差别，抑制不感兴趣的特征，使之改善图像质量、丰富信息量，加强图像判读和识别效果，满足某些特殊分析的需要。</p>
+<h2 id="直方图均衡化图像增强"><a href="#直方图均衡化图像增强" class="headerlink" title="直方图均衡化图像增强"></a>直方图均衡化图像增强</h2><p>图像对比度增强的方法可以分成两类:一类是<strong>直接对比度增强方法</strong>;另一类是<strong>间接对比度增强方法</strong>。<br><strong>直方图拉伸</strong>和<strong>直方图均衡化</strong>是两种最常见的间接对比度增强方法。<br><strong>直方图拉伸</strong>是通过对比度拉伸对直方图进行调整，从而“扩大”前景和背景灰度的差别，以达到增强对比度的目的，这种方法可以利用线性或非线性的方法来实现。<br><strong>直方图均衡化</strong>则通过使用累积函数对灰度值进行“调整”以实现对比度的增强。</p>
+<blockquote>
+<ul>
+<li><strong>优点</strong>:这种方法对于背景和前景都太亮或者太暗的图像非常有用，这种方法尤其是可以带来X光图像中更好的骨骼结构显示以及曝光过度或者曝光不足照片中更好的细节。这种方法的一个主要优势是它是一个相当直观的技术并且是可逆操作，如果已知均衡化函数，那么就可以恢复原始的直方图，并且计算量也不大。</li>
+<li><strong>缺点</strong>:缺点是它对处理的数据不加选择，它可能会增加背景杂讯的对比度并且降低有用信号的对比度；变换后图像的灰度级减少，某些细节消失；某些图像，如直方图有高峰，经处理后对比度不自然的过分增强。<br> 彩色图像的直方图均衡化实现：</li>
+</ul>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"opencv2/opencv.hpp"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"opencv2/highgui/highgui.hpp"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"opencv2/imgproc/imgproc.hpp"</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> cv;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Mat src = imread(<span class="string">"elephant.jpg"</span>);</span><br><span class="line">    Mat src_RGB[<span class="number">3</span>], dst;</span><br><span class="line">    split(src, src_RGB);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">3</span>; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        equalizeHist(src_RGB[i], src_RGB[i]);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    merge(src_RGB, <span class="number">3</span>, dst);</span><br><span class="line">    imwrite(<span class="string">"elephant_hist.jpg"</span>, dst);</span><br><span class="line">    waitKey();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>直方图均衡化前后对比如下:<br><img src="/.io//elephant_hist.jpg" alt="直方图均衡化"></p>
+<h2 id="Laplace图像增强"><a href="#Laplace图像增强" class="headerlink" title="Laplace图像增强"></a>Laplace图像增强</h2><p>拉普拉斯算子可以增强局部的图像对比度。<br>Laplace 8邻域卷积核:<br> 0   -1    0<br>-1    5   -1<br> 0   -1    0<br>采用filter2D函数实现对图像的卷积:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"opencv2/opencv.hpp"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"opencv2/highgui/highgui.hpp"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"opencv2/imgproc/imgproc.hpp"</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> cv;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">        Mat src = imread(<span class="string">"cow.jpg"</span>);</span><br><span class="line">        Mat dst;</span><br><span class="line">        Mat kernel = (Mat_&lt;<span class="keyword">int</span>&gt;(<span class="number">3</span>, <span class="number">3</span>) &lt;&lt; <span class="number">0</span>, <span class="number">-1</span>, <span class="number">0</span>, <span class="number">-1</span>, <span class="number">5</span>, <span class="number">-1</span>, <span class="number">0</span>, <span class="number">-1</span>, <span class="number">0</span>);</span><br><span class="line">        filter2D(src, dst, src.depth(), kernel);</span><br><span class="line">        imshow(<span class="string">"dst"</span>,dst);</span><br><span class="line">        waitKey();</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>图像进行Laplace卷积前后对比如下:<br><img src="/.io//cow_laplace.jpg" alt="Laplace变换"></p>
+<h2 id="对数Log变换图像增强"><a href="#对数Log变换图像增强" class="headerlink" title="对数Log变换图像增强"></a>对数Log变换图像增强</h2><p>对数变换可以将图像的低灰度值部分扩展，显示出低灰度部分更多的细节，将其高灰度值部分压缩，减少高灰度值部分的细节，从而达到强调图像低灰度部分的目的。变换方法：<br> $$ s=c·\log_v(1+v·r) \longrightarrow r\in [0,1]$$<br>对于不同的底数，底数越大，对低灰度部分的扩展就越强，对高灰度部分的压缩也就越强。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"opencv2/opencv.hpp"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"opencv2/highgui/highgui.hpp"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"opencv2/imgproc/imgproc.hpp"</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> cv;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">        Mat src = imread(<span class="string">"darknight.jpg"</span>);</span><br><span class="line">        <span class="function">Mat <span class="title">dst</span><span class="params">(src.size(), CV_32FC3)</span></span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; src.rows; i++)</span><br><span class="line">        &#123;</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; src.cols; j++)</span><br><span class="line">                &#123;</span><br><span class="line">                        dst.at&lt;Vec3f&gt;(i, j)[<span class="number">0</span>] = <span class="built_in">log</span>(<span class="number">1</span> + src.at&lt;Vec3b&gt;(i, j)[<span class="number">0</span>]);</span><br><span class="line">                        dstdst.at&lt;Vec3f&gt;(i, j)[<span class="number">1</span>] = <span class="built_in">log</span>(<span class="number">1</span> + src.at&lt;Vec3b&gt;(i, j)[<span class="number">1</span>]);</span><br><span class="line">                        dst.at&lt;Vec3f&gt;(i, j)[<span class="number">2</span>] = <span class="built_in">log</span>(<span class="number">1</span> + src.at&lt;Vec3b&gt;(i, j)[<span class="number">2</span>]);</span><br><span class="line">                &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        normalize(dst, dst, <span class="number">0</span>, <span class="number">255</span>, CV_MINMAX);</span><br><span class="line">        convertScaleAbs(dst, dst);</span><br><span class="line">        imshow(<span class="string">"darknight_log.jpg"</span>,dst);</span><br><span class="line">        waitKey();</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>对图片进行Log变换前后对比如下:<br><img src="/.io//darknight_log.jpg" alt="Log变换"></p>
+<h2 id="伽马变换的图像增强"><a href="#伽马变换的图像增强" class="headerlink" title="伽马变换的图像增强"></a>伽马变换的图像增强</h2><p>伽马变换主要用于图像的校正，将灰度过高或者灰度过低的图片进行修正，增强对比度。变换公式就是对原图像上每一个像素值做乘积运算：<br>  $$ s=cr^\gamma \longrightarrow r\in[0,1] $$<br>伽马变换对于图像对比度偏低，并且整体亮度值偏高（对于于相机过曝）情况下的图像增强效果明显。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"opencv2/opencv.hpp"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"opencv2/highgui/highgui.hpp"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"opencv2/imgproc/imgproc.hpp"</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> cv;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> Gamma 3</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">        Mat src = imread(<span class="string">"src.jpg"</span>);</span><br><span class="line">        <span class="function">Mat <span class="title">dst</span><span class="params">(src.size(), CV_32FC3)</span></span>;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; src.rows;i++)</span><br><span class="line">        &#123;</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; src.cols; j++)</span><br><span class="line">                &#123;</span><br><span class="line">                        dst.at&lt;Vec3f&gt;(i, j)[<span class="number">0</span>] = <span class="built_in">pow</span>(src.at&lt;Vec3b&gt;(i, j)[<span class="number">0</span>], Gamma);</span><br><span class="line">                        dst.at&lt;Vec3f&gt;(i, j)[<span class="number">1</span>] = <span class="built_in">pow</span>(src.at&lt;Vec3b&gt;(i, j)[<span class="number">1</span>], Gamma);</span><br><span class="line">                        dst.at&lt;Vec3f&gt;(i, j)[<span class="number">2</span>] = <span class="built_in">pow</span>(src.at&lt;Vec3b&gt;(i, j)[<span class="number">2</span>], Gamma);</span><br><span class="line">                &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        normalize(dst, dst, <span class="number">0</span>, <span class="number">255</span>, CV_MINMAX);</span><br><span class="line">        convertScaleAbs(dst, dst);</span><br><span class="line"></span><br><span class="line">        waitKey();</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>图像进行Laplace卷积前后对比如下:<br><img src="/.io//gamma_cvt.jpg" alt="伽马变换"></p>
+
+      
     </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+
+
+  <div>
+    
+      <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-heart"></i>感谢您的阅读-------------</div>
+    
+</div>
+     
+  </div>
+
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Opencv/" rel="tag"><i class="fa fa-tag"></i> Opencv</a>
+          
+            <a href="/tags/图像增强/" rel="tag"><i class="fa fa-tag"></i> 图像增强</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/02/20/Opencv实现Surf特征点和Homography匹配物体/" rel="next" title="Opencv实现Surf特征点和Homography匹配物体">
+                <i class="fa fa-chevron-left"></i> Opencv实现Surf特征点和Homography匹配物体
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/02/23/Opencv计算算法运行时间/" rel="prev" title="Opencv计算算法运行时间">
+                Opencv计算算法运行时间 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
           
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zNDMxMy8xMDg1MA=="></div>
+    </div>
+
+  
+
+
 
         </div>
         
@@ -457,8 +618,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -611,7 +781,7 @@
 
           
             <div class="feed-link motion-element">
-              <a href="/" rel="alternate">
+              <a href="/atom.xml" rel="alternate">
                 <i class="fa fa-rss"></i>
                 RSS
               </a>
@@ -701,6 +871,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#直方图均衡化图像增强"><span class="nav-number">1.</span> <span class="nav-text">直方图均衡化图像增强</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Laplace图像增强"><span class="nav-number">2.</span> <span class="nav-text">Laplace图像增强</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对数Log变换图像增强"><span class="nav-number">3.</span> <span class="nav-text">对数Log变换图像增强</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#伽马变换的图像增强"><span class="nav-number">4.</span> <span class="nav-text">伽马变换的图像增强</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -849,6 +1035,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.0.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.0.4"></script>
+
+
 
   
 
@@ -873,6 +1063,17 @@
 
 
 
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
   
 
 
@@ -1237,6 +1438,29 @@
   
   
 
+  
+    
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    
   
 
 
