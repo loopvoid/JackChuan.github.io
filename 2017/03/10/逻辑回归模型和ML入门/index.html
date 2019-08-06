@@ -1,0 +1,1551 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+  <script>
+  (function(i,s,o,g,r,a,m){i["DaoVoiceObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;a.charset="utf-8";m.parentNode.insertBefore(a,m)})(window,document,"script",('https:' == document.location.protocol ? 'https:' : 'http:') + "//widget.daovoice.io/widget/0f81ff2f.js","daovoice")
+  daovoice('init', {
+      app_id: "5fc143b8"
+    });
+  daovoice('update');
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.0.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/tt.png?v=6.0.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/tt.png?v=6.0.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/tt.png?v=6.0.4">
+
+
+  <link rel="mask-icon" href="/images/tt.png?v=6.0.4" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '6.0.4',
+    sidebar: {"position":"right","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+
+
+
+
+  
+  <meta name="keywords" content="ML,逻辑回归模型,">
+
+
+<meta name="description" content="简介(Introduction)问题：肿瘤医院提供了数据，并希望我们确定患者是否有致命的恶性肿瘤或良性肿瘤。 这被称为分类问题。 为了帮助分类每个患者，我们给出他们的年龄和肿瘤的大小。 直观地，可以想象年轻的患者和患有小的良性肿瘤的患者不太可能患有恶性癌症。 数据集模拟此应用程序，其中每个观察结果是表示为点（在下面的图中）的患者，其中红色表示恶性，蓝色表示良性。 注意：这是一个学习的玩具示例，在现">
+<meta name="keywords" content="ML,逻辑回归模型">
+<meta property="og:type" content="article">
+<meta property="og:title" content="逻辑回归模型和ML入门">
+<meta property="og:url" content="https://loopvoid.github.io/2017/03/10/逻辑回归模型和ML入门/index.html">
+<meta property="og:site_name" content="Chuan·Yen">
+<meta property="og:description" content="简介(Introduction)问题：肿瘤医院提供了数据，并希望我们确定患者是否有致命的恶性肿瘤或良性肿瘤。 这被称为分类问题。 为了帮助分类每个患者，我们给出他们的年龄和肿瘤的大小。 直观地，可以想象年轻的患者和患有小的良性肿瘤的患者不太可能患有恶性癌症。 数据集模拟此应用程序，其中每个观察结果是表示为点（在下面的图中）的患者，其中红色表示恶性，蓝色表示良性。 注意：这是一个学习的玩具示例，在现">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://loopvoid.github.io/2017/03/10/逻辑回归模型和ML入门/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92%E6%A8%A1%E5%9E%8B%E5%92%8CML%E5%85%A5%E9%97%A8/cancer_data_plot.jpg">
+<meta property="og:image" content="https://loopvoid.github.io/2017/03/10/逻辑回归模型和ML入门/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92%E6%A8%A1%E5%9E%8B%E5%92%8CML%E5%85%A5%E9%97%A8/cancer_classify_plot.jpg">
+<meta property="og:image" content="https://loopvoid.github.io/2017/03/10/逻辑回归模型和ML入门/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92%E6%A8%A1%E5%9E%8B%E5%92%8CML%E5%85%A5%E9%97%A8/logistic_neuron.jpg">
+<meta property="og:image" content="https://loopvoid.github.io/2017/03/10/逻辑回归模型和ML入门/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92%E6%A8%A1%E5%9E%8B%E5%92%8CML%E5%85%A5%E9%97%A8/image4.png">
+<meta property="og:image" content="https://loopvoid.github.io/2017/03/10/逻辑回归模型和ML入门/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92%E6%A8%A1%E5%9E%8B%E5%92%8CML%E5%85%A5%E9%97%A8/logistic_neuron2.jpg">
+<meta property="og:image" content="https://loopvoid.github.io/2017/03/10/逻辑回归模型和ML入门/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92%E6%A8%A1%E5%9E%8B%E5%92%8CML%E5%85%A5%E9%97%A8/image6.png">
+<meta property="og:image" content="https://loopvoid.github.io/2017/03/10/逻辑回归模型和ML入门/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92%E6%A8%A1%E5%9E%8B%E5%92%8CML%E5%85%A5%E9%97%A8/image7.png">
+<meta property="og:updated_time" content="2019-08-06T04:38:56.710Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="逻辑回归模型和ML入门">
+<meta name="twitter:description" content="简介(Introduction)问题：肿瘤医院提供了数据，并希望我们确定患者是否有致命的恶性肿瘤或良性肿瘤。 这被称为分类问题。 为了帮助分类每个患者，我们给出他们的年龄和肿瘤的大小。 直观地，可以想象年轻的患者和患有小的良性肿瘤的患者不太可能患有恶性癌症。 数据集模拟此应用程序，其中每个观察结果是表示为点（在下面的图中）的患者，其中红色表示恶性，蓝色表示良性。 注意：这是一个学习的玩具示例，在现">
+<meta name="twitter:image" content="https://loopvoid.github.io/2017/03/10/逻辑回归模型和ML入门/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92%E6%A8%A1%E5%9E%8B%E5%92%8CML%E5%85%A5%E9%97%A8/cancer_data_plot.jpg">
+
+
+
+  <link rel="alternate" href="/" title="Chuan·Yen" type="application/atom+xml">
+
+
+
+
+  <link rel="canonical" href="https://loopvoid.github.io/2017/03/10/逻辑回归模型和ML入门/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+  <title>逻辑回归模型和ML入门 | Chuan·Yen</title>
+  
+
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?df155f6ce6a17f08be7a6a73822581d2";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+
+
+    <a href="https://github.com/loopvoid" class="github-corner" aria-label="View source on Github"><svg width="80" height="80" viewbox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+
+    
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"> <div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Chuan·Yen</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description"></h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-user"></i> <br>About</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Search</a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+  
+
+
+
+ </div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://loopvoid.github.io/2017/03/10/逻辑回归模型和ML入门/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Chuan Yen">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/tt.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Chuan·Yen">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">逻辑回归模型和ML入门</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-10T08:15:04+08:00">2017-03-10</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Machine-Learning/" itemprop="url" rel="index"><span itemprop="name">Machine Learning</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             Views: 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="简介-Introduction"><a href="#简介-Introduction" class="headerlink" title="简介(Introduction)"></a>简介(Introduction)</h1><p><strong>问题：</strong>肿瘤医院提供了数据，并希望我们确定患者是否有致命的恶性肿瘤或良性肿瘤。 这被称为分类问题。 为了帮助分类每个患者，我们给出他们的年龄和肿瘤的大小。 直观地，可以想象年轻的患者和患有小的良性肿瘤的患者不太可能患有恶性癌症。 数据集模拟此应用程序，其中每个观察结果是表示为点（在下面的图中）的患者，其中红色表示恶性，蓝色表示良性。 注意：这是一个学习的玩具示例，在现实生活中有大量来自不同测试(检查)源的特征和医生的经验，这些特征对患者的诊断(治疗)决定起作用。<br><img src="%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92%E6%A8%A1%E5%9E%8B%E5%92%8CML%E5%85%A5%E9%97%A8/cancer_data_plot.jpg" alt="image1"><br><strong>目标：</strong>我们的目标是训练一个分类器，可以根据两个特征（年龄和肿瘤大小）自动将任何患者标记为良性或恶性类别。 本次，我们将创建一个线性分类器，它是深度网络中的一块基石。<br><img src="%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92%E6%A8%A1%E5%9E%8B%E5%92%8CML%E5%85%A5%E9%97%A8/cancer_classify_plot.jpg" alt="image2"><br>在上图中，绿线表示从数据中学习的模型，并将蓝点与红点分离。<strong>注意：</strong>这个分类器确实犯错误，其中蓝色点在绿色线的错误一侧。 但是，有办法解决这个问题，既是用非线性分类来解决。<br><strong>方法：</strong>任何学习算法通常具有五个阶段。<strong>数据读取</strong>，<strong>数据预处理</strong>，<strong>模型创建</strong>，<strong>模型参数学习</strong>和<strong>模型评估</strong>(模型测试或模型预测)。</p>
+<blockquote>
+<ul>
+<li>1.<strong>数据读取(Data reading)</strong>：我们生成的模拟数据集，每个样品具有指示年龄和肿瘤大小的两个特征（绘制如下）。</li>
+<li>2.<strong>数据预处理(Data Preprocessing)</strong>：通常需要对尺寸或年龄等个别特征进行缩放。 通常，可以在0和1之间缩放数据。为了简单起见，本次不进行任何缩放（有关详细信息，请参阅：特征缩放）。</li>
+<li>3.<strong>模型创建(Model creation)</strong>：本次我们创建一个基本的线性模型。</li>
+<li>4.<strong>模型学习(Learing the model)</strong>：这也被称为训练。虽然拟合线性模型可以以各种方式（线性回归），在CNTK中，我们使用<strong>随机梯度下降</strong><a href="https://en.wikipedia.org/wiki/Stochastic_gradient_descent" target="_blank" rel="noopener">SGD</a>。</li>
+<li>5.<strong>评估(Evaluation)</strong>：这也被称为测试，其中采用具有未曾用于训练的已知标签（也称ground-truth）的数据集。 这使我们能够评估模型在现实世界（以前看不到的）观察中的表现。</li>
+</ul>
+</blockquote>
+<h1 id="逻辑回归-Logistic-Regression"><a href="#逻辑回归-Logistic-Regression" class="headerlink" title="逻辑回归(Logistic Regression)"></a>逻辑回归(Logistic Regression)</h1><p><a href="https://en.wikipedia.org/wiki/Logistic_regression" target="_blank" rel="noopener">逻辑回归(Logistic Regression)</a>是使用特征的线性加权组合并且预测不同类的概率的基本机器学习技术。 在我们的情况下，分类器将在[0,1]中生成概率，然后与阈值（例如0.5）进行比较以产生二进制标签（0或1）。显然，所示的方法可以容易地扩展到多个类。<br><img src="%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92%E6%A8%A1%E5%9E%8B%E5%92%8CML%E5%85%A5%E9%97%A8/logistic_neuron.jpg" alt="image3"><br>在上图中，来自不同输入特征的贡献被线性加权并且聚合。 所得的总和通过sigmoid函数映射到0-1范围。 对于具有多于两个输出标签的分类器，可以使用[softmax][]函数。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Import 相关组件</span></span><br><span class="line"><span class="keyword">from</span> __future__ <span class="keyword">import</span> print_function</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">from</span> cntk <span class="keyword">import</span> Trainer, learning_rate_schedule, UnitType</span><br><span class="line"><span class="keyword">from</span> cntk.learner <span class="keyword">import</span> sgd</span><br><span class="line"><span class="keyword">from</span> cntk.ops <span class="keyword">import</span> *</span><br><span class="line"><span class="comment"># 在测计算机时选择正确的目标设备：</span></span><br><span class="line"><span class="keyword">if</span> <span class="string">'TEST_DEVICE'</span> <span class="keyword">in</span> os.environ:</span><br><span class="line">    <span class="keyword">import</span> cntk</span><br><span class="line">    <span class="keyword">if</span> os.environ[<span class="string">'TEST_DEVICE'</span>] == <span class="string">'cpu'</span>:</span><br><span class="line">        cntk.device.set_default_device(cntk.device.cpu())</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        cntk.device.set_default_device(cntk.device.gpu(<span class="number">0</span>))</span><br></pre></td></tr></table></figure>
+
+<h2 id="数据生成-Data-Generation"><a href="#数据生成-Data-Generation" class="headerlink" title="数据生成(Data Generation)"></a>数据生成(Data Generation)</h2><p>将使用numpy库生成一些模拟肿瘤示例的合成数据。我们有两个特征（以二维表示），每个特征都是两个类别中的一个（<strong>蓝色点:良性</strong>、<strong>红色点:恶性</strong>）。<br>训练数据中的每个表观(observation)具有对应于每个表观(observation)（特征 - 年龄和大小的集合）的标签（蓝色或红色）。 在这个例子中，我们有两个类由标签0或1表示，因此这是个二进制分类任务。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 定义该网络</span></span><br><span class="line">input_dim = <span class="number">2</span></span><br><span class="line">num_output_classes = <span class="number">2</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="输入-Input-和标签-Labels"><a href="#输入-Input-和标签-Labels" class="headerlink" title="输入(Input)和标签(Labels)"></a>输入(Input)和标签(Labels)</h2><p>在本示例中，我们使用numpy库来生成合成数据。在现实世界的问题中，将使用读取器，其将读取对应于每个观察（患者）的特征值（特征：年龄和肿瘤大小）。模拟的年龄变量按比例缩小使其具有与其他变量类似的范围。这是数据预处理的一个关键方面。<strong>注意:</strong>每个表观(observation)可以处在更高维度的空间中（当更多特征可用时），并且将在CNTK中表示为张量(tensor)。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 确保我们总是获得相同的随机性</span></span><br><span class="line">np.random.seed(<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 辅助函数生成随机数据样本</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">generate_random_data_sample</span><span class="params">(sample_size, feature_dim, num_classes)</span>:</span></span><br><span class="line">    <span class="comment"># 使用NumPy创建合成数据</span></span><br><span class="line">    Y = np.random.randint(size=(sample_size, <span class="number">1</span>), low=<span class="number">0</span>, high=num_classes)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 确保数据是可分离的 </span></span><br><span class="line">    X = (np.random.randn(sample_size, feature_dim)+<span class="number">3</span>) * (Y+<span class="number">1</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 指定数据类型以匹配后面使用的输入变量 </span></span><br><span class="line">    <span class="comment"># (默认double类型)</span></span><br><span class="line">    X = X.astype(np.float32)    </span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 将类 0 转换为向量 '1 0 0'</span></span><br><span class="line">    <span class="comment"># 类 1 转换为向量 '0 1 0', ...</span></span><br><span class="line">    class_ind = [Y==class_number <span class="keyword">for</span> class_number <span class="keyword">in</span> range(num_classes)]</span><br><span class="line">    Y = np.asarray(np.hstack(class_ind), dtype=np.float32)</span><br><span class="line">    <span class="keyword">return</span> X, Y</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建表征要素和标签数据的输入变量。 </span></span><br><span class="line"><span class="comment">#注意：input_variable不需要关于观察值（样本）的附加信息，因为CNTK首先仅创建网络拓扑</span></span><br><span class="line">mysamplesize = <span class="number">32</span></span><br><span class="line">features, labels = generate_random_data_sample(mysamplesize, input_dim, num_output_classes)</span><br></pre></td></tr></table></figure>
+
+<p>接下来可视化数据处理。<br><strong>注意：</strong>如果matplotlib.pyplot的导入失败，请运行conda install matplotlib，这将修复pyplot版本依赖性。 如果你在一个不同于Anaconda的python环境中，那么使用pip install。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 绘制数据</span></span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="comment"># 给定一个2分类</span></span><br><span class="line">colors = [<span class="string">'r'</span> <span class="keyword">if</span> l == <span class="number">0</span> <span class="keyword">else</span> <span class="string">'b'</span> <span class="keyword">for</span> l <span class="keyword">in</span> labels[:,<span class="number">0</span>]]</span><br><span class="line"></span><br><span class="line">plt.scatter(features[:,<span class="number">0</span>], features[:,<span class="number">1</span>], c=colors)</span><br><span class="line">plt.xlabel(<span class="string">"Scaled age (in yrs)"</span>)</span><br><span class="line">plt.ylabel(<span class="string">"Tumor size (in cm)"</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<p><img src="%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92%E6%A8%A1%E5%9E%8B%E5%92%8CML%E5%85%A5%E9%97%A8/image4.png" alt="image4"></p>
+<h2 id="模型创建-Model-Creation"><a href="#模型创建-Model-Creation" class="headerlink" title="模型创建(Model Creation)"></a>模型创建(Model Creation)</h2><p>逻辑回归网络（又名LR）是最简单的构建块，但x在过去十年中已经为许多ML应用程序提供了动力。 LR是一个简单的线性模型，它以一个数字向量作为输入，描述我们所分类的属性（也称为特征向量X，下图中的蓝色节点），并发出Evidence(Z)(从绿色节点发出，也称为激活）。输入层中的每个特征通过相应的权重w（由不同厚度的黑线表示）与输出节点连接。<br><img src="%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92%E6%A8%A1%E5%9E%8B%E5%92%8CML%E5%85%A5%E9%97%A8/logistic_neuron2.jpg" alt="image5"></p>
+<p>第一步是计算观察的证据(evidence)。<br>$$z = \sum_{i=1}^n w_i \times x_i + b = \textbf{w} \cdot \textbf{x} + b$$<br>$\bf{w}$ 是长度的权重向量.  $b$ 是偏差项.<br><strong>Note</strong>: 使用<strong>粗体</strong>表示法来表示向量。<br>使用<a href="https://en.wikipedia.org/wiki/Sigmoid_function" target="_blank" rel="noopener">sigmoid</a>(当结果可以取两个值之一时)或softmax函数(当结果可以采用多于2个类别值中的一个时)，将所计算的证据映射到0-1标度。<br><strong>输入变量(a key CNTK概念)</strong>：输入变量是面向用户代码的容器，其中用户提供的代码在模型学习(aka training)期间填充不同的观察(数据点或样本，在本示例中等同于蓝色/红色点)作为模型函数的输入， 模型评价(测试)。 因此，input_variable的形状必须匹配将提供的数据的形状。 例如，当数据是高度10像素和宽度5像素的图像时，输入特征尺寸将是2(表示图像高度和宽度)。类似地，在我们的示例中，维度是年龄和肿瘤大小，因此input_dim=2.更多关于数据及其维度，以显示在单独的教程中。</p>
+<p><code>input = input_variable(input_dim, np.float32)</code></p>
+<h2 id="网络设置-Network-Setup"><a href="#网络设置-Network-Setup" class="headerlink" title="网络设置(Network Setup)"></a>网络设置(Network Setup)</h2><p>linear_layer函数是上述方程的直接实现。 我们执行两个操作：</p>
+<blockquote>
+<ul>
+<li>1.使用CNTK乘法运算符将权重($\bf{w}$)与特征($\bf{x}$)相乘，并且添加个体特征的贡献(contribution)</li>
+<li>2.添加偏差项b</li>
+</ul>
+</blockquote>
+<p>这些CNTK操作被优化并在可用硬件上执行，并且隐藏了，实现减少用户使用的复杂性。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 定义字典以存储模型参数</span></span><br><span class="line">mydict = &#123;<span class="string">"w"</span>:<span class="literal">None</span>,<span class="string">"b"</span>:<span class="literal">None</span>&#125; </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">linear_layer</span><span class="params">(input_var, output_dim)</span>:</span></span><br><span class="line">    input_dim = input_var.shape[<span class="number">0</span>]</span><br><span class="line">    weight_param = parameter(shape=(input_dim, output_dim))</span><br><span class="line">    bias_param = parameter(shape=(output_dim))</span><br><span class="line">    mydict[<span class="string">'w'</span>], mydict[<span class="string">'b'</span>] = weight_param, bias_param</span><br><span class="line">    <span class="keyword">return</span> times(input_var, weight_param) + bias_param   </span><br><span class="line"></span><br><span class="line"><span class="comment"># z代表网络的输出</span></span><br><span class="line"></span><br><span class="line">output_dim = num_output_classes</span><br><span class="line">z = linear_layer(input, output_dim)</span><br></pre></td></tr></table></figure>
+
+<h2 id="训练模型参数-Learning-model-parameters"><a href="#训练模型参数-Learning-model-parameters" class="headerlink" title="训练模型参数(Learning model parameters)"></a>训练模型参数(Learning model parameters)</h2><p>现在网络已经建立，我们想学习我们的简单线性层的参数$\bf{w}$和b。 为此，我们使用softmax函数将计算的证据(evidence)z转换为一组预测概率($\bf{P}$)。</p>
+<p>$$ \textbf{p} = \mathrm{softmax}(z)$$ </p>
+<p>softmax是将累积的证据(evidence)映射到类别上的概率分布(<a href="https://www.cntk.ai/pythondocs/cntk.ops.html#cntk.ops.softmax" target="_blank" rel="noopener">softmax</a>)的激活函数。 激活功能的其他选择可以在<a href="https://github.com/Microsoft/CNTK/wiki/Activation-Functions" target="_blank" rel="noopener">这里</a>找到。</p>
+<h3 id="训练-Training"><a href="#训练-Training" class="headerlink" title="训练(Training)"></a>训练(Training)</h3><p>softmax的输出是属于各个类别的观察(observation)的概率。 为了训练分类器，我们需要确定模型需要模拟的行为。 换句话说，我们希望生成的概率尽可能接近观察到的标签。 此函数称为成本或损失函数，并显示学习模型与由训练集生成的模型之间的差异。<br>交叉熵(<a href="https://cntk.ai/pythondocs/cntk.ops.html#cntk.ops.cross_entropy_with_softmax" target="_blank" rel="noopener">Cross-entropy</a>)是衡量损失的常用函数。 它定义为：<br>$$ H(p) = - \sum_{j=1}^C y_j \log (p_j) $$<br>其中$p$是我们从<code>softmax</code>函数的预测概率，$y$表示标签。 提供用于训练的数据的该标签也称为<strong>地面真值(ground-truth)</strong>标签。 在两类示例中，<code>标签</code>变量具有两个维度（等于<code>num_output_classes</code>或$C$）。 一般来说，如果手中的任务需要分类到$C$不同的类，则标签变量将具有除了由数据点表示的类别1之外的所有地方的$C$元素。强烈推荐到<a href="http://colah.github.io/posts/2015-09-Visual-Information/" target="_blank" rel="noopener">Blog</a>理解这个交叉熵函数的细节。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">label = input_variable((num_output_classes), np.float32)</span><br><span class="line">loss = cross_entropy_with_softmax(z, label)</span><br></pre></td></tr></table></figure>
+
+<h3 id="测试-Evaluation"><a href="#测试-Evaluation" class="headerlink" title="测试(Evaluation)"></a>测试(Evaluation)</h3><p>为了评估分类，可以比较网络的输出，其对于每个观察发射(emits)具有等于类的数量的维度的证据的向量（可以使用softmax函数转换成概率）。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">eval_error = classification_error(z, label)</span><br></pre></td></tr></table></figure>
+
+<h2 id="配置训练-Configer-Training"><a href="#配置训练-Configer-Training" class="headerlink" title="配置训练(Configer Training)"></a>配置训练(Configer Training)</h2><p>训练者努力通过不同的优化方法减少损失函数，随机梯度下降（<a href="https://en.wikipedia.org/wiki/Stochastic_gradient_descent" target="_blank" rel="noopener">sgd</a>）是最流行的一种。通常，可以从模型参数的随机初始化开始。sgd优化器将计算预测标签与相应的地面真值标签之间的损失或误差，并使用<a href="http://www.statisticsviews.com/details/feature/5722691/Getting-to-the-Bottom-of-Regression-with-Gradient-Descent.html" target="_blank" rel="noopener">gradient-decent</a>在单次迭代中生成新的集合模型参数。一次使用单个观察的上述模型参数更新是有吸引力的，因为其不需要将整个数据集（所有观察）加载到存储器中，并且还需要在较少数据点上的梯度计算，从而允许对大数据集进行训练。然而，使用单个观察样本一次产生的更新在迭代之间可以非常不同。中间点是加载一小组观测值，并使用来自该组的损失或误差的平均值来更新模型参数。这个子集称为minibatch。使用minibatches我们经常从较大的训练数据集采样观察。我们重复模型参数更新的过程，使用不同的训练样本组合，并在一段时间内使损失（和误差）最小化。当增量误差率不再显着变化或在预设数量的最大微型间隔训练之后，我们声称我们的模型是训练的。优化的关键参数之一称为learning_rate。现在，我们可以把它看作是一个缩放因子，它可以调节我们在任何迭代中改变参数的程度。我们将在后面的教程中介绍更多的细节。有了这些信息，我们随时准备创建我们的训练器。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 实例化训练器对象以驱动模型训练</span></span><br><span class="line">learning_rate = <span class="number">0.5</span></span><br><span class="line">lr_schedule = learning_rate_schedule(learning_rate, UnitType.minibatch) </span><br><span class="line">learner = sgd(z.parameters, lr_schedule)</span><br><span class="line">trainer = Trainer(z, (loss, eval_error), [learner])</span><br></pre></td></tr></table></figure>
+
+<p>首先让我们创建一些帮助函数，可视化与训练相关的不同功能。 注意这些令人信服的功能是为了理解其内部机理。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> cntk.utils <span class="keyword">import</span> get_train_eval_criterion, get_train_loss</span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义一个效用函数来计算移动平均和。</span></span><br><span class="line"><span class="comment"># 使用np.cumsum（）函数可以实现更高效的实现</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">moving_average</span><span class="params">(a, w=<span class="number">10</span>)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> len(a) &lt; w: </span><br><span class="line">        <span class="keyword">return</span> a[:]    </span><br><span class="line">    <span class="keyword">return</span> [val <span class="keyword">if</span> idx &lt; w <span class="keyword">else</span> sum(a[(idx-w):idx])/w <span class="keyword">for</span> idx, val <span class="keyword">in</span> enumerate(a)]</span><br><span class="line"><span class="comment"># 定义打印训练进度的函数</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">print_training_progress</span><span class="params">(trainer, mb, frequency, verbose=<span class="number">1</span>)</span>:</span></span><br><span class="line">    training_loss, eval_error = <span class="string">"NA"</span>, <span class="string">"NA"</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> mb % frequency == <span class="number">0</span>:</span><br><span class="line">        training_loss = get_train_loss(trainer)</span><br><span class="line">        eval_error = get_train_eval_criterion(trainer)</span><br><span class="line">        <span class="keyword">if</span> verbose: </span><br><span class="line">            <span class="keyword">print</span> (<span class="string">"Minibatch: &#123;0&#125;, Loss: &#123;1:.4f&#125;, Error: &#123;2:.2f&#125;"</span>.format(mb, training_loss, eval_error))</span><br><span class="line">        </span><br><span class="line">    <span class="keyword">return</span> mb, training_loss, eval_error</span><br></pre></td></tr></table></figure>
+
+<h2 id="运行训练器-Run-the-trainer"><a href="#运行训练器-Run-the-trainer" class="headerlink" title="运行训练器(Run the trainer)"></a>运行训练器(Run the trainer)</h2><p>我们现在准备训练我们的逻辑回归模型。 我们想决定我们需要将什么数据输入到训练引擎中。<br>在此示例中，优化程序的每次迭代将工作在25个样本（25点w.r.t.上面的图）a.k.a. minibatch_size。 我们想训练说20000个观察。 如果数据中的样本数量只有10000，训练器将使2次通过数据。 这由num_minibatches_to_train表示。<strong>注意：</strong>在现实世界的情况下，我们将被给予一定量的标记数据（在本示例的上下文中，观察（年龄，大小）及其意义（良性/恶性）。 我们将使用大量的训练观察值表示70％，并留出余下的值用于评估训练模型。<br>利用这些参数，我们可以继续训练我们的简单前馈网络。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Initialize the parameters for the trainer</span></span><br><span class="line">minibatch_size = <span class="number">25</span></span><br><span class="line">num_samples_to_train = <span class="number">20000</span></span><br><span class="line">num_minibatches_to_train = int(num_samples_to_train  / minibatch_size)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Run the trainer and perform model training</span></span><br><span class="line">training_progress_output_freq = <span class="number">50</span></span><br><span class="line"></span><br><span class="line">plotdata = &#123;<span class="string">"batchsize"</span>:[], <span class="string">"loss"</span>:[], <span class="string">"error"</span>:[]&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>, num_minibatches_to_train):</span><br><span class="line">    features, labels = generate_random_data_sample(minibatch_size, input_dim, num_output_classes)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># Specify input variables mapping in the model to actual minibatch data to be trained with</span></span><br><span class="line">    trainer.train_minibatch(&#123;input : features, label : labels&#125;)</span><br><span class="line">    batchsize, loss, error = print_training_progress(trainer, i, </span><br><span class="line">                                                     training_progress_output_freq, verbose=<span class="number">1</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> (loss == <span class="string">"NA"</span> <span class="keyword">or</span> error ==<span class="string">"NA"</span>):</span><br><span class="line">        plotdata[<span class="string">"batchsize"</span>].append(batchsize)</span><br><span class="line">        plotdata[<span class="string">"loss"</span>].append(loss)</span><br><span class="line">        plotdata[<span class="string">"error"</span>].append(error)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">Minibatch: <span class="number">0</span>, Loss: <span class="number">0.6931</span>, Error: <span class="number">0.32</span></span><br><span class="line">Minibatch: <span class="number">50</span>, Loss: <span class="number">2.4317</span>, Error: <span class="number">0.36</span></span><br><span class="line">Minibatch: <span class="number">100</span>, Loss: <span class="number">0.4701</span>, Error: <span class="number">0.20</span></span><br><span class="line">Minibatch: <span class="number">150</span>, Loss: <span class="number">0.7732</span>, Error: <span class="number">0.40</span></span><br><span class="line">Minibatch: <span class="number">200</span>, Loss: <span class="number">0.1273</span>, Error: <span class="number">0.04</span></span><br><span class="line">Minibatch: <span class="number">250</span>, Loss: <span class="number">0.1316</span>, Error: <span class="number">0.08</span></span><br><span class="line">Minibatch: <span class="number">300</span>, Loss: <span class="number">0.1012</span>, Error: <span class="number">0.04</span></span><br><span class="line">Minibatch: <span class="number">350</span>, Loss: <span class="number">0.1071</span>, Error: <span class="number">0.04</span></span><br><span class="line">Minibatch: <span class="number">400</span>, Loss: <span class="number">0.3085</span>, Error: <span class="number">0.08</span></span><br><span class="line">Minibatch: <span class="number">450</span>, Loss: <span class="number">0.3214</span>, Error: <span class="number">0.12</span></span><br><span class="line">Minibatch: <span class="number">500</span>, Loss: <span class="number">0.4114</span>, Error: <span class="number">0.20</span></span><br><span class="line">Minibatch: <span class="number">550</span>, Loss: <span class="number">0.6799</span>, Error: <span class="number">0.20</span></span><br><span class="line">Minibatch: <span class="number">600</span>, Loss: <span class="number">0.2982</span>, Error: <span class="number">0.12</span></span><br><span class="line">Minibatch: <span class="number">650</span>, Loss: <span class="number">0.1675</span>, Error: <span class="number">0.12</span></span><br><span class="line">Minibatch: <span class="number">700</span>, Loss: <span class="number">0.2770</span>, Error: <span class="number">0.12</span></span><br><span class="line">Minibatch: <span class="number">750</span>, Loss: <span class="number">0.2308</span>, Error: <span class="number">0.04</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Compute the moving average loss to smooth out the noise in SGD</span></span><br><span class="line">plotdata[<span class="string">"avgloss"</span>] = moving_average(plotdata[<span class="string">"loss"</span>])</span><br><span class="line">plotdata[<span class="string">"avgerror"</span>] = moving_average(plotdata[<span class="string">"error"</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># Plot the training loss and the training error</span></span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line">plt.figure(<span class="number">1</span>)</span><br><span class="line">plt.subplot(<span class="number">211</span>)</span><br><span class="line">plt.plot(plotdata[<span class="string">"batchsize"</span>], plotdata[<span class="string">"avgloss"</span>], <span class="string">'b--'</span>)</span><br><span class="line">plt.xlabel(<span class="string">'Minibatch number'</span>)</span><br><span class="line">plt.ylabel(<span class="string">'Loss'</span>)</span><br><span class="line">plt.title(<span class="string">'Minibatch run vs. Training loss'</span>)</span><br><span class="line"></span><br><span class="line">plt.show()</span><br><span class="line"></span><br><span class="line">plt.subplot(<span class="number">212</span>)</span><br><span class="line">plt.plot(plotdata[<span class="string">"batchsize"</span>], plotdata[<span class="string">"avgerror"</span>], <span class="string">'r--'</span>)</span><br><span class="line">plt.xlabel(<span class="string">'Minibatch number'</span>)</span><br><span class="line">plt.ylabel(<span class="string">'Label Prediction Error'</span>)</span><br><span class="line">plt.title(<span class="string">'Minibatch run vs. Label Prediction Error'</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<p><img src="%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92%E6%A8%A1%E5%9E%8B%E5%92%8CML%E5%85%A5%E9%97%A8/image6.png" alt="image6"></p>
+<h1 id="评估测试-Evaluation-Testing"><a href="#评估测试-Evaluation-Testing" class="headerlink" title="评估测试(Evaluation/Testing)"></a>评估测试(Evaluation/Testing)</h1><p>现在我们已经训练了网络。 让我们评估训练网络对未用于训练的数据。 这称为测试。 让我们创建一些新的数据，并评估这个集合的平均错误和损失。 这是使用trainer.test_minibatch完成的。 注意，这个以前看不见的数据的错误与训练错误相当。 这是一个关键的检查。 如果误差大于训练误差大的幅度，则表明训练的模型在训练期间没有见到的数据上不能很好地执行。 这被称为<a href="https://en.wikipedia.org/wiki/Overfitting" target="_blank" rel="noopener">过度拟合</a>。 有几种方法来解决超额配合，这超出了本教程的范围，但认知工具包提供了必要的组件来解决过度拟合。<br>注意：为了说明的目的，我们正在测试一个小型批次。 在实践中，运行几个测试数据的小型批次并报告平均值。<br>问题:为什么这是建议？ 尝试使用用于训练的绘图函数在多组生成的数据样本和绘图上绘制测试错误。 你看到一个模式吗？</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Run the trained model on newly generated dataset</span></span><br><span class="line">test_minibatch_size = <span class="number">25</span></span><br><span class="line">features, labels = generate_random_data_sample(test_minibatch_size, input_dim, num_output_classes)</span><br><span class="line"></span><br><span class="line">trainer.test_minibatch(&#123;input : features, label : labels&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>输出:0.12</p>
+<h2 id="检查预测-评估-Checking-prediction-evaluation"><a href="#检查预测-评估-Checking-prediction-evaluation" class="headerlink" title="检查预测/评估(Checking prediction/evaluation)"></a>检查预测/评估(Checking prediction/evaluation)</h2><p>为了评估，我们将网络的输出在0-1之间映射，并将它们转换为两个类的概率。 这表明每次观察的机会是恶性和良性的。 我们使用softmax函数来获得每个类的概率。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">out = softmax(z)</span><br><span class="line">result = out.eval(&#123;input : features&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>让我们将地面真实标签与预测进行比较。 他们应该符合。</p>
+<p>Question:</p>
+<ul>
+<li>有多少预测被错误标记？ 您可以更改下面的代码，以确定哪些观察被错误分类？<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">"Label    :"</span>, [np.argmax(label) <span class="keyword">for</span> label <span class="keyword">in</span> labels])</span><br><span class="line">print(<span class="string">"Predicted:"</span>, [np.argmax(result[i,:,:]) <span class="keyword">for</span> i <span class="keyword">in</span> range(result.shape[<span class="number">0</span>])])</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>Label    : [1, 0, 0, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 0, 0, 1, 0, 0, 0, 1]<br>Predicted: [1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 0, 0, 1, 0, 0, 0, 1]</p>
+<h2 id="可视化-Visualization"><a href="#可视化-Visualization" class="headerlink" title="可视化(Visualization)"></a>可视化(Visualization)</h2><p>期望可视化结果。 在该示例中，数据方便地在二维中并且可以被绘制。 对于具有较高尺寸的数据，可视化可能具有挑战性。 存在允许这种<a href="https://en.wikipedia.org/wiki/T-distributed_stochastic_neighbor_embedding" target="_blank" rel="noopener">可视化的先进的降维技术</a>。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Model parameters</span></span><br><span class="line">print(mydict[<span class="string">'b'</span>].value)</span><br><span class="line"></span><br><span class="line">bias_vector   = mydict[<span class="string">'b'</span>].value</span><br><span class="line">weight_matrix = mydict[<span class="string">'w'</span>].value</span><br><span class="line"></span><br><span class="line"><span class="comment"># Plot the data </span></span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line"><span class="comment"># given this is a 2 class </span></span><br><span class="line">colors = [<span class="string">'r'</span> <span class="keyword">if</span> l == <span class="number">0</span> <span class="keyword">else</span> <span class="string">'b'</span> <span class="keyword">for</span> l <span class="keyword">in</span> labels[:,<span class="number">0</span>]]</span><br><span class="line">plt.scatter(features[:,<span class="number">0</span>], features[:,<span class="number">1</span>], c=colors)</span><br><span class="line">plt.plot([<span class="number">0</span>, bias_vector[<span class="number">0</span>]/weight_matrix[<span class="number">0</span>][<span class="number">1</span>]], </span><br><span class="line">         [ bias_vector[<span class="number">1</span>]/weight_matrix[<span class="number">0</span>][<span class="number">0</span>], <span class="number">0</span>], c = <span class="string">'g'</span>, lw = <span class="number">3</span>)</span><br><span class="line">plt.xlabel(<span class="string">"Scaled age (in yrs)"</span>)</span><br><span class="line">plt.ylabel(<span class="string">"Tumor size (in cm)"</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<p>输出结果:[ 7.98766518 -7.988904 ]</p>
+<p><img src="%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92%E6%A8%A1%E5%9E%8B%E5%92%8CML%E5%85%A5%E9%97%A8/image7.png" alt="image7"></p>
+<h1 id="探索建议-Exploration-Suggestions"><a href="#探索建议-Exploration-Suggestions" class="headerlink" title="探索建议(Exploration Suggestions)"></a>探索建议(Exploration Suggestions)</h1><ul>
+<li>尝试探索分类器如何与不同的数据分布行为，建议更改minibatch_size参数从25到说64.为什么错误增加？</li>
+<li>尝试探索不同的激活功能</li>
+<li>尝试探索不同的学习模型</li>
+<li>可以探索训练<a href="https://en.wikipedia.org/wiki/Multinomial_logistic_regression" target="_blank" rel="noopener">多类逻辑回归</a>分类器。</li>
+</ul>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+
+
+  <div>
+    
+      <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-heart"></i>感谢您的阅读-------------</div>
+    
+</div>
+     
+  </div>
+
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ML/" rel="tag"><i class="fa fa-tag"></i> ML</a>
+          
+            <a href="/tags/逻辑回归模型/" rel="tag"><i class="fa fa-tag"></i> 逻辑回归模型</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/03/04/一维信号的高斯滤波/" rel="next" title="一维信号的高斯滤波">
+                <i class="fa fa-chevron-left"></i> 一维信号的高斯滤波
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/03/11/结巴Jieba分词/" rel="prev" title="结巴Jieba分词">
+                结巴Jieba分词 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zNDMxMy8xMDg1MA=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/tt.png" alt="Chuan Yen">
+            
+              <p class="site-author-name" itemprop="name">Chuan Yen</p>
+              <p class="site-description motion-element" itemprop="description">Learn and record.</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">41</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">11</span>
+                    <span class="site-state-item-name">categories</span>
+                  
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">39</span>
+                    <span class="site-state-item-name">tags</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/loopvoid" target="_blank" title="GitHub" rel="external nofollow"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:584714309@qq.com" target="_blank" title="E-Mail" rel="external nofollow"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/chuan-jie-92/activities" target="_blank" title="ZhiHu" rel="external nofollow"><i class="fa fa-fw fa-globe"></i>ZhiHu</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://weibo.com/sunyanchuan" target="_blank" title="Weibo" rel="external nofollow"><i class="fa fa-fw fa-globe"></i>Weibo</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://blog.csdn.net/ycj9090900" target="_blank" title="CSDN" rel="external nofollow"><i class="fa fa-fw fa-globe"></i>CSDN</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://loopvoid.github.io/minewiki/" title="mineWiki" target="_blank">mineWiki</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://docs.opencv.org" title="OpencvDocs" target="_blank">OpencvDocs</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://lib.csdn.net/base/opencv" title="OpencvKnowledgeMap" target="_blank">OpencvKnowledgeMap</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://zh.cppreference.com/w/%E9%A6%96%E9%A1%B5" title="CppRef" target="_blank">CppRef</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.freebuf.com" title="FreeBuf" target="_blank">FreeBuf</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.sec-wiki.com" title="SecWiki" target="_blank">SecWiki</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://theme-next.iissnan.com/" title="NexTDoc" target="_blank">NexTDoc</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#简介-Introduction"><span class="nav-number">1.</span> <span class="nav-text">简介(Introduction)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#逻辑回归-Logistic-Regression"><span class="nav-number">2.</span> <span class="nav-text">逻辑回归(Logistic Regression)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#数据生成-Data-Generation"><span class="nav-number">2.1.</span> <span class="nav-text">数据生成(Data Generation)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#输入-Input-和标签-Labels"><span class="nav-number">2.2.</span> <span class="nav-text">输入(Input)和标签(Labels)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模型创建-Model-Creation"><span class="nav-number">2.3.</span> <span class="nav-text">模型创建(Model Creation)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#网络设置-Network-Setup"><span class="nav-number">2.4.</span> <span class="nav-text">网络设置(Network Setup)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#训练模型参数-Learning-model-parameters"><span class="nav-number">2.5.</span> <span class="nav-text">训练模型参数(Learning model parameters)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#训练-Training"><span class="nav-number">2.5.1.</span> <span class="nav-text">训练(Training)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#测试-Evaluation"><span class="nav-number">2.5.2.</span> <span class="nav-text">测试(Evaluation)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置训练-Configer-Training"><span class="nav-number">2.6.</span> <span class="nav-text">配置训练(Configer Training)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#运行训练器-Run-the-trainer"><span class="nav-number">2.7.</span> <span class="nav-text">运行训练器(Run the trainer)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#评估测试-Evaluation-Testing"><span class="nav-number">3.</span> <span class="nav-text">评估测试(Evaluation/Testing)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#检查预测-评估-Checking-prediction-evaluation"><span class="nav-number">3.1.</span> <span class="nav-text">检查预测/评估(Checking prediction/evaluation)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#可视化-Visualization"><span class="nav-number">3.2.</span> <span class="nav-text">可视化(Visualization)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#探索建议-Exploration-Suggestions"><span class="nav-number">4.</span> <span class="nav-text">探索建议(Exploration Suggestions)</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">YenChuan</span>
+
+  
+
+  
+
+</div>
+
+
+  
+
+
+
+
+
+<div class="powered-by">
+<i class="fa fa-eye"></i><span id="busuanzi_container_site_pv">
+  :<span id="busuanzi_value_site_pv"></span>
+|<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  :<span id="busuanzi_value_site_uv"></span></span>
+</span></div>
+
+
+
+
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" rel="external nofollow" href="https://github.com/theme-next/hexo-theme-next">NexT.Mist</a></div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.0.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.0.4"></script>
+
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.0.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.0.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.0.4"></script>
+
+
+
+  
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    
+  
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>
