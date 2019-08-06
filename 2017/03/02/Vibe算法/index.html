@@ -165,19 +165,19 @@
 <meta property="og:site_name" content="Chuan·Yen">
 <meta property="og:description" content="原文链接 简介ViBe - a powerful technique for background detection and subtraction in video sequencesViBe是一种像素级视频背景建模或前景检测的算法，效果优于所熟知的几种算法，对硬件内存占用也少。ViBe是一种像素级的背景建模、前景检测算法，该算法主要不同之处是背景模型的更新策略，随机选择需要替换的像素的样本，">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://loopvoid.github.io/.io//vibe1.jpg">
-<meta property="og:image" content="https://loopvoid.github.io/.io//vibe2.png">
-<meta property="og:image" content="https://loopvoid.github.io/.io//vibe3.png">
-<meta property="og:image" content="https://loopvoid.github.io/.io//vibe4.png">
-<meta property="og:image" content="https://loopvoid.github.io/.io//vibe5.png">
-<meta property="og:image" content="https://loopvoid.github.io/.io//vibe6.png">
-<meta property="og:image" content="https://loopvoid.github.io/.io//vibe7.png">
-<meta property="og:image" content="https://loopvoid.github.io/.io//vibe8.png">
+<meta property="og:image" content="https://loopvoid.github.io/2017/03/02/Vibe算法/vibe1.jpg">
+<meta property="og:image" content="https://loopvoid.github.io/2017/03/02/Vibe算法/vibe2.png">
+<meta property="og:image" content="https://loopvoid.github.io/2017/03/02/Vibe算法/vibe3.png">
+<meta property="og:image" content="https://loopvoid.github.io/2017/03/02/Vibe算法/vibe4.png">
+<meta property="og:image" content="https://loopvoid.github.io/2017/03/02/Vibe算法/vibe5.png">
+<meta property="og:image" content="https://loopvoid.github.io/2017/03/02/Vibe算法/vibe6.png">
+<meta property="og:image" content="https://loopvoid.github.io/2017/03/02/Vibe算法/vibe7.png">
+<meta property="og:image" content="https://loopvoid.github.io/2017/03/02/Vibe算法/vibe8.png">
 <meta property="og:updated_time" content="2019-08-06T05:53:04.080Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Vibe算法">
 <meta name="twitter:description" content="原文链接 简介ViBe - a powerful technique for background detection and subtraction in video sequencesViBe是一种像素级视频背景建模或前景检测的算法，效果优于所熟知的几种算法，对硬件内存占用也少。ViBe是一种像素级的背景建模、前景检测算法，该算法主要不同之处是背景模型的更新策略，随机选择需要替换的像素的样本，">
-<meta name="twitter:image" content="https://loopvoid.github.io/.io//vibe1.jpg">
+<meta name="twitter:image" content="https://loopvoid.github.io/2017/03/02/Vibe算法/vibe1.jpg">
 
 
 
@@ -497,7 +497,7 @@
 <li>物体检测中往往会出现Ghost区域，Ghost区域也就是指当一个原本静止的物体开始运动，背景差检测算法可能会将原来该物体所覆盖的区域错误的检测为运动的，这块区域就成为Ghost，当然原来运动的物体变为静止的也会引入Ghost区域，Ghost区域在检测中必须被尽快的消除。一个Ghost区域的实例如<strong>图1</strong>,在图中可以发现相比于原图，检测的结果中错误的多出现了两个人的形状，这就是Ghost。</li>
 </ul>
 </blockquote>
-<p><img src="/.io//vibe1.jpg" alt="Vibe1"> </p>
+<p><img src="//loopvoid.github.io/2017/03/02/Vibe算法/vibe1.jpg" alt="Vibe1"> </p>
 <h2 id="ViBe检测方法"><a href="#ViBe检测方法" class="headerlink" title="ViBe检测方法"></a>ViBe检测方法</h2><p>ViBe是本篇论文中所提出的一个检测方法，相比于其他方法它有很多的不同和优点。具体的思想就是<strong>为每个像素点存储了一个样本集，样本集中采样值就是该像素点过去的像素值和其邻居点的像素值，然后将每一个新的像素值和样本集进行比较来判断是否属于背景点。</strong></p>
 <p>该模型主要包括三个方面：</p>
 <blockquote>
@@ -537,14 +537,14 @@ $$ P(t,t+dt) = e^{-ln(\frac{N}{N-1})dt} $$
 <li>增加更新因子</li>
 </ul>
 </blockquote>
-<h3 id="距离计算方法"><a href="#距离计算方法" class="headerlink" title="距离计算方法"></a>距离计算方法</h3><p>以圆椎模型代替原来的几何距离计算方法<br><img src="/.io//vibe2.png" alt="vibe2"><br><strong>以自适应阈值代替原来固定的距离判定阈值,阈值大小与样本集的方差成正比,样本集方差越大,说明背景越复杂,判定阈值应该越大.</strong><br>$$ 0.5 \times σ_{m} \in [20,40]$$</p>
+<h3 id="距离计算方法"><a href="#距离计算方法" class="headerlink" title="距离计算方法"></a>距离计算方法</h3><p>以圆椎模型代替原来的几何距离计算方法<br><img src="//loopvoid.github.io/2017/03/02/Vibe算法/vibe2.png" alt="vibe2"><br><strong>以自适应阈值代替原来固定的距离判定阈值,阈值大小与样本集的方差成正比,样本集方差越大,说明背景越复杂,判定阈值应该越大.</strong><br>$$ 0.5 \times σ_{m} \in [20,40]$$</p>
 <h3 id="分离UpdatingMask和SegmentationMask"><a href="#分离UpdatingMask和SegmentationMask" class="headerlink" title="分离UpdatingMask和SegmentationMask"></a>分离UpdatingMask和SegmentationMask</h3><p>引入目标整体的概念，弥补基于像素级前景检测的不足。针对updating mask和segmentation mask采用不同尺寸的形态学处理方法，提高检测准确率。</p>
 <h3 id="抑制邻域更新"><a href="#抑制邻域更新" class="headerlink" title="抑制邻域更新"></a>抑制邻域更新</h3><p>在updating mask里，计算像素点的梯度，根据梯度大小，确定是否需要更新邻域。梯度值越大，说明像素值变化越大，说明该像素值可能为前景，不应该更新。</p>
 <h3 id="检测闪烁像素点"><a href="#检测闪烁像素点" class="headerlink" title="检测闪烁像素点"></a>检测闪烁像素点</h3><p>引入闪烁程度的概念，当一个像素点的updating label与前一帧的updating label不一样时，blinking level增加15，否则，减少1，然后根据blinking level的大小判断该像素点是否为闪烁点。闪烁像素主要出现在背景复杂的场景，如树叶、水纹等，这些场景会出现像素背景和前景的频繁变化，因而针对这些闪烁应该单独处理，可以作为全部作为背景。</p>
 <h3 id="增加更新因子"><a href="#增加更新因子" class="headerlink" title="增加更新因子"></a>增加更新因子</h3><p>ViBe算法中，默认的更新因子是16，当背景变化很快时，背景模型无法快速的更新，将会导致前景检测的较多的错误。因而，需要根据背景变化快慢程度，调整更新因子的大小，可将更新因子分多个等级，如rate = 16,rate = 5,rate = 1。</p>
 <h2 id="ViBe实验结果"><a href="#ViBe实验结果" class="headerlink" title="ViBe实验结果"></a>ViBe实验结果</h2><p> 在实验中，我们和其他的一些检测算法在检测准确率和算法的计算量方面都进行了比较，实验表明我们的方法检测效果明显要好很多，对于光照的变化和相机抖动等的效果都十分稳定，而且计算量非常小，内存占用较少，这就使得该方法能够用于嵌入手持照相机中。一些具体的实验效果和数据如下:</p>
-<p> <img src="/.io//vibe3.png" alt="vibe3"><br> <img src="/.io//vibe4.png" alt="vibe4"><br> <img src="/.io//vibe5.png" alt="vibe5"><br> <img src="/.io//vibe6.png" alt="vibe6"> <img src="/.io//vibe7.png" alt="vibe7"> </p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>在这片文章中，我们提出了一个新的背静差算法-ViBe，和以前相比它具有三个不同点。首先，我们提出了一个新的分类模型。其次，我们介绍了ViBe如何初始化，它只需要一帧图像即可完成初始化，而其他的算法通常需要等待数秒去完成初始化，这对于嵌入照相机中的要求实时性比较高的和一些比较短的视频序列很有帮助。 最后，我们提出了自己的更新策略，相比于其他算法将样本值在模型中保存一个固定的时间，我们采用随机的替换更新样本值，经过证明这样可以保证样本值的一个指数衰减的平滑生命周期，并且可以使得背景模型很好的适应视频场景的变化，从而达到更好的检测效果。<br>通过一系列实验表明ViBe方法相比于其他的一些检测算法具有计算量小、内存占用少、处理速度快、检测效果好、有更快的Ghost区域消融速度和应对噪声稳定可靠的特点，并且非常适合嵌入照相机等要求计算量小和内存占用少的情境中。<br>效果图：<br> <img src="/.io//vibe8.png" alt="vibe8"> </p>
+<p> <img src="//loopvoid.github.io/2017/03/02/Vibe算法/vibe3.png" alt="vibe3"><br> <img src="//loopvoid.github.io/2017/03/02/Vibe算法/vibe4.png" alt="vibe4"><br> <img src="//loopvoid.github.io/2017/03/02/Vibe算法/vibe5.png" alt="vibe5"><br> <img src="//loopvoid.github.io/2017/03/02/Vibe算法/vibe6.png" alt="vibe6"> <img src="//loopvoid.github.io/2017/03/02/Vibe算法/vibe7.png" alt="vibe7"> </p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>在这片文章中，我们提出了一个新的背静差算法-ViBe，和以前相比它具有三个不同点。首先，我们提出了一个新的分类模型。其次，我们介绍了ViBe如何初始化，它只需要一帧图像即可完成初始化，而其他的算法通常需要等待数秒去完成初始化，这对于嵌入照相机中的要求实时性比较高的和一些比较短的视频序列很有帮助。 最后，我们提出了自己的更新策略，相比于其他算法将样本值在模型中保存一个固定的时间，我们采用随机的替换更新样本值，经过证明这样可以保证样本值的一个指数衰减的平滑生命周期，并且可以使得背景模型很好的适应视频场景的变化，从而达到更好的检测效果。<br>通过一系列实验表明ViBe方法相比于其他的一些检测算法具有计算量小、内存占用少、处理速度快、检测效果好、有更快的Ghost区域消融速度和应对噪声稳定可靠的特点，并且非常适合嵌入照相机等要求计算量小和内存占用少的情境中。<br>效果图：<br> <img src="//loopvoid.github.io/2017/03/02/Vibe算法/vibe8.png" alt="vibe8"> </p>
 <h2 id="算法的主要优势"><a href="#算法的主要优势" class="headerlink" title="算法的主要优势"></a>算法的主要优势</h2><blockquote>
 <ul>
 <li>内存占用少，一个像素需要作一次比较，占用一个字节的内存；</li>

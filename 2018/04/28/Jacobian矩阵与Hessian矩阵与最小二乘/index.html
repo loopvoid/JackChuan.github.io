@@ -165,13 +165,13 @@
 <meta property="og:site_name" content="Chuan·Yen">
 <meta property="og:description" content="雅可比矩阵 (Jacobian matrix)在向量分析中, 雅可比矩阵是一阶偏导数以一定方式排列成的矩阵, 其行列式称为雅可比行列式. 还有, 在代数几何中, 代数曲线的雅可比量表示雅可比簇：伴随该曲线的一个代数群, 曲线可以嵌入其中. 它们全部都以数学家卡尔·雅可比(Carl Jacob, 1804年10月4日－1851年2月18日)命名；英文雅可比量”Jacobian”可以发音为[ja ˈk">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://loopvoid.github.io/.io//hessian.jpg">
-<meta property="og:image" content="https://loopvoid.github.io/.io//optimize.jpg">
+<meta property="og:image" content="https://loopvoid.github.io/2018/04/28/Jacobian矩阵与Hessian矩阵与最小二乘/hessian.jpg">
+<meta property="og:image" content="https://loopvoid.github.io/2018/04/28/Jacobian矩阵与Hessian矩阵与最小二乘/optimize.jpg">
 <meta property="og:updated_time" content="2019-08-06T06:49:50.751Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Jacobian矩阵与Hessian矩阵与最小二乘">
 <meta name="twitter:description" content="雅可比矩阵 (Jacobian matrix)在向量分析中, 雅可比矩阵是一阶偏导数以一定方式排列成的矩阵, 其行列式称为雅可比行列式. 还有, 在代数几何中, 代数曲线的雅可比量表示雅可比簇：伴随该曲线的一个代数群, 曲线可以嵌入其中. 它们全部都以数学家卡尔·雅可比(Carl Jacob, 1804年10月4日－1851年2月18日)命名；英文雅可比量”Jacobian”可以发音为[ja ˈk">
-<meta name="twitter:image" content="https://loopvoid.github.io/.io//hessian.jpg">
+<meta name="twitter:image" content="https://loopvoid.github.io/2018/04/28/Jacobian矩阵与Hessian矩阵与最小二乘/hessian.jpg">
 
 
 
@@ -504,7 +504,7 @@
 <p>求解方程$f(x)=0$，即求解$f(x_0)+(x-x_0)f’(x_0) = 0$</p>
 <p>即是求解$$x=x_1=x_0-\frac{f(x_0)}{f’(x_0)}$$</p>
 <p>因为这是利用泰勒公式的一阶展开,$f(x)$的值是近似相等，这里求得的$x_1$，只能让$f(x_1) \approx 0$。于是乎, 迭代求解的想法就很自然了, 可以进而推出：$x_{n+1}=x_n-\frac{f(x_n)}{f’(x_n)}$， 通过迭代, 这个式子必然在$f(x^*)=0$的时候收敛.过程如下图：</p>
-<p><img src="/.io//hessian.jpg" alt="hessian"></p>
+<p><img src="//loopvoid.github.io/2018/04/28/Jacobian矩阵与Hessian矩阵与最小二乘/hessian.jpg" alt="hessian"></p>
 <h3 id="最优化"><a href="#最优化" class="headerlink" title="最优化"></a>最优化</h3><p>在最优化的问题中, 线性最优化至少可以使用单纯形法(或称<strong><a href="https://en.wikipedia.org/wiki/Fixed-point_arithmetic" target="_blank" rel="noopener">不动点算法</a></strong>)求解, 但对于非线性优化问题, 牛顿法提供了一种求解的办法.假设任务是优化一个目标函数$f$,求函数$f$的极大极小问题可以转化为求解函数$f$的导数${f}’=0$的问题。, 这样求可以把优化问题看成方程(${f}’=0$)求解问题。剩下的问题就和前面提到的牛顿法求解很相似了。</p>
 <p>这次为了求解${f}’=0$的根, 首先把$f(x)$在探索点$x_n$处泰勒展开, 展开到2阶形式进行近似：</p>
 <p>$$f(x)=f(x_n)+f’(x_n)(x-x_n)+\frac{f’’(x_n)}{2}(x-x_n)^2$$</p>
@@ -513,7 +513,7 @@
 <p>求得出迭代公式:</p>
 <p>$$x_{n+1}=x_n-\frac{f’(n)}{f’’(n)},n=0,1,…$$</p>
 <p>一般认为牛顿法可以利用到曲线本身的信息, 比梯度下降法更容易收敛（迭代更少次数）, 如下图是一个最小化一个目标方程的例子, 红色曲线是利用牛顿法迭代求解, 绿色曲线是利用梯度下降法求解.</p>
-<p><img src="/.io//optimize.jpg" alt="optimize"></p>
+<p><img src="//loopvoid.github.io/2018/04/28/Jacobian矩阵与Hessian矩阵与最小二乘/optimize.jpg" alt="optimize"></p>
 <p>在上面讨论的是2维情况, 高维情况的牛顿迭代公式是：</p>
 <p>$$x_{n+1}=x_n-[\bigtriangledown ^2f(x_n)]^{-1}\bigtriangledown f(x_n),n\geqslant 0$$</p>
 <p>其中$\bigtriangledown ^2$是<strong>Hessian矩阵</strong>，$\bigtriangledown$为$f$的<strong>梯度向量</strong>，$f$的矢量微分运算。</p>

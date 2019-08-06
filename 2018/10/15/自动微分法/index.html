@@ -165,19 +165,19 @@
 <meta property="og:site_name" content="Chuan·Yen">
 <meta property="og:description" content="几种微分求解的方法 手动求解法(Manual Differentiation) 数值微分法(Numerical Differentiation) 符号微分法(Symbolic Differentiation) 自动微分法(Automatic Differentiation)  自动微分在数学和计算代数领域，automatic differentiation (AD)又称为 algorithmic">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://loopvoid.github.io/.io//%E8%AE%A1%E7%AE%97%E5%9B%BE1.png">
-<meta property="og:image" content="https://loopvoid.github.io/.io//%E8%AE%A1%E7%AE%97%E5%9B%BE2.png">
-<meta property="og:image" content="https://loopvoid.github.io/.io//%E8%AE%A1%E7%AE%97%E5%9B%BE3.png">
-<meta property="og:image" content="https://loopvoid.github.io/.io//%E8%AE%A1%E7%AE%97%E5%9B%BE4.png">
-<meta property="og:image" content="https://loopvoid.github.io/.io//%E8%AE%A1%E7%AE%97%E5%9B%BE5.png">
-<meta property="og:image" content="https://loopvoid.github.io/.io//%E8%AE%A1%E7%AE%97%E5%9B%BE6.png">
-<meta property="og:image" content="https://loopvoid.github.io/.io//%E8%AE%A1%E7%AE%97%E5%9B%BE7.png">
-<meta property="og:image" content="https://loopvoid.github.io/.io//%E8%AE%A1%E7%AE%97%E5%9B%BE8.png">
+<meta property="og:image" content="https://loopvoid.github.io/2018/10/15/自动微分法/%E8%AE%A1%E7%AE%97%E5%9B%BE1.png">
+<meta property="og:image" content="https://loopvoid.github.io/2018/10/15/自动微分法/%E8%AE%A1%E7%AE%97%E5%9B%BE2.png">
+<meta property="og:image" content="https://loopvoid.github.io/2018/10/15/自动微分法/%E8%AE%A1%E7%AE%97%E5%9B%BE3.png">
+<meta property="og:image" content="https://loopvoid.github.io/2018/10/15/自动微分法/%E8%AE%A1%E7%AE%97%E5%9B%BE4.png">
+<meta property="og:image" content="https://loopvoid.github.io/2018/10/15/自动微分法/%E8%AE%A1%E7%AE%97%E5%9B%BE5.png">
+<meta property="og:image" content="https://loopvoid.github.io/2018/10/15/自动微分法/%E8%AE%A1%E7%AE%97%E5%9B%BE6.png">
+<meta property="og:image" content="https://loopvoid.github.io/2018/10/15/自动微分法/%E8%AE%A1%E7%AE%97%E5%9B%BE7.png">
+<meta property="og:image" content="https://loopvoid.github.io/2018/10/15/自动微分法/%E8%AE%A1%E7%AE%97%E5%9B%BE8.png">
 <meta property="og:updated_time" content="2019-08-06T07:45:08.655Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="自动微分法">
 <meta name="twitter:description" content="几种微分求解的方法 手动求解法(Manual Differentiation) 数值微分法(Numerical Differentiation) 符号微分法(Symbolic Differentiation) 自动微分法(Automatic Differentiation)  自动微分在数学和计算代数领域，automatic differentiation (AD)又称为 algorithmic">
-<meta name="twitter:image" content="https://loopvoid.github.io/.io//%E8%AE%A1%E7%AE%97%E5%9B%BE1.png">
+<meta name="twitter:image" content="https://loopvoid.github.io/2018/10/15/自动微分法/%E8%AE%A1%E7%AE%97%E5%9B%BE1.png">
 
 
 
@@ -521,34 +521,34 @@
 <h2 id="正向链式法则计算图"><a href="#正向链式法则计算图" class="headerlink" title="正向链式法则计算图"></a>正向链式法则计算图</h2><p>将函数转化为一个DAG（有向无环图），就能很容易的求解每一步的值。</p>
 <h3 id="例1："><a href="#例1：" class="headerlink" title="例1："></a>例1：</h3><p>假设有计算式子：$y=x_0*x_1+x_1$  (1)，我们要求解$\frac{\partial y}{\partial x_1}$。</p>
 <p>首先，其计算图表示为：</p>
-<p><img src="/.io//%E8%AE%A1%E7%AE%97%E5%9B%BE1.png" alt="计算图1.png"></p>
+<p><img src="//loopvoid.github.io/2018/10/15/自动微分法/%E8%AE%A1%E7%AE%97%E5%9B%BE1.png" alt="计算图1.png"></p>
 <p>把（1）式展开为链式计算序列为：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">c=x0*x1</span><br><span class="line">d=c+x1</span><br><span class="line">y=d</span><br></pre></td></tr></table></figure>
 
 <p>那么其对应的计算图则为：</p>
-<p><img src="/.io//%E8%AE%A1%E7%AE%97%E5%9B%BE2.png" alt="计算图2.png"></p>
+<p><img src="//loopvoid.github.io/2018/10/15/自动微分法/%E8%AE%A1%E7%AE%97%E5%9B%BE2.png" alt="计算图2.png"></p>
 <p>这里假设$x_0,x_1$的初值分别为：1, 2。 (1)式展开计算子序列为：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">x0=1</span><br><span class="line">x1=2</span><br><span class="line">c=x0*x1</span><br><span class="line">d=c+x1</span><br><span class="line">y=d</span><br></pre></td></tr></table></figure>
 
 <p>那么其对应计算图为：</p>
-<p><img src="/.io//%E8%AE%A1%E7%AE%97%E5%9B%BE3.png" alt="计算图3.png"></p>
+<p><img src="//loopvoid.github.io/2018/10/15/自动微分法/%E8%AE%A1%E7%AE%97%E5%9B%BE3.png" alt="计算图3.png"></p>
 <p>然后对该计算图求解偏导数：</p>
-<p><img src="/.io//%E8%AE%A1%E7%AE%97%E5%9B%BE4.png" alt="计算图4.png"></p>
+<p><img src="//loopvoid.github.io/2018/10/15/自动微分法/%E8%AE%A1%E7%AE%97%E5%9B%BE4.png" alt="计算图4.png"></p>
 <p>由链式法则得到：$$\frac{\partial y}{\partial  x_1}=\frac{\partial y}{\partial  d}\frac{\partial d}{\partial  c}\frac{\partial c}{\partial  x_1}+\frac{\partial y}{\partial  d}\frac{\partial d}{\partial  x_1}$$</p>
 <p>结合计算图中对应的值可知：$$\frac{\partial y}{\partial  x_1}=1<em>1</em>1+1*1=2$$</p>
 <h3 id="例2："><a href="#例2：" class="headerlink" title="例2："></a>例2：</h3><p>对于下列函数：$$f(x_1,x_2)=ln(x_1)+x_1*x_2-sin(x_2)$$</p>
 <p>转化为计算图：</p>
-<p><img src="/.io//%E8%AE%A1%E7%AE%97%E5%9B%BE5.png" alt="计算图5.png"></p>
+<p><img src="//loopvoid.github.io/2018/10/15/自动微分法/%E8%AE%A1%E7%AE%97%E5%9B%BE5.png" alt="计算图5.png"></p>
 <p>那么求每一步的导数值就可以表示为：</p>
-<p><img src="/.io//%E8%AE%A1%E7%AE%97%E5%9B%BE6.png" alt="计算图6.png"></p>
+<p><img src="//loopvoid.github.io/2018/10/15/自动微分法/%E8%AE%A1%E7%AE%97%E5%9B%BE6.png" alt="计算图6.png"></p>
 <p>上表，左半部分是从左往右计算图每个节点的求值结果，右半部分是每个节点对于$x_1$的求导结果，比如$\dot{v_1}=\frac{dv}{dx_1}$，注意到每一步的求导都会利用到上一步的求导结果。</p>
 <p>对于自动微分的正向模式，如果函数输入输出为：$R \rightarrow R^m $</p>
 <p>那么正向模式只需要计算一次上表右侧过程即可，非常高效。但是对于输入输出映射为：$R^n\rightarrow R^m$，这样一个有$n$个输入的函数，对于函数的梯度求解则需要处理$n$遍上述过程。而且再实际算法模型中，通常输入输出是极度不成比例的，也就是$n&gt;&gt;m$，那么利用正向模式进行自动微分的效率就太低了，因此有了反向模式的出现。</p>
 <h2 id="反向链式法则计算图"><a href="#反向链式法则计算图" class="headerlink" title="反向链式法则计算图"></a>反向链式法则计算图</h2><p>自动微分的反向模式其实就是一种通用的<a href="https://en.wikipedia.org/wiki/Backpropagation" target="_blank" rel="noopener">BackPropagation</a>(<a href="http://galaxy.agh.edu.pl/~vlsi/AI/backp_t_en/backprop.html" target="_blank" rel="noopener">反向传播算法</a>)，即backpropagation是自动微分反向模式的一种特殊形式。</p>
 <p>反向模式从最终结果开始求导，利用最终输出对每一个节点进行求导，其过程如下计算图所示： </p>
-<p><img src="/.io//%E8%AE%A1%E7%AE%97%E5%9B%BE7.png" alt="计算图7.png"></p>
+<p><img src="//loopvoid.github.io/2018/10/15/自动微分法/%E8%AE%A1%E7%AE%97%E5%9B%BE7.png" alt="计算图7.png"></p>
 <p>其具体计算过程如下表所示：   </p>
-<p><img src="/.io//%E8%AE%A1%E7%AE%97%E5%9B%BE8.png" alt="计算图8.png"></p>
+<p><img src="//loopvoid.github.io/2018/10/15/自动微分法/%E8%AE%A1%E7%AE%97%E5%9B%BE8.png" alt="计算图8.png"></p>
 <p>上表左边和之前的正向模式一致，用于求解函数值，右边则是反向模式的计算过程，须从下向上看，也就是一开始先计算输出$y$对于节点$v_5$的导数，用$\bar{v_5}=\frac{dy}{dv_5}$，这样的记号可以强调我们对当前计算结果进行缓存，以便用于后续计算，而不必重复计算。再由链式法则我们可以计算输出节点对于图种每个节点的导数。  </p>
 <p>比如对节点$v_3$：</p>
 <p>$$\frac{y}{v_3}=\frac{dy}{dv_5}\frac{dv_5}{dv_3}$$</p>
