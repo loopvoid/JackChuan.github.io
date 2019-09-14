@@ -169,7 +169,7 @@
 <meta property="og:image" content="https://loopvoid.github.io/2019/09/14/BP神经网络原理和简明理解/bp3.jpg">
 <meta property="og:image" content="https://loopvoid.github.io/2019/09/14/BP神经网络原理和简明理解/bp4.jpg">
 <meta property="og:image" content="https://loopvoid.github.io/2019/09/14/BP神经网络原理和简明理解/bp5.jpg">
-<meta property="og:updated_time" content="2019-09-14T07:41:30.402Z">
+<meta property="og:updated_time" content="2019-09-14T07:49:28.080Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="BP神经网络原理和简明理解">
 <meta name="twitter:description" content="单个神经元结构  输入：$x_1,x_2,…,x_n$  输出：$y$  输入和输出的关系(函数)：$y = (x_1\ast w_1+x_2\ast w_2+…+x_n\ast w_n+)+b = \sum_{i=1}^n x_i\ast w_i+b$，其中$w_i$是权重  将输入用矩阵表示：$X = [x_1,x_2,…,x_n]^T,X为一个n行1列的矩阵$  将权重用矩阵表示：$W=[w">
@@ -495,7 +495,7 @@
 <p>Sigmoid函数：$$y = \frac{1}{e^{(-x)}+1}$$</p>
 <p><img src="//loopvoid.github.io/2019/09/14/BP神经网络原理和简明理解/bp2.jpg" alt="bp2"></p>
 <p>S函数的导数：</p>
-<p>$$ y’= (\frac{1}{e^{-x}+1})’ \ =(\frac{u}{v})’,这里u=1,v=e^{-x}+1 \ =\frac{u’v-uv’}{v^2} \ =\frac{1’\ast (e^{-x}+1)-1\ast (e^{-x}+1)’}{(e^{-x}+1)^2} \ =\frac{e^{-x}}{(e^{-x}+1)^2} \ = \frac{1}{1+e^{-x}}\ast \frac{1+e^{-x}-1}{1+e^{-x}} \ = \frac{1}{1+e^{-x}}\ast (1-\frac{1}{1+e^{-x}}), 令y=\frac{1}{e^{-x}+1} \ =y\ast (1-y)$$</p>
+<p>$$ y’= (\frac{1}{e^{-x}+1})’ \\ =(\frac{u}{v})’,这里u=1,v=e^{-x}+1 \\ =\frac{u’v-uv’}{v^2} \\ =\frac{1’\ast (e^{-x}+1)-1\ast (e^{-x}+1)’}{(e^{-x}+1)^2} \\ =\frac{e^{-x}}{(e^{-x}+1)^2} \\ = \frac{1}{1+e^{-x}}\ast \frac{1+e^{-x}-1}{1+e^{-x}} \\ = \frac{1}{1+e^{-x}}\ast (1-\frac{1}{1+e^{-x}}), 令y=\frac{1}{e^{-x}+1} \\ =y\ast (1-y)$$</p>
 <p>S函数的导数的图像：</p>
 <p><img src="//loopvoid.github.io/2019/09/14/BP神经网络原理和简明理解/bp3.jpg" alt="bp3"></p>
 <h1 id="传播过程"><a href="#传播过程" class="headerlink" title="传播过程"></a>传播过程</h1><p>下面是一个典型的三层神经网络结构，第一层是输入层，第二层是隐藏层，第三层是输出层。</p>
