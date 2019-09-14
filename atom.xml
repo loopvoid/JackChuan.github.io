@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://loopvoid.github.io/"/>
-  <updated>2019-08-06T07:57:48.256Z</updated>
+  <updated>2019-08-20T10:23:42.290Z</updated>
   <id>https://loopvoid.github.io/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>蒙特卡洛搜索树</title>
+    <link href="https://loopvoid.github.io/2019/08/20/%E8%92%99%E7%89%B9%E5%8D%A1%E6%B4%9B%E6%90%9C%E7%B4%A2%E6%A0%91/"/>
+    <id>https://loopvoid.github.io/2019/08/20/蒙特卡洛搜索树/</id>
+    <published>2019-08-20T10:02:56.000Z</published>
+    <updated>2019-08-20T10:23:42.290Z</updated>
+    
+    <content type="html"><![CDATA[<p>[1]AlphaGo Zero论文</p><p><a href="https://deepmind.com/documents/119/agz_unformatted_nature.pdf" target="_blank" rel="noopener">https://deepmind.com/documents/119/agz_unformatted_nature.pdf</a></p><p>[2] 什么是强化学习？</p><p><a href="https://mubu.com/doc/WNKomuDNl" target="_blank" rel="noopener">https://mubu.com/doc/WNKomuDNl</a></p><p>[3]强化学习系列笔记</p><p><a href="http://www.cnblogs.com/steven-yang/p/6481772.html" target="_blank" rel="noopener">http://www.cnblogs.com/steven-yang/p/6481772.html</a></p><p>[4]蒙特卡洛搜索树—走子演算</p><p><a href="http://t.cn/RWMmLdM" target="_blank" rel="noopener">http://t.cn/RWMmLdM</a></p><p>[5] 深入浅出看懂 AlphaGo 如何下棋<br>原论文（英文）：<a href="https://link.jianshu.com/?t=https://www.nature.com/articles/nature24270.epdf?author_access_token=VJXbVjaSHxFoctQQ4p2k4tRgN0jAjWel9jnR3ZoTv0PVW4gB86EEpGqTRDtpIz-2rmo8-KG06gqVobU5NSCFeHILHcVFUeMsbvwS-lxjqQGg98faovwjxeTUgZAUMnRQ" target="_blank" rel="noopener">Mastering the game of Go without human knowledge</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;[1]AlphaGo Zero论文&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://deepmind.com/documents/119/agz_unformatted_nature.pdf&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;https://d
+      
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>自动微分法</title>
@@ -519,31 +541,6 @@
     
     
       <category term="机械臂" scheme="https://loopvoid.github.io/tags/%E6%9C%BA%E6%A2%B0%E8%87%82/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Cpp基础补全</title>
-    <link href="https://loopvoid.github.io/2017/03/20/Cpp%E5%9F%BA%E7%A1%80%E8%A1%A5%E5%85%A8/"/>
-    <id>https://loopvoid.github.io/2017/03/20/Cpp基础补全/</id>
-    <published>2017-03-20T09:00:26.000Z</published>
-    <updated>2019-08-06T06:55:57.047Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="getline"><a href="#getline" class="headerlink" title="getline"></a>getline</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::<span class="built_in">string</span> line;</span><br><span class="line">getline(<span class="built_in">cin</span>,line);</span><br></pre></td></tr></table></figure><h1 id="scope"><a href="#scope" class="headerlink" title="scope"></a>scope</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">string</span></span><br><span class="line">uisng <span class="built_in">std</span>::<span class="built_in">cout</span></span><br><span class="line"><span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">cin</span></span><br></pre></td></tr></table></figure><h1 id="struct"><a href="#struct" class="headerlink" title="struct"></a>struct</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Sales_data</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="comment">/**/</span></span><br><span class="line">&#125;accum, *trans;</span><br></pre></td></tr></table></figure><h1 id="auto-decltype"><a href="#auto-decltype" class="headerlink" title="auto  decltype"></a>auto  decltype</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> a = <span class="number">0</span>; <span class="comment">//(a -- int型 )</span></span><br><span class="line"><span class="keyword">decltype</span>(a) b;<span class="comment">//(未初始化的int型b)</span></span><br><span class="line"><span class="keyword">decltype</span>((a)) c = <span class="number">0</span>;<span class="comment">//(c为初始化为0的int&amp;, 引用, 必须初始化)</span></span><br></pre></td></tr></table></figure><h1 id="typedef-using"><a href="#typedef-using" class="headerlink" title="typedef  using"></a>typedef  using</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">double</span> wages <span class="comment">//wages是double的同义词</span></span><br><span class="line"><span class="keyword">typedef</span> wages base, *p <span class="comment">//wages base等于double base,wages *p为 double *p的同义词</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> SI = Sales_data;</span><br><span class="line">SI item;  <span class="comment">//等价于 Sales_data item;</span></span><br></pre></td></tr></table></figure><h1 id="string"><a href="#string" class="headerlink" title="string"></a>string</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::<span class="built_in">string</span>::size_type len = line.size();</span><br><span class="line"></span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">string</span> s1 = <span class="built_in">std</span>::<span class="built_in">string</span>(<span class="number">10</span>,<span class="string">"c"</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">string</span> s2 = s1 + <span class="string">"World"</span>; <span class="comment">//必须确保每个加法运算符两侧的运算对象至少有一个是string</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">std</span>::<span class="function"><span class="built_in">string</span> <span class="title">str</span><span class="params">(<span class="string">"some string"</span>)</span></span>;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">auto</span> c : str)</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; c &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br></pre></td></tr></table></figure><table><thead><tr><th>函数名称</th><th>返回值</th></tr></thead><tbody><tr><td>isalnum()</td><td>如果参数是字母数字，即字母或数字，该函数返回true</td></tr><tr><td>isalpha()</td><td>如果参数是字母，该函数返回真</td></tr><tr><td>isblank()</td><td>如果参数是空格或水平制表符，该函数返回true</td></tr><tr><td>iscntrl()</td><td>如果参数是控制字符，该函数返回true</td></tr><tr><td>isdigit()</td><td>如果参数是数字（0～9），该函数返回true</td></tr><tr><td>isgraph()</td><td>如果参数是除空格之外的打印字符，该函数返回true</td></tr><tr><td>islower()</td><td>如果参数是小写字母，该函数返回true</td></tr><tr><td>isprint()</td><td>如果参数是打印字符（包括空格），该函数返回true</td></tr><tr><td>ispunct()</td><td>如果参数是标点符号，该函数返回true</td></tr><tr><td>isspace()</td><td>如果参数是标准空白字符，如空格、进纸、换行符、回车、水平制表符或者垂直制表符，该函数返回true</td></tr><tr><td>isupper()</td><td>如果参数是大写字母，该函数返回true</td></tr><tr><td>isxdigit()</td><td>如果参数是十六进制的数字，即0～9、a<del>f、A</del>F，该函数返回true</td></tr><tr><td>tolower()</td><td>如果参数是大写字符，则返回其小写，否则返回该参数</td></tr><tr><td>toupper()</td><td>如果参数是小写字母，则返回其大写，否则返回该参数</td></tr></tbody></table>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;getline&quot;&gt;&lt;a href=&quot;#getline&quot; class=&quot;headerlink&quot; title=&quot;getline&quot;&gt;&lt;/a&gt;getline&lt;/h1&gt;&lt;figure class=&quot;highlight cpp&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;g
-      
-    
-    </summary>
-    
-      <category term="Cpp" scheme="https://loopvoid.github.io/categories/Cpp/"/>
-    
-    
-      <category term="Cpp" scheme="https://loopvoid.github.io/tags/Cpp/"/>
     
   </entry>
   

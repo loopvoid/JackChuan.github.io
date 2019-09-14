@@ -4,6 +4,19 @@
   
     
     <entry>
+      <title>蒙特卡洛搜索树</title>
+      <link href="/2019/08/20/%E8%92%99%E7%89%B9%E5%8D%A1%E6%B4%9B%E6%90%9C%E7%B4%A2%E6%A0%91/"/>
+      <url>/2019/08/20/%E8%92%99%E7%89%B9%E5%8D%A1%E6%B4%9B%E6%90%9C%E7%B4%A2%E6%A0%91/</url>
+      
+        <content type="html"><![CDATA[<p>[1]AlphaGo Zero论文</p><p><a href="https://deepmind.com/documents/119/agz_unformatted_nature.pdf" target="_blank" rel="noopener">https://deepmind.com/documents/119/agz_unformatted_nature.pdf</a></p><p>[2] 什么是强化学习？</p><p><a href="https://mubu.com/doc/WNKomuDNl" target="_blank" rel="noopener">https://mubu.com/doc/WNKomuDNl</a></p><p>[3]强化学习系列笔记</p><p><a href="http://www.cnblogs.com/steven-yang/p/6481772.html" target="_blank" rel="noopener">http://www.cnblogs.com/steven-yang/p/6481772.html</a></p><p>[4]蒙特卡洛搜索树—走子演算</p><p><a href="http://t.cn/RWMmLdM" target="_blank" rel="noopener">http://t.cn/RWMmLdM</a></p><p>[5] 深入浅出看懂 AlphaGo 如何下棋<br>原论文（英文）：<a href="https://link.jianshu.com/?t=https://www.nature.com/articles/nature24270.epdf?author_access_token=VJXbVjaSHxFoctQQ4p2k4tRgN0jAjWel9jnR3ZoTv0PVW4gB86EEpGqTRDtpIz-2rmo8-KG06gqVobU5NSCFeHILHcVFUeMsbvwS-lxjqQGg98faovwjxeTUgZAUMnRQ" target="_blank" rel="noopener">Mastering the game of Go without human knowledge</a></p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>自动微分法</title>
       <link href="/2018/10/15/%E8%87%AA%E5%8A%A8%E5%BE%AE%E5%88%86%E6%B3%95/"/>
       <url>/2018/10/15/%E8%87%AA%E5%8A%A8%E5%BE%AE%E5%88%86%E6%B3%95/</url>
