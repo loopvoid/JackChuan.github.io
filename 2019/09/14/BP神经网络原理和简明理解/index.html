@@ -157,22 +157,22 @@
   <meta name="keywords" content="YenChuan's Blog">
 
 
-<meta name="description" content="单个神经元结构  输入：$x_1,x_2,…,x_n$  输出：$y$  输入和输出的关系(函数)：$y = (x_1w_1+x_2w_2+…+x_nw_n+)+b = \sum_{i=1}^n x_iw_i+b，其中，w_i是权重$  将输入用矩阵表示：$X = [x_1,x_2,…,x_n]^T,X为一个n行1列的矩阵$  将权重用矩阵表示：$W=[w_1,x_2,…,w_n]$  那么输出可">
+<meta name="description" content="单个神经元结构  输入：$x_1,x_2,…,x_n$  输出：$y$  输入和输出的关系(函数)：$y = (x_1w_1+x_2w_2+…+x_nw_n+)+b = \sum_{i=1}^n x_iw_i+b$，其中$w_i$是权重  将输入用矩阵表示：$X = [x_1,x_2,…,x_n]^T,X为一个n行1列的矩阵$  将权重用矩阵表示：$W=[w_1,x_2,…,w_n]$  那么输出">
 <meta property="og:type" content="article">
 <meta property="og:title" content="BP神经网络原理和简明理解">
 <meta property="og:url" content="https://loopvoid.github.io/2019/09/14/BP神经网络原理和简明理解/index.html">
 <meta property="og:site_name" content="Chuan·Yen">
-<meta property="og:description" content="单个神经元结构  输入：$x_1,x_2,…,x_n$  输出：$y$  输入和输出的关系(函数)：$y = (x_1w_1+x_2w_2+…+x_nw_n+)+b = \sum_{i=1}^n x_iw_i+b，其中，w_i是权重$  将输入用矩阵表示：$X = [x_1,x_2,…,x_n]^T,X为一个n行1列的矩阵$  将权重用矩阵表示：$W=[w_1,x_2,…,w_n]$  那么输出可">
+<meta property="og:description" content="单个神经元结构  输入：$x_1,x_2,…,x_n$  输出：$y$  输入和输出的关系(函数)：$y = (x_1w_1+x_2w_2+…+x_nw_n+)+b = \sum_{i=1}^n x_iw_i+b$，其中$w_i$是权重  将输入用矩阵表示：$X = [x_1,x_2,…,x_n]^T,X为一个n行1列的矩阵$  将权重用矩阵表示：$W=[w_1,x_2,…,w_n]$  那么输出">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://loopvoid.github.io/2019/09/14/BP神经网络原理和简明理解/bp1.jpg">
 <meta property="og:image" content="https://loopvoid.github.io/2019/09/14/BP神经网络原理和简明理解/bp2.jpg">
 <meta property="og:image" content="https://loopvoid.github.io/2019/09/14/BP神经网络原理和简明理解/bp3.jpg">
 <meta property="og:image" content="https://loopvoid.github.io/2019/09/14/BP神经网络原理和简明理解/bp4.jpg">
 <meta property="og:image" content="https://loopvoid.github.io/2019/09/14/BP神经网络原理和简明理解/bp5.jpg">
-<meta property="og:updated_time" content="2019-09-14T07:33:33.284Z">
+<meta property="og:updated_time" content="2019-09-14T07:35:35.111Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="BP神经网络原理和简明理解">
-<meta name="twitter:description" content="单个神经元结构  输入：$x_1,x_2,…,x_n$  输出：$y$  输入和输出的关系(函数)：$y = (x_1w_1+x_2w_2+…+x_nw_n+)+b = \sum_{i=1}^n x_iw_i+b，其中，w_i是权重$  将输入用矩阵表示：$X = [x_1,x_2,…,x_n]^T,X为一个n行1列的矩阵$  将权重用矩阵表示：$W=[w_1,x_2,…,w_n]$  那么输出可">
+<meta name="twitter:description" content="单个神经元结构  输入：$x_1,x_2,…,x_n$  输出：$y$  输入和输出的关系(函数)：$y = (x_1w_1+x_2w_2+…+x_nw_n+)+b = \sum_{i=1}^n x_iw_i+b$，其中$w_i$是权重  将输入用矩阵表示：$X = [x_1,x_2,…,x_n]^T,X为一个n行1列的矩阵$  将权重用矩阵表示：$W=[w_1,x_2,…,w_n]$  那么输出">
 <meta name="twitter:image" content="https://loopvoid.github.io/2019/09/14/BP神经网络原理和简明理解/bp1.jpg">
 
 
@@ -474,7 +474,7 @@
 </li>
 <li><p>输出：$y$</p>
 </li>
-<li><p>输入和输出的关系(函数)：$y = (x_1<em>w_1+x_2</em>w_2+…+x_n<em>w_n+)+b = \sum_{i=1}^n x_i</em>w_i+b，其中，w_i是权重$</p>
+<li><p>输入和输出的关系(函数)：$y = (x_1<em>w_1+x_2</em>w_2+…+x_n<em>w_n+)+b = \sum_{i=1}^n x_i</em>w_i+b$，其中$w_i$是权重</p>
 </li>
 <li><p>将输入用矩阵表示：$X = [x_1,x_2,…,x_n]^T,X为一个n行1列的矩阵$</p>
 </li>
