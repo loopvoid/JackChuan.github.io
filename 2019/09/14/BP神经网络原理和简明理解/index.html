@@ -157,23 +157,23 @@
   <meta name="keywords" content="YenChuan's Blog">
 
 
-<meta name="description" content="单个神经元结构  输入：$x_1,x_2,…,x_n$  输出：$y$  输入和输出的关系(函数)： ​        $y = (x_1w_1+x_2w_2+…+x_nw_n+)+b = \sum_{i=1}^nx_iw_i+b，其中，w_i是权重$  将输入用矩阵表示：$X = [x_1,x_2,…,x_n]^T,X为一个n行1列的矩阵$  将权重用矩阵表示：$W=[w_1,x_2,…,w_n">
+<meta name="description" content="单个神经元结构  输入：$x_1,x_2,…,x_n$  输出：$y$  输入和输出的关系(函数)：$y = (x_1w_1+x_2w_2+…+x_nw_n+)+b = \sum_{i=1}^n x_iw_i+b，其中，w_i是权重$  将输入用矩阵表示：$X = [x_1,x_2,…,x_n]^T,X为一个n行1列的矩阵$  将权重用矩阵表示：$W=[w_1,x_2,…,w_n]$  那么输出可">
 <meta property="og:type" content="article">
 <meta property="og:title" content="BP神经网络原理和简明理解">
 <meta property="og:url" content="https://loopvoid.github.io/2019/09/14/BP神经网络原理和简明理解/index.html">
 <meta property="og:site_name" content="Chuan·Yen">
-<meta property="og:description" content="单个神经元结构  输入：$x_1,x_2,…,x_n$  输出：$y$  输入和输出的关系(函数)： ​        $y = (x_1w_1+x_2w_2+…+x_nw_n+)+b = \sum_{i=1}^nx_iw_i+b，其中，w_i是权重$  将输入用矩阵表示：$X = [x_1,x_2,…,x_n]^T,X为一个n行1列的矩阵$  将权重用矩阵表示：$W=[w_1,x_2,…,w_n">
+<meta property="og:description" content="单个神经元结构  输入：$x_1,x_2,…,x_n$  输出：$y$  输入和输出的关系(函数)：$y = (x_1w_1+x_2w_2+…+x_nw_n+)+b = \sum_{i=1}^n x_iw_i+b，其中，w_i是权重$  将输入用矩阵表示：$X = [x_1,x_2,…,x_n]^T,X为一个n行1列的矩阵$  将权重用矩阵表示：$W=[w_1,x_2,…,w_n]$  那么输出可">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://loopvoid.github.io/2019/09/14/BP神经网络原理和简明理解/BP%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%8E%9F%E7%90%86%E5%92%8C%E7%AE%80%E6%98%8E%E7%90%86%E8%A7%A3%5Cbp1.jpg">
+<meta property="og:image" content="https://loopvoid.github.io/2019/09/14/BP神经网络原理和简明理解/bp1.jpg">
 <meta property="og:image" content="https://loopvoid.github.io/2019/09/14/BP神经网络原理和简明理解/bp2.jpg">
 <meta property="og:image" content="https://loopvoid.github.io/2019/09/14/BP神经网络原理和简明理解/bp3.jpg">
 <meta property="og:image" content="https://loopvoid.github.io/2019/09/14/BP神经网络原理和简明理解/bp4.jpg">
 <meta property="og:image" content="https://loopvoid.github.io/2019/09/14/BP神经网络原理和简明理解/bp5.jpg">
-<meta property="og:updated_time" content="2019-09-14T07:24:11.734Z">
+<meta property="og:updated_time" content="2019-09-14T07:33:33.284Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="BP神经网络原理和简明理解">
-<meta name="twitter:description" content="单个神经元结构  输入：$x_1,x_2,…,x_n$  输出：$y$  输入和输出的关系(函数)： ​        $y = (x_1w_1+x_2w_2+…+x_nw_n+)+b = \sum_{i=1}^nx_iw_i+b，其中，w_i是权重$  将输入用矩阵表示：$X = [x_1,x_2,…,x_n]^T,X为一个n行1列的矩阵$  将权重用矩阵表示：$W=[w_1,x_2,…,w_n">
-<meta name="twitter:image" content="https://loopvoid.github.io/2019/09/14/BP神经网络原理和简明理解/BP%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%8E%9F%E7%90%86%E5%92%8C%E7%AE%80%E6%98%8E%E7%90%86%E8%A7%A3%5Cbp1.jpg">
+<meta name="twitter:description" content="单个神经元结构  输入：$x_1,x_2,…,x_n$  输出：$y$  输入和输出的关系(函数)：$y = (x_1w_1+x_2w_2+…+x_nw_n+)+b = \sum_{i=1}^n x_iw_i+b，其中，w_i是权重$  将输入用矩阵表示：$X = [x_1,x_2,…,x_n]^T,X为一个n行1列的矩阵$  将权重用矩阵表示：$W=[w_1,x_2,…,w_n]$  那么输出可">
+<meta name="twitter:image" content="https://loopvoid.github.io/2019/09/14/BP神经网络原理和简明理解/bp1.jpg">
 
 
 
@@ -468,14 +468,13 @@
       
 
       
-        <h1 id="单个神经元结构"><a href="#单个神经元结构" class="headerlink" title="单个神经元结构"></a>单个神经元结构</h1><p><img src="//loopvoid.github.io/2019/09/14/BP神经网络原理和简明理解/BP%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%8E%9F%E7%90%86%E5%92%8C%E7%AE%80%E6%98%8E%E7%90%86%E8%A7%A3%5Cbp1.jpg" alt="bp1"></p>
+        <h1 id="单个神经元结构"><a href="#单个神经元结构" class="headerlink" title="单个神经元结构"></a>单个神经元结构</h1><p><img src="//loopvoid.github.io/2019/09/14/BP神经网络原理和简明理解/bp1.jpg" alt="bp1"></p>
 <ul>
 <li><p>输入：$x_1,x_2,…,x_n$</p>
 </li>
 <li><p>输出：$y$</p>
 </li>
-<li><p>输入和输出的关系(函数)：</p>
-<p>​        $y = (x_1<em>w_1+x_2</em>w_2+…+x_n<em>w_n+)+b = \sum_{i=1}^nx_i</em>w_i+b，其中，w_i是权重$</p>
+<li><p>输入和输出的关系(函数)：$y = (x_1<em>w_1+x_2</em>w_2+…+x_n<em>w_n+)+b = \sum_{i=1}^n x_i</em>w_i+b，其中，w_i是权重$</p>
 </li>
 <li><p>将输入用矩阵表示：$X = [x_1,x_2,…,x_n]^T,X为一个n行1列的矩阵$</p>
 </li>
@@ -526,16 +525,14 @@
 </ul>
 <p>正向传播结束，可以看到输出层输出的结果：$[0.7987314002,0.8374488853]$，但是训练数据的期望输出是$[0.01,0.99]$，相差太大，这时就需要利用反向传播，更新权重$w$，然后重新计算输出。</p>
 <h2 id="反向传播"><a href="#反向传播" class="headerlink" title="反向传播"></a>反向传播</h2><ul>
-<li><p>计算输出误差：</p>
-<ul>
+<li>计算输出误差：<ul>
 <li>误差计算：$$E_{total}=\sum_{i=1}^2E_{OUT_{O_i}} \ =E_{OUT_{O_1}} + E_{OUT_{O_2}} \ =\frac{1}{2}(expected_{OUT_{O_1}}-OUT_{O_1})^2+\frac{1}{2}(expected_{OUT_{O_2}}-OUT_{O_2})^2 \ =\frac{1}{2}<em>(O_1-OUT_{O_1})^2+\frac{1}{2}</em>(O_2-OUT_{O_2})^2 \ =\frac{1}{2}<em>(0.01-0.7987314002)^2+\frac{1}{2}</em>(0.99-0.8374488853)^2 \=0.0116359213+0.3110486109 \=0.3226845322 \ 其中：E_{OUT_{O_1}}=0.0116359213,E_{OUT_{O_2}}= 0.3110486109$$</li>
 <li>PS:这里使用这个简单的误差计算便于理解，实际上其效果有待提高。如果激活函数是饱和的，带来的缺陷就是系统迭代更新变慢，系统收敛就慢，当然这是可以有办法弥补的，一种方法是使用<strong>交叉熵函数</strong>作为损失函数。<a href="https://blog.csdn.net/lanchunhui/article/details/50086025" target="_blank" rel="noopener">这里</a>有更详细的介绍。</li>
 <li>交叉熵损失函数：$$E_{total}=\frac{1}{m}\sum_{i=1}^m(O_i\cdot log OUT_{O_i}+(1-O_i)\cdot log(1-OUT_{O_i}))$$</li>
 <li>对输出求偏导：$$\frac{\partial E_{total}}{\partial OUT_{O_i}}=\frac{1}{m}\sum_{i=1}^m(\frac{O_i}{OUT_{O_i}}-\frac{1-O_i}{1-OUT_{O_i}})$$</li>
 </ul>
 </li>
-<li><p>隐藏层–&gt;输出层的权重及偏置的更新：</p>
-<ul>
+<li>隐藏层–&gt;输出层的权重的更新：<ul>
 <li>链式求导法则(详细可参考<a href="[https://loopvoid.github.io/2018/10/15/%E8%87%AA%E5%8A%A8%E5%BE%AE%E5%88%86%E6%B3%95/](https://loopvoid.github.io/2018/10/15/自动微分法/)">这篇文章</a>)：$$假设y是u的函数，而u是x的函数：y=f(u),u=g(x) \ 那么对应的复合函数就是：y=f(g(x)) \ 那么y对x的导数则有：\frac{dy}{dx}=\frac{dy}{du}\cdot \frac{du}{dx}$$</li>
 <li>以权重$w_5$举例计算：权重$w$的大小能直接影响输出，$w$不合适会使输出有误差。要知道某个$w$对误差影响的程度，可以用<strong>误差对该$w$的变化率</strong>来表达。如果$w$的很少的变化，会导致误差增大很多，说明这个$w$对误差影响的程度就更大，也就是说，误差对该$w$的变化率越高。而误差对$w$的变化率就是误差对$w$的偏导。如图，总误差的大小首先受输出层神经元$O_1$的输出影响，继续反推，$O_1$的输出受它自己的输入的影响，而它自己的输入会受到$w_5$的影响。<img src="//loopvoid.github.io/2019/09/14/BP神经网络原理和简明理解/bp5.jpg" alt="bp5"></li>
 <li>那么根据链式法则有：$$\frac{\partial E_{total}}{\partial w_5}=\frac{\partial E_{total}}{\partial OUT_{O_1}}\frac{\partial OUT_{O_1}}{\partial IN_{O_1}}\frac{\partial IN_{O_1}}{\partial w_5} \ \because E_{total}=\frac{1}{2}(O_1-OUT_{O_1})^2+\frac{1}{2}(O_2-OUT_{O_2})^2 \ \therefore \frac{\partial E_{total}}{\partial OUT_{O_1}}=\frac{\partial (\frac{1}{2}(O_1-OUT_{O_1})^2+\frac{1}{2}(O_2-OUT_{O_2})^2)}{\partial OUT_{O_1}} \ =2<em>\frac{1}{2}(O_1-OUT_{O_1})^{2-1}</em>(0-1)+0 \ =-(O_1-OUT_{O_1}) \ =-(0.01-0.7987314002) \ =0.7887314002$$</li>
@@ -543,6 +540,10 @@
 <li>$$\because IN_{O_1}=w_5<em>OUT_{h_1}+w_6</em>OUT_{h_2}+1<em>b_3 \ \therefore \frac{\partial IN_{O_1}}{\partial w_5}=\frac{\partial (w_5</em>OUT_{h_1}+w_6<em>OUT_{H}+1</em>b_3)}{\partial w_5} \ =1<em>w_5^{(1-1)}</em>OUT_{h_1}+0+0 \ =OUT_{h_1} \=0.6456563062$$</li>
 <li>所以：$$\frac{\partial E_{total}}{\partial w_5}=\frac{\partial E_{total}}{\partial OUT_{O_1}}\frac{\partial OUT_{O_1}}{\partial IN_{O_1}}\frac{\partial IN_{O_1}}{\partial w_5} \=0.7887314002<em>0.1607595505</em>0.6456563062\=0.0818667051$$</li>
 <li>归纳如下：$$\frac{\partial E_{total}}{\partial w_5}=\frac{\partial E_{total}}{\partial OUT_{O_1}}\frac{\partial OUT_{O_1}}{\partial IN_{O_1}}\frac{\partial IN_{O_1}}{\partial w_5} \ =-(O_1-OUT_{O_1})\cdot OUT_{O_1}\cdot (1-OUT_{O_1})\cdot OUT_{h_1}\=\sigma_{O_1}\cdot OUT_{h_1} \ 其中，\sigma_{O_1}=-(O_1-OUT_{O_1})\cdot OUT_{O_1}\cdot (1-OUT_{O_1})$$</li>
+</ul>
+</li>
+<li>隐藏层–&gt;输出层的偏置的更新：<ul>
+<li>同理<strong>输出层</strong>偏置b更新如下：$$$$</li>
 </ul>
 </li>
 </ul>
