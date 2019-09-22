@@ -157,18 +157,18 @@
   <meta name="keywords" content="单映性,基础知识,">
 
 
-<meta name="description" content="3D坐标转换到2D坐标在单应性下，我们可以将3D中的点从相机1到相机2的变换写为：  $$ X_2=HX_1 \longrightarrow X_1,X_2 \in R^3  $$  在图像平面中，使用齐次坐标，公式如下:  $$ λ_1x_1=X_1$$$$λ_2x_2=X_2 $$$$\therefore λ_2 x_2 = Hλ_1x_1 $$  这意味着在一定范围内,X2等于HX1。X2到">
+<meta name="description" content="3D坐标转换到2D坐标在单应性下，我们可以将3D中的点从相机1到相机2的变换写为：  $$ X_2=HX_1 \longrightarrow X_1,X_2 \in R^3  $$  在图像平面中，使用齐次坐标，公式如下:  $ λ_1x_1=X_1$$λ_2x_2=X_2 $$\therefore λ_2 x_2 = Hλ_1x_1 $  这意味着在一定范围内,X2等于HX1。X2到HX1是图像">
 <meta name="keywords" content="单映性,基础知识">
 <meta property="og:type" content="article">
 <meta property="og:title" content="单映性变换">
 <meta property="og:url" content="https://loopvoid.github.io/2017/02/20/单映性变换/index.html">
 <meta property="og:site_name" content="Chuan·Yen">
-<meta property="og:description" content="3D坐标转换到2D坐标在单应性下，我们可以将3D中的点从相机1到相机2的变换写为：  $$ X_2=HX_1 \longrightarrow X_1,X_2 \in R^3  $$  在图像平面中，使用齐次坐标，公式如下:  $$ λ_1x_1=X_1$$$$λ_2x_2=X_2 $$$$\therefore λ_2 x_2 = Hλ_1x_1 $$  这意味着在一定范围内,X2等于HX1。X2到">
+<meta property="og:description" content="3D坐标转换到2D坐标在单应性下，我们可以将3D中的点从相机1到相机2的变换写为：  $$ X_2=HX_1 \longrightarrow X_1,X_2 \in R^3  $$  在图像平面中，使用齐次坐标，公式如下:  $ λ_1x_1=X_1$$λ_2x_2=X_2 $$\therefore λ_2 x_2 = Hλ_1x_1 $  这意味着在一定范围内,X2等于HX1。X2到HX1是图像">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-08-06T05:44:24.624Z">
+<meta property="og:updated_time" content="2019-09-22T08:19:08.727Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="单映性变换">
-<meta name="twitter:description" content="3D坐标转换到2D坐标在单应性下，我们可以将3D中的点从相机1到相机2的变换写为：  $$ X_2=HX_1 \longrightarrow X_1,X_2 \in R^3  $$  在图像平面中，使用齐次坐标，公式如下:  $$ λ_1x_1=X_1$$$$λ_2x_2=X_2 $$$$\therefore λ_2 x_2 = Hλ_1x_1 $$  这意味着在一定范围内,X2等于HX1。X2到">
+<meta name="twitter:description" content="3D坐标转换到2D坐标在单应性下，我们可以将3D中的点从相机1到相机2的变换写为：  $$ X_2=HX_1 \longrightarrow X_1,X_2 \in R^3  $$  在图像平面中，使用齐次坐标，公式如下:  $ λ_1x_1=X_1$$λ_2x_2=X_2 $$\therefore λ_2 x_2 = Hλ_1x_1 $  这意味着在一定范围内,X2等于HX1。X2到HX1是图像">
 
 
 
@@ -487,15 +487,14 @@
 </blockquote>
 <p>在图像平面中，使用齐次坐标，公式如下:</p>
 <blockquote>
-<p>$$ λ_1x_1=X_1$$<br>$$λ_2x_2=X_2 $$<br>$$\therefore λ_2 x_2 = Hλ_1x_1 $$</p>
+<p>$ λ_1x_1=X_1$<br>$λ_2x_2=X_2 $<br>$\therefore λ_2 x_2 = Hλ_1x_1 $</p>
 </blockquote>
 <p>这意味着在一定范围内,X<sub>2</sub>等于HX<sub>1</sub>。X<sub>2</sub>到HX<sub>1</sub>是图像平面中的点之间的直接映射。如果确定这些点都在一副图像(对于通过纯旋转相关的相机，每个场景点可以被认为是躺在无限平面上)所在的平面中，则可以直接校正图像，而不需要恢复和操纵3D坐标。</p>
 <h2 id="单映性计算"><a href="#单映性计算" class="headerlink" title="单映性计算"></a>单映性计算</h2><p>为了计算H，我们从等式x<sub>2</sub>=Hx<sub>1</sub>开始，在齐次坐标中我们得到以下约束:</p>
-<p>$$<br>\left[\begin{array}{l}{x_{2}} \ {y_{2}} \ {z_{2}}\end{array}\right]=\left[\begin{array}{lll}{H_{11}} &amp; {H_{12}} &amp; {H_{13}} \ {H_{21}} &amp; {H_{22}} &amp; {H_{23}} \ {H_{31}} &amp; {H_{32}} &amp; {H_{33}}\end{array}\right]\left[\begin{array}{l}{x_{1}} \ {y_{1}} \ {z_{1}}\end{array}\right] \Leftrightarrow \mathbf{x}<em>{2}=H \mathbf{x}</em>{1}<br>$$</p>
-<p>在齐次坐标中$(x’<em>{2} = x</em>{2}/z_{2} 和 y’<em>{2} = y</em>{2}/z_{2})$:<br>$$<br>\begin{aligned} x_{2}^{\prime} &amp;=\frac{H_{11} x_{1}+H_{12} y_{1}+H_{13} z_{1}}{H_{31} x_{1}+H_{32} y_{1}+H_{33} z_{1}} \ y_{2}^{\prime} &amp;=\frac{H_{21} x_{1}+H_{22} y_{1}+H_{23} z_{1}}{H_{31} x_{1}+H_{32} y_{1}+H_{33} z_{1}} \end{aligned}<br>$$<br>为了习惯一般情况，令$z_1=1$并重新排列:<br>$$<br>\begin{array}{l}{x_{2}^{\prime}\left(H_{31} x_{1}+H_{32} y_{1}+H_{33}\right)=H_{11} x_{1}+H_{12} y_{1}+H_{13}} \ {y_{2}^{\prime}\left(H_{31} x_{1}+H_{32} y_{1}+H_{33}\right)=H_{21} x_{1}+H_{22} y_{1}+H_{23}}\end{array}<br>$$</p>
+<p>$$<br>\begin{bmatrix}x_2\ y_2 \ z_2 \end{bmatrix}=\begin{bmatrix}H_{11} &amp; H_{12} &amp; H_{13}\ H_{21} &amp; H_{22} &amp; H_{23}\ H_{31} &amp; H_{32} &amp; H_{33} \end{bmatrix}=\begin{bmatrix}x_1 \ y_1 \ z_1\end{bmatrix}\Leftrightarrow x_2=Hx_1<br>$$</p>
+<p>在齐次坐标中$(x_2’= x_2/z_2 和 y_2’ = y_2/z_2)$:<br>$$<br>\begin{aligned} x_{2}^{\prime} &amp;=\frac{H_{11} x_{1}+H_{12} y_{1}+H_{13} z_{1}}{H_{31} x_{1}+H_{32} y_{1}+H_{33} z_{1}} \ y_{2}^{\prime} &amp;=\frac{H_{21} x_{1}+H_{22} y_{1}+H_{23} z_{1}}{H_{31} x_{1}+H_{32} y_{1}+H_{33} z_{1}} \end{aligned}<br>$$<br>为了习惯一般情况，令$z_1=1$并重新排列:<br>$$<br>\begin{array}{l}{x_{2}^{\prime}\left(H_{31} x_{1}+H_{32} y_{1}+H_{33}\right)=H_{11} x_{1}+H_{12} y_{1}+H_{13}} \ {y_{2}^{\prime}\left(H_{31} x_{1}+H_{32} y_{1}+H_{33}\right)=H_{21} x_{1}+H_{22} y_{1}+H_{23}}\end{array}<br>$$</p>
 <p>我们想求解H.即使这些非齐次方程涉及非线性坐标，但是H的系数呈线性。 因此整理上面的方程得到:<br>$$<br>\begin{matrix}<br>a^T_xh = 0\ a^T_yh = 0<br>\end{matrix}<br>$$</p>
-<p>其中参数含义:<br>$$<br>\begin{matrix}<br>h=(H_{11},H_{11},H_{11},H_{11},H_{11},H_{11},H_{11},H_{11},H_{11})^T\ a_x=(-x_1,-y_1,-1,0,0,0,x’_2x_1,x’_2y_1,x’_2)^T \ a_y = (0,0,0,-x_1,-y_1,-1,y’_2x_1,y’_2y_1,y’_2)^T</p>
-<p>\end{matrix}<br>$$</p>
+<p>其中参数含义:<br>$$<br>\begin{matrix}<br>h=(H_{11},H_{12},H_{13},H_{21},H_{22},H_{23},H_{31},H_{32},H_{33})^T\ a_x=(-x_1,-y_1,-1,0,0,0,x’_2x_1,x’_2y_1,x’_2)^T \ a_y = (0,0,0,-x_1,-y_1,-1,y’_2x_1,y’_2y_1,y’_2)^T<br>\end{matrix}<br>$$</p>
 <p>对这个系数矩阵做奇异值分解，在matlab里面有工具可以帮我们计算：</p>
 <figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[U,D,V]=svd(A);</span><br><span class="line">h=V(:,<span class="keyword">end</span>);</span><br><span class="line">H=[h(<span class="number">1</span>) h(<span class="number">2</span>) h(<span class="number">3</span>);h(<span class="number">4</span>) h(<span class="number">5</span>) h(<span class="number">6</span>);h(<span class="number">7</span>) h(<span class="number">8</span>) h(<span class="number">9</span>)];</span><br></pre></td></tr></table></figure>
 
@@ -507,13 +506,13 @@
 <blockquote>
 <ul>
 <li>如果单应性是确定的,则$σ_{9} = 0$，并且存在适合该点的单应性。</li>
-<li>如果单映性是超定的,则$σ<em>{9} &gt;= 0$ ,这里$σ</em>{9}表示“残余”或拟合优度。 </li>
+<li>如果单映性是超定的,则$σ<em>{9} &gt;= 0$ ,这里$σ</em>{9}$表示“残余”或拟合优度。 </li>
 <li>我们不处理单映性未定的情况。</li>
 </ul>
 </blockquote>
 <p>从SVD中，我们取对应于最小奇异值的“右奇异向量”（V的一列）值$σ<em>{9}$。 解h包含最佳拟合点的单应性矩阵的系数。我们将h重构成矩阵H，并形成等式$x</em>{2}=Hx_{1}$。</p>
-<h2 id="齐次线性最小二乘的推导"><a href="#齐次线性最小二乘的推导" class="headerlink" title="齐次线性最小二乘的推导"></a>齐次线性最小二乘的推导</h2><p>从Ah=0开始，总和平方的误差可以写为:<br>$$<br>\begin{matrix}<br>f(h)=\frac{1}{2}(Ah-0)^T(Ah-0) \<br>f(h)=\frac{1}{2}(Ah)^T(Ah) \<br>f(h)=\frac{1}{2}h^TA^TAh<br>\end{matrix}<br>$$</p>
-<p>取f相对于h的导数并且将结果设置为零，得到:<br>$$<br>\begin{matrix}<br>\frac{d}{dh}f=0=\frac{1}{2}(A^TA+(A^TA)^T)h \<br>0 = A^TAh<br>\end{matrix}<br>$$</p>
+<h2 id="齐次线性最小二乘的推导"><a href="#齐次线性最小二乘的推导" class="headerlink" title="齐次线性最小二乘的推导"></a>齐次线性最小二乘的推导</h2><p>从Ah=0开始，总和平方的误差可以写为:<br>$$<br>f(h)=\frac{1}{2}(Ah-0)^T(Ah-0) \<br>f(h)=\frac{1}{2}(Ah)^T(Ah) \<br>f(h)=\frac{1}{2}h^TA^TAh<br>$$</p>
+<p>取f相对于h的导数并且将结果设置为零，得到:<br>$$<br>\frac{d}{dh}f=0=\frac{1}{2}(A^TA+(A^TA)^T)h \<br>0 = A^TAh<br>$$</p>
 <p>观察$A^T$A的特征向量分解，我们看到h应该等于特征值为零的$A^T$A的特征向量（或者，在存在噪声的情况下，特征值最接近零）。</p>
 <p>该结果与使用SVD获得的结果相同。这从很容易理解，假设具有SVD分解的矩阵$A=UΣV^T$，V的列对应于$A^TA$的特征向量。</p>
 <p>可以参考:</p>
