@@ -484,27 +484,27 @@
         <h1 id="二维图像之间的单应变换"><a href="#二维图像之间的单应变换" class="headerlink" title="二维图像之间的单应变换"></a>二维图像之间的单应变换</h1><p>图像中的2D点(x,y)(x,y)可以被表示成3D向量的形式$(x_1,x_2,x_3)$，其中$x=\frac{x_1}{x_3}$，$y=\frac{x_2}{x_3}$。它被叫做点的齐次表达，位于投影平面$P^2$上。所谓单应就是发生在投影平面$P^2$上的点和线可逆的映射。其它叫法包括射影变换、投影变换和平面投影变换等。</p>
 <p>单应变换矩阵是一个3*3的矩阵H。这个变换可以被任意乘上一个非零常数，而不改变变换本身。它虽然具有9个元素，但是具有8个自由度。这意味这它里面有8个未知参数待求。</p>
 <p>典型地，可以通过图像之间的特征匹配来估计单应矩阵。</p>
-<h2 id="单应和齐次坐标"><a href="#单应和齐次坐标" class="headerlink" title="单应和齐次坐标"></a>单应和齐次坐标</h2><p>一个单应矩阵是大小为3*3的矩阵$H = \begin{bmatrix} h_{11} &amp; h_{12} &amp; h_{13}\ h_{21} &amp; h_{22} &amp; h_{23}\ h_{31} &amp; h_{32} &amp; h_{33}\end{bmatrix}$，满足给定一个点 $P_1 = \left[ \begin{matrix}   x_1 \   y_1 \  w_1  \end{matrix} \right]$ ,矩阵H把点$P_1$变换成一个新的点$P_2 = \left[ \begin{matrix}   x_2 \   y_2 \  w_2  \end{matrix} \right] = \begin{bmatrix} h_{11} &amp; h_{12} &amp; h_{13}\  h_{21} &amp; h_{22} &amp; h_{23}\ h_{31} &amp; h_{32} &amp; h_{33}\end{bmatrix}\cdot  \left[ \begin{matrix}   x_1 \   y_1 \  w_1  \end{matrix} \right]$ 。由于他们都是齐次坐标，对应在图像上的两个点分别是$\left[ \begin{matrix}   \frac{x_1}{w_1}  \  \frac{y_1}{w_1}\end{matrix} \right]$，$\left[ \begin{matrix}   \frac{x_2}{w_2}  \  \frac{y_2}{w_2}\end{matrix} \right]$ 。</p>
+<h2 id="单应和齐次坐标"><a href="#单应和齐次坐标" class="headerlink" title="单应和齐次坐标"></a>单应和齐次坐标</h2><p>一个单应矩阵是大小为3*3的矩阵$H = \begin{bmatrix} h_{11} &amp; h_{12} &amp; h_{13}\\ h_{21} &amp; h_{22} &amp; h_{23}\\ h_{31} &amp; h_{32} &amp; h_{33}\end{bmatrix}$，满足给定一个点 $P_1 = \left[ \begin{matrix}   x_1 \\   y_1 \\  w_1  \end{matrix} \right]$ ,矩阵H把点$P_1$变换成一个新的点$P_2 = \left[ \begin{matrix}   x_2 \\   y_2 \\  w_2  \end{matrix} \right] = \begin{bmatrix} h_{11} &amp; h_{12} &amp; h_{13}\\  h_{21} &amp; h_{22} &amp; h_{23}\\ h_{31} &amp; h_{32} &amp; h_{33}\end{bmatrix}\cdot  \left[ \begin{matrix}   x_1 \\   y_1 \\  w_1  \end{matrix} \right]$ 。由于他们都是齐次坐标，对应在图像上的两个点分别是$\left[ \begin{matrix}   \frac{x_1}{w_1}  \\  \frac{y_1}{w_1}\end{matrix} \right]$，$\left[ \begin{matrix}   \frac{x_2}{w_2}  \\  \frac{y_2}{w_2}\end{matrix} \right]$ 。</p>
 <h2 id="单应的自由度"><a href="#单应的自由度" class="headerlink" title="单应的自由度"></a>单应的自由度</h2><p>如果给定一个单位$H={h_{ij}}$，给H的每个元素乘上a，得到的单应$aH$和$H$作用相同，因为新的单应无非把齐次点$P_1$变成了齐次点$aP_2$，$aP_2$和$P_2$在图像上对应的点是相同的。所以一个单应中只有8个自由度，一般令$h_{33}=1$来归一化。</p>
 <h2 id="求解单应"><a href="#求解单应" class="headerlink" title="求解单应"></a>求解单应</h2><p>8个未知数需要8个方程来求解，之所以4对点能求解，因为他们一个点能提供两个方程。</p>
-<p>假设图像上有两个点$(x_1,y_1)$，$(x_2,y_2)$，他们的齐次坐标为$\left[ \begin{matrix}   x_1 \   y_1 \  1  \end{matrix} \right]$，$\left[ \begin{matrix}   x_2 \   y_2 \  1  \end{matrix} \right]$。</p>
+<p>假设图像上有两个点$(x_1,y_1)$，$(x_2,y_2)$，他们的齐次坐标为$\left[ \begin{matrix}   x_1 \\   y_1 \\  1  \end{matrix} \right]$，$\left[ \begin{matrix}   x_2 \\   y_2 \\  1  \end{matrix} \right]$。</p>
 <p>带入上述的推导可以得到：</p>
-<p>$$<br>x_2=x_1h_{11}+y_1h_{12}+h_{13}<br>$$</p>
-<p>$$<br>y_2=x_1h_{21}+y_1h_{22}+h_{23}<br>$$</p>
-<p>$$<br>1=x_1h_{31}+y_1h_{32}+h_{33}<br>$$</p>
-<p>一般令$h_{33}=1$来归一化，可得到：</p>
-<p>$$<br>x_2=\frac{x_1h_{11}+y_1h_{12}+h_{13}}{x_1h_{31}+y_1h_{32}+1}<br>$$</p>
-<p>$$<br>y_2=\frac{x_1h_{21}+y_1h_{22}+h_{23}}{x_1h_{31}+y_1h_{32}+1}<br>$$</p>
-<p>把这两个式子重新组织一下，得到等价的矩阵形式：</p>
-<p>$$<br>Au=v<br>$$</p>
-<p>$$<br>A = \left[ \begin{matrix}   x_1 \  y_1 \  1 \  0 \  0 \  0  \ -x_1x_2  \  -x_2y_1 \ 0 \ 0 \ 0 \ x_1 \ y_1 \ 1 \ -x_1y_2 \ -y_1y_2  \end{matrix} \right]<br>$$</p>
-<p>$$<br>u=\left[ \begin{matrix}   h_{11} \  h_{12} \  h_{13} \  h_{21} \  h_{22} \  h_{23} \  h_{31} \  h_{32} \  h_{33}  \end{matrix} \right]^T<br>$$</p>
-<p>$$<br>v=\left[ \begin{matrix} x_2 \ y_2  \end{matrix} \right]^T<br>$$</p>
-<p>如果有四对不共线匹配点对，这个方程组就能够垒到8行，存在唯一解。</p>
+<script type="math/tex; mode=display">
+x_2=x_1h_{11}+y_1h_{12}+h_{13}</script><script type="math/tex; mode=display">
+y_2=x_1h_{21}+y_1h_{22}+h_{23}</script><script type="math/tex; mode=display">
+1=x_1h_{31}+y_1h_{32}+h_{33}</script><p>一般令$h_{33}=1$来归一化，可得到：</p>
+<script type="math/tex; mode=display">
+x_2=\frac{x_1h_{11}+y_1h_{12}+h_{13}}{x_1h_{31}+y_1h_{32}+1}</script><script type="math/tex; mode=display">
+y_2=\frac{x_1h_{21}+y_1h_{22}+h_{23}}{x_1h_{31}+y_1h_{32}+1}</script><p>把这两个式子重新组织一下，得到等价的矩阵形式：</p>
+<script type="math/tex; mode=display">
+Au=v</script><script type="math/tex; mode=display">
+A = \left[ \begin{matrix}   x_1 \  y_1 \  1 \  0 \  0 \  0  \ -x_1x_2  \  -x_2y_1 \\ 0 \ 0 \ 0 \ x_1 \ y_1 \ 1 \ -x_1y_2 \ -y_1y_2  \end{matrix} \right]</script><script type="math/tex; mode=display">
+u=\left[ \begin{matrix}   h_{11} \  h_{12} \  h_{13} \  h_{21} \  h_{22} \  h_{23} \  h_{31} \  h_{32} \  h_{33}  \end{matrix} \right]^T</script><script type="math/tex; mode=display">
+v=\left[ \begin{matrix} x_2 \ y_2  \end{matrix} \right]^T</script><p>如果有四对不共线匹配点对，这个方程组就能够垒到8行，存在唯一解。</p>
 <p>如果多于四对点，比如有n对点，方程就垒到2n行，用最小二乘法或SVD分解就可以求解$H$。</p>
 <p>由于点对中可能存在不少错误匹配，一般使用RANSAC算法剔除错误匹配点对。</p>
 <h1 id="Opencv中单应性矩阵H的计算"><a href="#Opencv中单应性矩阵H的计算" class="headerlink" title="Opencv中单应性矩阵H的计算"></a>Opencv中单应性矩阵H的计算</h1><p>如果在两幅对应的图像中已知4个映射点的坐标，就可以使用 <a href="https://docs.opencv.org/3.4.1/d9/d0c/group__calib3d.html#gafd3ef89257e27d5235f4467cbb1b6a63" target="_blank" rel="noopener">findHomography</a>函数如下：</p>
-<p><strong>C++:  ** <code>Mat cv::findHomography(InputArray srcPoints,InputArray dstPoints,OutputArray mask,int method = 0,double ransacReprojThreshold = 3)</code><br>**Python:</strong> <code>retval,mask=cv.findHomography(srcPoints,dstPoints[,method[,ransacReprojThreshold[,mask[,maxIters[,confidence]]]]])</code></p>
+<p><strong>C++:  </strong> <code>Mat cv::findHomography(InputArray srcPoints,InputArray dstPoints,OutputArray mask,int method = 0,double ransacReprojThreshold = 3)</code><br><strong>Python:</strong> <code>retval,mask=cv.findHomography(srcPoints,dstPoints[,method[,ransacReprojThreshold[,mask[,maxIters[,confidence]]]]])</code></p>
 <h1 id="自动寻找对应点-corresponding-points"><a href="#自动寻找对应点-corresponding-points" class="headerlink" title="自动寻找对应点(corresponding points)"></a>自动寻找对应点(corresponding points)</h1><p>由上文知道知道两对对应点(4个映射点)的坐标即可求得单应性矩阵H。</p>
 <p>我们可以使用在OpenCV中的几个关键点检测器（例如SIFT，SURF和ORB）。</p>
 <p>本文将采用ORB关键点检测器，SIFT和SURF已经注册专利。</p>

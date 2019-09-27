@@ -165,19 +165,19 @@
 <meta property="og:site_name" content="Chuan·Yen">
 <meta property="og:description" content="几种微分求解的方法 手动求解法(Manual Differentiation) 数值微分法(Numerical Differentiation) 符号微分法(Symbolic Differentiation) 自动微分法(Automatic Differentiation)  自动微分在数学和计算代数领域，automatic differentiation (AD)又称为 algorithmic">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://loopvoid.github.io/2018/10/15/自动微分法/%E8%AE%A1%E7%AE%97%E5%9B%BE1.png">
-<meta property="og:image" content="https://loopvoid.github.io/2018/10/15/自动微分法/%E8%AE%A1%E7%AE%97%E5%9B%BE2.png">
-<meta property="og:image" content="https://loopvoid.github.io/2018/10/15/自动微分法/%E8%AE%A1%E7%AE%97%E5%9B%BE3.png">
-<meta property="og:image" content="https://loopvoid.github.io/2018/10/15/自动微分法/%E8%AE%A1%E7%AE%97%E5%9B%BE4.png">
-<meta property="og:image" content="https://loopvoid.github.io/2018/10/15/自动微分法/%E8%AE%A1%E7%AE%97%E5%9B%BE5.png">
-<meta property="og:image" content="https://loopvoid.github.io/2018/10/15/自动微分法/%E8%AE%A1%E7%AE%97%E5%9B%BE6.png">
-<meta property="og:image" content="https://loopvoid.github.io/2018/10/15/自动微分法/%E8%AE%A1%E7%AE%97%E5%9B%BE7.png">
-<meta property="og:image" content="https://loopvoid.github.io/2018/10/15/自动微分法/%E8%AE%A1%E7%AE%97%E5%9B%BE8.png">
+<meta property="og:image" content="https://loopvoid.github.io/2018/10/15/自动微分法/计算图1.png">
+<meta property="og:image" content="https://loopvoid.github.io/2018/10/15/自动微分法/计算图2.png">
+<meta property="og:image" content="https://loopvoid.github.io/2018/10/15/自动微分法/计算图3.png">
+<meta property="og:image" content="https://loopvoid.github.io/2018/10/15/自动微分法/计算图4.png">
+<meta property="og:image" content="https://loopvoid.github.io/2018/10/15/自动微分法/计算图5.png">
+<meta property="og:image" content="https://loopvoid.github.io/2018/10/15/自动微分法/计算图6.png">
+<meta property="og:image" content="https://loopvoid.github.io/2018/10/15/自动微分法/计算图7.png">
+<meta property="og:image" content="https://loopvoid.github.io/2018/10/15/自动微分法/计算图8.png">
 <meta property="og:updated_time" content="2019-08-06T07:57:48.256Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="自动微分法">
 <meta name="twitter:description" content="几种微分求解的方法 手动求解法(Manual Differentiation) 数值微分法(Numerical Differentiation) 符号微分法(Symbolic Differentiation) 自动微分法(Automatic Differentiation)  自动微分在数学和计算代数领域，automatic differentiation (AD)又称为 algorithmic">
-<meta name="twitter:image" content="https://loopvoid.github.io/2018/10/15/自动微分法/%E8%AE%A1%E7%AE%97%E5%9B%BE1.png">
+<meta name="twitter:image" content="https://loopvoid.github.io/2018/10/15/自动微分法/计算图1.png">
 
 
 
@@ -515,56 +515,48 @@
 </ul>
 <p>AD 这两种实现方式：<strong>运算符重载</strong>与<strong>代码生成</strong>，两种方式的原理都一样， <code>链式法则</code>。AD相关工具，请到这个<a href="http://www.autodiff.org/" target="_blank" rel="noopener">http://www.autodiff.org/</a> 页面。自动微分（AD）是计算导数的最优方法，比符号计算、有限微分更快更精确，AD已经广泛应用在优化领域，包括人工神经网络的训练算法 back-propagation（BP）等。</p>
 <h1 id="AD基本原理"><a href="#AD基本原理" class="headerlink" title="AD基本原理"></a>AD基本原理</h1><h2 id="链式法则"><a href="#链式法则" class="headerlink" title="链式法则"></a>链式法则</h2><p>AD基本原理是<code>链式法则</code>。链式法则又分为正向和反向。如下例子</p>
-<p>$$y=f(g(h(x)))=f(g(h(w_0)))=f(g(w_1))=f(w_2)=w_3$$</p>
-<p>那么链式法则就表示为:</p>
-<p>$$\frac{dy}{dx}=\frac{dy}{dw_2}\frac{dw_2}{dw_1}\frac{dw_1}{dx}$$</p>
-<p>正向链式法则：则从链里往外算（即，先算$\frac{dw_1}{dx}$，再算$\frac{dw_2}{dw_1}$，最后算$\frac{dy}{dw_2}$）。</p>
+<script type="math/tex; mode=display">y=f(g(h(x)))=f(g(h(w_0)))=f(g(w_1))=f(w_2)=w_3</script><p>那么链式法则就表示为:</p>
+<script type="math/tex; mode=display">\frac{dy}{dx}=\frac{dy}{dw_2}\frac{dw_2}{dw_1}\frac{dw_1}{dx}</script><p>正向链式法则：则从链里往外算（即，先算$\frac{dw_1}{dx}$，再算$\frac{dw_2}{dw_1}$，最后算$\frac{dy}{dw_2}$）。</p>
 <p>反向链式法则：则从链外往外里（即，先算$\frac{dy}{dw_2}$，再算$\frac{dw_2}{dw_1}$，最后算$\frac{dw_1}{dx}$）。</p>
 <p>简洁的表示为：</p>
-<p>正向链式法则：计算递归式$$\frac{dw_i}{dx}=\frac{dw_i}{dw_{i-1}}\frac{dw_{i-1}}{dx}，且w_3=y$$</p>
-<p>反向链式法则：计算递归式$$\frac{dy}{dw_i}=\frac{dy}{dw_{i+1}}\frac{dw_{i+1}}{dw_i}，且w_0=y$$</p>
+<p>正向链式法则：计算递归式<script type="math/tex">\frac{dw_i}{dx}=\frac{dw_i}{dw_{i-1}}\frac{dw_{i-1}}{dx}，且w_3=y</script></p>
+<p>反向链式法则：计算递归式<script type="math/tex">\frac{dy}{dw_i}=\frac{dy}{dw_{i+1}}\frac{dw_{i+1}}{dw_i}，且w_0=y</script></p>
 <p> 通常，正向跟反向链式法则都是通过计算图来表示和计算，这样更加的方便。</p>
 <h2 id="正向链式法则计算图"><a href="#正向链式法则计算图" class="headerlink" title="正向链式法则计算图"></a>正向链式法则计算图</h2><p>将函数转化为一个DAG（有向无环图），就能很容易的求解每一步的值。</p>
 <h3 id="例1："><a href="#例1：" class="headerlink" title="例1："></a>例1：</h3><p>假设有计算式子：$y=x_0*x_1+x_1$  (1)，我们要求解$\frac{\partial y}{\partial x_1}$。</p>
 <p>首先，其计算图表示为：</p>
-<p><img src="//loopvoid.github.io/2018/10/15/自动微分法/%E8%AE%A1%E7%AE%97%E5%9B%BE1.png" alt="计算图1.png"></p>
+<p><img src="//loopvoid.github.io/2018/10/15/自动微分法/计算图1.png" alt="计算图1.png"></p>
 <p>把（1）式展开为链式计算序列为：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">c=x0*x1</span><br><span class="line">d=c+x1</span><br><span class="line">y=d</span><br></pre></td></tr></table></figure>
-
 <p>那么其对应的计算图则为：</p>
-<p><img src="//loopvoid.github.io/2018/10/15/自动微分法/%E8%AE%A1%E7%AE%97%E5%9B%BE2.png" alt="计算图2.png"></p>
+<p><img src="//loopvoid.github.io/2018/10/15/自动微分法/计算图2.png" alt="计算图2.png"></p>
 <p>这里假设$x_0,x_1$的初值分别为：1, 2。 (1)式展开计算子序列为：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">x0=1</span><br><span class="line">x1=2</span><br><span class="line">c=x0*x1</span><br><span class="line">d=c+x1</span><br><span class="line">y=d</span><br></pre></td></tr></table></figure>
-
 <p>那么其对应计算图为：</p>
-<p><img src="//loopvoid.github.io/2018/10/15/自动微分法/%E8%AE%A1%E7%AE%97%E5%9B%BE3.png" alt="计算图3.png"></p>
+<p><img src="//loopvoid.github.io/2018/10/15/自动微分法/计算图3.png" alt="计算图3.png"></p>
 <p>然后对该计算图求解偏导数：</p>
-<p><img src="//loopvoid.github.io/2018/10/15/自动微分法/%E8%AE%A1%E7%AE%97%E5%9B%BE4.png" alt="计算图4.png"></p>
-<p>由链式法则得到：$$\frac{\partial y}{\partial  x_1}=\frac{\partial y}{\partial  d}\frac{\partial d}{\partial  c}\frac{\partial c}{\partial  x_1}+\frac{\partial y}{\partial  d}\frac{\partial d}{\partial  x_1}$$</p>
+<p><img src="//loopvoid.github.io/2018/10/15/自动微分法/计算图4.png" alt="计算图4.png"></p>
+<p>由链式法则得到：<script type="math/tex">\frac{\partial y}{\partial  x_1}=\frac{\partial y}{\partial  d}\frac{\partial d}{\partial  c}\frac{\partial c}{\partial  x_1}+\frac{\partial y}{\partial  d}\frac{\partial d}{\partial  x_1}</script></p>
 <p>结合计算图中对应的值可知：$\frac{\partial y}{\partial  x_1}=1\times1\times1+1\times1=2$</p>
-<h3 id="例2："><a href="#例2：" class="headerlink" title="例2："></a>例2：</h3><p>对于下列函数：$$f(x_1,x_2)=ln(x_1)+x_1*x_2-sin(x_2)$$</p>
+<h3 id="例2："><a href="#例2：" class="headerlink" title="例2："></a>例2：</h3><p>对于下列函数：<script type="math/tex">f(x_1,x_2)=ln(x_1)+x_1*x_2-sin(x_2)</script></p>
 <p>转化为计算图：</p>
-<p><img src="//loopvoid.github.io/2018/10/15/自动微分法/%E8%AE%A1%E7%AE%97%E5%9B%BE5.png" alt="计算图5.png"></p>
+<p><img src="//loopvoid.github.io/2018/10/15/自动微分法/计算图5.png" alt="计算图5.png"></p>
 <p>那么求每一步的导数值就可以表示为：</p>
-<p><img src="//loopvoid.github.io/2018/10/15/自动微分法/%E8%AE%A1%E7%AE%97%E5%9B%BE6.png" alt="计算图6.png"></p>
+<p><img src="//loopvoid.github.io/2018/10/15/自动微分法/计算图6.png" alt="计算图6.png"></p>
 <p>上表，左半部分是从左往右计算图每个节点的求值结果，右半部分是每个节点对于$x_1$的求导结果，比如$\dot{v_1}=\frac{dv}{dx_1}$，注意到每一步的求导都会利用到上一步的求导结果。</p>
 <p>对于自动微分的正向模式，如果函数输入输出为：$R \rightarrow R^m $</p>
 <p>那么正向模式只需要计算一次上表右侧过程即可，非常高效。但是对于输入输出映射为：$R^n\rightarrow R^m$，这样一个有$n$个输入的函数，对于函数的梯度求解则需要处理$n$遍上述过程。而且再实际算法模型中，通常输入输出是极度不成比例的，也就是$n&gt;&gt;m$，那么利用正向模式进行自动微分的效率就太低了，因此有了反向模式的出现。</p>
 <h2 id="反向链式法则计算图"><a href="#反向链式法则计算图" class="headerlink" title="反向链式法则计算图"></a>反向链式法则计算图</h2><p>自动微分的反向模式其实就是一种通用的<a href="https://en.wikipedia.org/wiki/Backpropagation" target="_blank" rel="noopener">BackPropagation</a>(<a href="http://galaxy.agh.edu.pl/~vlsi/AI/backp_t_en/backprop.html" target="_blank" rel="noopener">反向传播算法</a>)，即backpropagation是自动微分反向模式的一种特殊形式。</p>
 <p>反向模式从最终结果开始求导，利用最终输出对每一个节点进行求导，其过程如下计算图所示： </p>
-<p><img src="//loopvoid.github.io/2018/10/15/自动微分法/%E8%AE%A1%E7%AE%97%E5%9B%BE7.png" alt="计算图7.png"></p>
+<p><img src="//loopvoid.github.io/2018/10/15/自动微分法/计算图7.png" alt="计算图7.png"></p>
 <p>其具体计算过程如下表所示：   </p>
-<p><img src="//loopvoid.github.io/2018/10/15/自动微分法/%E8%AE%A1%E7%AE%97%E5%9B%BE8.png" alt="计算图8.png"></p>
+<p><img src="//loopvoid.github.io/2018/10/15/自动微分法/计算图8.png" alt="计算图8.png"></p>
 <p>上表左边和之前的正向模式一致，用于求解函数值，右边则是反向模式的计算过程，须从下向上看，也就是一开始先计算输出$y$对于节点$v_5$的导数，用$\bar{v_5}=\frac{dy}{dv_5}$，这样的记号可以强调我们对当前计算结果进行缓存，以便用于后续计算，而不必重复计算。再由链式法则我们可以计算输出节点对于图种每个节点的导数。  </p>
 <p>比如对节点$v_3$：</p>
-<p>$$\frac{y}{v_3}=\frac{dy}{dv_5}\frac{dv_5}{dv_3}$$</p>
-<p>用$\bar{v_i}=\frac{dy}{dv_i}$记法，则有：</p>
-<p>$$\frac{y}{v_3}=\bar{v_5}\frac{dv_5}{dv_3}$$</p>
-<p>比如对于节点$v_0$：</p>
-<p>  $$\frac{y}{v_0}=\frac{dy}{dv_2}\frac{dv_2}{dv_0}+\frac{dy}{dv_3}\frac{dv_3}{dv_0}$$</p>
-<p>用$\bar{v_i}=\frac{dy}{dv_i}$记法，则有：</p>
-<p>  $$\frac{y}{v_0}=\bar{v_2}\frac{dv_2}{dv_0}+\bar{v_3}\frac{dv_3}{dv_0}$$</p>
-<p>和backpropagation算法一样，我们必须记住前向时当前节点发出的边，然后在反向传播时，可以搜集所有受到当前节点影响的节点。 </p>
+<script type="math/tex; mode=display">\frac{y}{v_3}=\frac{dy}{dv_5}\frac{dv_5}{dv_3}</script><p>用$\bar{v_i}=\frac{dy}{dv_i}$记法，则有：</p>
+<script type="math/tex; mode=display">\frac{y}{v_3}=\bar{v_5}\frac{dv_5}{dv_3}</script><p>比如对于节点$v_0$：</p>
+<script type="math/tex; mode=display">\frac{y}{v_0}=\frac{dy}{dv_2}\frac{dv_2}{dv_0}+\frac{dy}{dv_3}\frac{dv_3}{dv_0}</script><p>用$\bar{v_i}=\frac{dy}{dv_i}$记法，则有：</p>
+<script type="math/tex; mode=display">\frac{y}{v_0}=\bar{v_2}\frac{dv_2}{dv_0}+\bar{v_3}\frac{dv_3}{dv_0}</script><p>和backpropagation算法一样，我们必须记住前向时当前节点发出的边，然后在反向传播时，可以搜集所有受到当前节点影响的节点。 </p>
 <p>如上的计算过程，对于像神经网络这种模型，输入通常是上万到上百万维，而输出损失函数是1维的模型，则只需要一遍反向模式计算过程，便可以求出输出对于各个输入的导数，从而轻松求取梯度用于后续优化更新。</p>
 <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>AD:</p>
 <ul>

@@ -157,18 +157,18 @@
   <meta name="keywords" content="Cpp,">
 
 
-<meta name="description" content="方法一命令行使用 &amp;lt; 和 &amp;gt; 1func.exe &amp;lt; infile.txt &amp;gt; outfile.txt  方法二C++实现 12345678910111213141516171819202122232425#include &amp;lt;iostream&amp;gt;#include &amp;lt;ostream&amp;gt; #include &amp;lt;fstream&amp;gt;   using na">
+<meta name="description" content="方法一命令行使用 &amp;lt; 和 &amp;gt; 1func.exe &amp;lt; infile.txt &amp;gt; outfile.txt 方法二C++实现 12345678910111213141516171819202122232425#include &amp;lt;iostream&amp;gt;#include &amp;lt;ostream&amp;gt; #include &amp;lt;fstream&amp;gt;   using nam">
 <meta name="keywords" content="Cpp">
 <meta property="og:type" content="article">
 <meta property="og:title" content="C++文件重定向">
 <meta property="og:url" content="https://loopvoid.github.io/2018/01/02/C-文件重定向/index.html">
 <meta property="og:site_name" content="Chuan·Yen">
-<meta property="og:description" content="方法一命令行使用 &amp;lt; 和 &amp;gt; 1func.exe &amp;lt; infile.txt &amp;gt; outfile.txt  方法二C++实现 12345678910111213141516171819202122232425#include &amp;lt;iostream&amp;gt;#include &amp;lt;ostream&amp;gt; #include &amp;lt;fstream&amp;gt;   using na">
+<meta property="og:description" content="方法一命令行使用 &amp;lt; 和 &amp;gt; 1func.exe &amp;lt; infile.txt &amp;gt; outfile.txt 方法二C++实现 12345678910111213141516171819202122232425#include &amp;lt;iostream&amp;gt;#include &amp;lt;ostream&amp;gt; #include &amp;lt;fstream&amp;gt;   using nam">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2019-08-06T06:56:59.891Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C++文件重定向">
-<meta name="twitter:description" content="方法一命令行使用 &amp;lt; 和 &amp;gt; 1func.exe &amp;lt; infile.txt &amp;gt; outfile.txt  方法二C++实现 12345678910111213141516171819202122232425#include &amp;lt;iostream&amp;gt;#include &amp;lt;ostream&amp;gt; #include &amp;lt;fstream&amp;gt;   using na">
+<meta name="twitter:description" content="方法一命令行使用 &amp;lt; 和 &amp;gt; 1func.exe &amp;lt; infile.txt &amp;gt; outfile.txt 方法二C++实现 12345678910111213141516171819202122232425#include &amp;lt;iostream&amp;gt;#include &amp;lt;ostream&amp;gt; #include &amp;lt;fstream&amp;gt;   using nam">
 
 
 
@@ -483,7 +483,6 @@
       
         <h1 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h1><p><strong>命令行使用 &lt; 和 &gt;</strong></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">func.exe &lt; infile.txt &gt; outfile.txt</span><br></pre></td></tr></table></figure>
-
 <h1 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h1><p><strong>C++实现</strong></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;ostream&gt; </span><br><span class="line">#include &lt;fstream&gt;   </span><br><span class="line">using namespace std;</span><br><span class="line">int main()</span><br><span class="line">&#123; </span><br><span class="line">    ifstream fin(&quot;input.txt&quot;);  // 已有输入文件</span><br><span class="line">    ofstream fout(&quot;output.txt&quot;);  //输出文件</span><br><span class="line"></span><br><span class="line">    streambuf *cinbackup;  </span><br><span class="line">    streambuf *coutbackup; </span><br><span class="line"></span><br><span class="line">    coutbackup= cout.rdbuf(fout.rdbuf());  //用 rdbuf() 重新定向</span><br><span class="line">    cinbackup= cin.rdbuf(fin.rdbuf());  //用 rdbuf() 重新定向</span><br><span class="line">    cout&lt;&lt;&quot;Hello world&quot;&lt;&lt;endl;   //去文件也</span><br><span class="line"></span><br><span class="line">    char line[100];  </span><br><span class="line">    cin&gt;&gt;line;  //从input.txt文件读入d</span><br><span class="line">    cout&lt;&lt;line&lt;&lt;endl;  //写入 output.txt</span><br><span class="line">    //恢复标准流缓冲区 </span><br><span class="line">    cin.rdbuf(cinbackup);  // 取消，恢复键盘输入</span><br><span class="line">    cout.rdbuf(coutbackup);  //取消，恢复屏幕输出</span><br><span class="line">    </span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       

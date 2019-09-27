@@ -492,26 +492,20 @@
 </ul>
 <p>如下图所示：<br><img src="//loopvoid.github.io/2017/04/22/欧氏距离和余弦相似度/01.jpg" alt="01"></p>
 <p>数据项A和B在坐标图中当做点时，两者相似度为距离dist(A,B)，可通过欧氏距离（也叫欧几里得距离）公式计算：</p>
-<p>$$dist(X,Y)=\sqrt{\sum_{i=1}^{n}(X_i-Y_i)^2}$$</p>
-<p>当做向量时，两者相似度为cosθ，可通过余弦公式计算：</p>
-<p>$$cos\theta = \frac{\sum_{i=1}^{n}(A_i \times B_i)}{\sqrt(\sum_{i=1}^{n}(A_i)^2) \times \sqrt(\sum_{i=1}^{n}(B_i)^2)}= \frac{A^T \cdot B}{||A||\times ||B||} $$</p>
-<p>假设$||A||$、$||B||$表示向量A、B的L2范数，例如向量[1,2,3]的2范数为：</p>
-<p>$$\sqrt{1^2+2^2=3^3} = \sqrt{14}$$<br>numpy中提供了范数的计算工具： linalg.norm()</p>
+<script type="math/tex; mode=display">dist(X,Y)=\sqrt{\sum_{i=1}^{n}(X_i-Y_i)^2}</script><p>当做向量时，两者相似度为cosθ，可通过余弦公式计算：</p>
+<script type="math/tex; mode=display">cos\theta = \frac{\sum_{i=1}^{n}(A_i \times B_i)}{\sqrt(\sum_{i=1}^{n}(A_i)^2) \times \sqrt(\sum_{i=1}^{n}(B_i)^2)}= \frac{A^T \cdot B}{||A||\times ||B||}</script><p>假设$||A||$、$||B||$表示向量A、B的L2范数，例如向量[1,2,3]的2范数为：</p>
+<script type="math/tex; mode=display">\sqrt{1^2+2^2=3^3} = \sqrt{14}</script><p>numpy中提供了范数的计算工具： linalg.norm()</p>
 <p>所以计算$cosθ$起来非常方便（假定A、B均为列向量）：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">num = float(A.T * B) <span class="comment">#若为行向量则 A * B.T</span></span><br><span class="line">denom = linalg.norm(A) * linalg.norm(B)</span><br><span class="line">cos = num / denom <span class="comment">#余弦值</span></span><br><span class="line">sim = <span class="number">0.5</span> + <span class="number">0.5</span> * cos <span class="comment">#归一化</span></span><br></pre></td></tr></table></figure>
-
-<p>因为有了linalg.norm()，欧氏距离公式实现起来更为方便：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">dist = linalg.norm(A - B)</span><br><span class="line">sim = <span class="number">1.0</span> / (<span class="number">1.0</span> + dist) <span class="comment">#归一化</span></span><br></pre></td></tr></table></figure>
-
+<p>因为有了linalg.norm()，欧氏距离公式实现起来更为方便：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">dist = linalg.norm(A - B)</span><br><span class="line">sim = <span class="number">1.0</span> / (<span class="number">1.0</span> + dist) <span class="comment">#归一化</span></span><br></pre></td></tr></table></figure></p>
 <p>关于归一化：</p>
 <p>因为余弦值的范围是 [-1,+1] ，相似度计算时一般需要把值归一化到 [0,1]，一般通过如下方式：</p>
-<p>$$sim = 0.5 + 0.5 * \cosθ $$<br>若在欧氏距离公式中，取值范围会很大，一般通过如下方式归一化：</p>
-<p>$$sim = \frac{1}{1+dist(x,y)}$$</p>
-<p>说完了原理，简单扯下实际意义，举个栗子吧：</p>
+<script type="math/tex; mode=display">sim = 0.5 + 0.5 * \cosθ</script><p>若在欧氏距离公式中，取值范围会很大，一般通过如下方式归一化：</p>
+<script type="math/tex; mode=display">sim = \frac{1}{1+dist(x,y)}</script><p>说完了原理，简单扯下实际意义，举个栗子吧：</p>
 <p>例如某T恤从100块降到了50块（A(100,50)），某西装从1000块降到了500块（B(1000,500)）</p>
 <p>那么T恤和西装都是降价了50%，两者的价格变动趋势一致，余弦相似度为最大值，即两者有很高的 变化趋势相似度</p>
 <p>但是从商品价格本身的角度来说，两者相差了好几百块的差距，欧氏距离较大，即两者有较低的 价格相似度。</p>
-<p>参考:<a href="http://blog.csdn.net/linvo/article/details/9333019?utm_source=tuicool&utm_medium=referral" target="_blank" rel="noopener">欧氏距离和余弦相似度</a></p>
+<p>参考:<a href="http://blog.csdn.net/linvo/article/details/9333019?utm_source=tuicool&amp;utm_medium=referral" target="_blank" rel="noopener">欧氏距离和余弦相似度</a></p>
 
       
     </div>

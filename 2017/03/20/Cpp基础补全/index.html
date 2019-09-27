@@ -157,18 +157,18 @@
   <meta name="keywords" content="Cpp,">
 
 
-<meta name="description" content="getline12std::string line;getline(cin,line);  scope123using std::stringuisng std::coutusing std::cin  struct1234struct Sales_data&amp;#123;    /**/&amp;#125;accum, *trans;  auto  decltype123auto a = 0; //(a -">
+<meta name="description" content="getline12std::string line;getline(cin,line); scope123using std::stringuisng std::coutusing std::cin struct1234struct Sales_data&amp;#123;    /**/&amp;#125;accum, *trans; auto  decltype123auto a = 0; //(a -- i">
 <meta name="keywords" content="Cpp">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Cpp基础补全">
 <meta property="og:url" content="https://loopvoid.github.io/2017/03/20/Cpp基础补全/index.html">
 <meta property="og:site_name" content="Chuan·Yen">
-<meta property="og:description" content="getline12std::string line;getline(cin,line);  scope123using std::stringuisng std::coutusing std::cin  struct1234struct Sales_data&amp;#123;    /**/&amp;#125;accum, *trans;  auto  decltype123auto a = 0; //(a -">
+<meta property="og:description" content="getline12std::string line;getline(cin,line); scope123using std::stringuisng std::coutusing std::cin struct1234struct Sales_data&amp;#123;    /**/&amp;#125;accum, *trans; auto  decltype123auto a = 0; //(a -- i">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2019-08-06T06:55:57.047Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Cpp基础补全">
-<meta name="twitter:description" content="getline12std::string line;getline(cin,line);  scope123using std::stringuisng std::coutusing std::cin  struct1234struct Sales_data&amp;#123;    /**/&amp;#125;accum, *trans;  auto  decltype123auto a = 0; //(a -">
+<meta name="twitter:description" content="getline12std::string line;getline(cin,line); scope123using std::stringuisng std::coutusing std::cin struct1234struct Sales_data&amp;#123;    /**/&amp;#125;accum, *trans; auto  decltype123auto a = 0; //(a -- i">
 
 
 
@@ -482,17 +482,12 @@
 
       
         <h1 id="getline"><a href="#getline" class="headerlink" title="getline"></a>getline</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::<span class="built_in">string</span> line;</span><br><span class="line">getline(<span class="built_in">cin</span>,line);</span><br></pre></td></tr></table></figure>
-
 <h1 id="scope"><a href="#scope" class="headerlink" title="scope"></a>scope</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">string</span></span><br><span class="line">uisng <span class="built_in">std</span>::<span class="built_in">cout</span></span><br><span class="line"><span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">cin</span></span><br></pre></td></tr></table></figure>
-
 <h1 id="struct"><a href="#struct" class="headerlink" title="struct"></a>struct</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Sales_data</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="comment">/**/</span></span><br><span class="line">&#125;accum, *trans;</span><br></pre></td></tr></table></figure>
-
 <h1 id="auto-decltype"><a href="#auto-decltype" class="headerlink" title="auto  decltype"></a>auto  decltype</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> a = <span class="number">0</span>; <span class="comment">//(a -- int型 )</span></span><br><span class="line"><span class="keyword">decltype</span>(a) b;<span class="comment">//(未初始化的int型b)</span></span><br><span class="line"><span class="keyword">decltype</span>((a)) c = <span class="number">0</span>;<span class="comment">//(c为初始化为0的int&amp;, 引用, 必须初始化)</span></span><br></pre></td></tr></table></figure>
-
 <h1 id="typedef-using"><a href="#typedef-using" class="headerlink" title="typedef  using"></a>typedef  using</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">double</span> wages <span class="comment">//wages是double的同义词</span></span><br><span class="line"><span class="keyword">typedef</span> wages base, *p <span class="comment">//wages base等于double base,wages *p为 double *p的同义词</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> SI = Sales_data;</span><br><span class="line">SI item;  <span class="comment">//等价于 Sales_data item;</span></span><br></pre></td></tr></table></figure>
-
 <h1 id="string"><a href="#string" class="headerlink" title="string"></a>string</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::<span class="built_in">string</span>::size_type len = line.size();</span><br><span class="line"></span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">string</span> s1 = <span class="built_in">std</span>::<span class="built_in">string</span>(<span class="number">10</span>,<span class="string">"c"</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">string</span> s2 = s1 + <span class="string">"World"</span>; <span class="comment">//必须确保每个加法运算符两侧的运算对象至少有一个是string</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">std</span>::<span class="function"><span class="built_in">string</span> <span class="title">str</span><span class="params">(<span class="string">"some string"</span>)</span></span>;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">auto</span> c : str)</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; c &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br></pre></td></tr></table></figure>
-
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -500,7 +495,8 @@
 <th>返回值</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>isalnum()</td>
 <td>如果参数是字母数字，即字母或数字，该函数返回true</td>
 </tr>
@@ -546,7 +542,7 @@
 </tr>
 <tr>
 <td>isxdigit()</td>
-<td>如果参数是十六进制的数字，即0～9、a<del>f、A</del>F，该函数返回true</td>
+<td>如果参数是十六进制的数字，即0～9、a~f、A~F，该函数返回true</td>
 </tr>
 <tr>
 <td>tolower()</td>
@@ -556,7 +552,9 @@
 <td>toupper()</td>
 <td>如果参数是小写字母，则返回其大写，否则返回该参数</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 
       
     </div>

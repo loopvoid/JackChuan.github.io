@@ -486,14 +486,10 @@
 <p><strong>深拷贝才需要释放内存。</strong></p>
 <h1 id="IplImage-转-Mat"><a href="#IplImage-转-Mat" class="headerlink" title="IplImage 转 Mat"></a>IplImage 转 Mat</h1><h2 id="浅拷贝"><a href="#浅拷贝" class="headerlink" title="浅拷贝"></a>浅拷贝</h2><p>直接使用cvarrToMat函数：</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">IplImage* src = cvLoadImage(<span class="string">"./res/tmp.jpg"</span>);  </span><br><span class="line">Mat img;  </span><br><span class="line">img = cvarrToMat(src);</span><br></pre></td></tr></table></figure>
-
 <h2 id="深拷贝"><a href="#深拷贝" class="headerlink" title="深拷贝"></a>深拷贝</h2><p>需要在Mat里创建一个新的Mat对象，然后进行数据的复制，再用上述的函数进行数据头的复制（即浅拷贝）。</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">IplImage* src = cvLoadImage(<span class="string">"c://tmp.jpg"</span>);  </span><br><span class="line">Mat img_tmp;  </span><br><span class="line">img_tmp = cvarrToMat(src);  </span><br><span class="line">Mat img = img_tmp.clone();</span><br></pre></td></tr></table></figure>
-
 <h1 id="Mat-转-IplImage"><a href="#Mat-转-IplImage" class="headerlink" title="Mat 转 IplImage"></a>Mat 转 IplImage</h1><h2 id="浅拷贝-1"><a href="#浅拷贝-1" class="headerlink" title="浅拷贝"></a>浅拷贝</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Mat img = imread(./res/tmp.jpg);</span><br><span class="line">IplImage *src = &amp;IplImage(img);</span><br></pre></td></tr></table></figure>
-
 <h2 id="深拷贝-即再复制一次数据"><a href="#深拷贝-即再复制一次数据" class="headerlink" title="深拷贝(即再复制一次数据)"></a>深拷贝(即再复制一次数据)</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Mat img = imread(./res/tmp.jpg);</span><br><span class="line">IplImage *src_tmp = &amp;IplImage(img);</span><br><span class="line">IplImage *src = cvCloneImage(src_tmp);</span><br></pre></td></tr></table></figure>
-
 
       
     </div>
