@@ -165,7 +165,7 @@
 <meta property="og:site_name" content="Chuan·Yen">
 <meta property="og:description" content="机器学习的数学基础高等数学导数定义：导数和微分的概念 $f’(x_0)=lim_{\Delta x\to 0}\frac{f(x_0+\Delta x)-f(x_0)}{\Delta x}$ 或者： $f’(x_0)=lim_{x\to x_0}\frac{f(x)-f(x_0)}{x-x_0}$ 左右导数导数的几何意义和物理意义函数$f(x)$在$x_0$处的左、右导数分别定义为： 左导数：$f">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-09-26T16:49:47.683Z">
+<meta property="og:updated_time" content="2019-09-27T02:03:17.055Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习的数学基础">
 <meta name="twitter:description" content="机器学习的数学基础高等数学导数定义：导数和微分的概念 $f’(x_0)=lim_{\Delta x\to 0}\frac{f(x_0+\Delta x)-f(x_0)}{\Delta x}$ 或者： $f’(x_0)=lim_{x\to x_0}\frac{f(x)-f(x_0)}{x-x_0}$ 左右导数导数的几何意义和物理意义函数$f(x)$在$x_0$处的左、右导数分别定义为： 左导数：$f">
@@ -521,7 +521,72 @@
 <p><strong>Th2:</strong> （取极值的必要条件）设函数$f(x)$在$x_0$处可导，且在$x_0$处取极值，则$f’(x_0)=0$。</p>
 <p><strong>Th3:</strong> （取极值的第一充分条件）设函数$f(x)$在$x_0$的某一邻域内可微，且$f’(x_0)=0$（或$f(x)$在$x_0$处连续，但$f’(x_0)$不存在。）<br>(1)若当$x$经过$x_0$时，$f’(x)$由“+”变“-”，则$f(x_0)$为极大值；<br>(2)若当$x$经过$x_0$时，$f’(x)$由“-”变“+”，则$f(x_0)$为极小值；<br>(3)若$f’(x)$经过$x=x_0$的两侧不变号，则$f(x_0)$不是极值。</p>
 <p><strong>Th4:</strong> (取极值的第二充分条件)设$f(x)$在点$x_0$处有$f’’(x)\ne 0$，且$f’(x_0)=0$，则 当$f’’(x_0)&lt;0$时，$f(x_0)$为极大值；<br>当$f’’(x_0)&gt;0$时，$f(x_0)$为极小值。<br>注：如果$f’’(x_0)&lt;0$，此方法失效。</p>
-
+<h2 id="渐近线的求法"><a href="#渐近线的求法" class="headerlink" title="渐近线的求法"></a><strong>渐近线的求法</strong></h2><p>(1)水平渐近线   若$lim_{x\to +\infty }f(x)=b$，或$lim_{x\to -\infty }f(x)=b$，则</p>
+<p>$y=b$称为函数$y=f(x)$的水平渐近线。</p>
+<p>(2)铅直渐近线   若$lim_{x\to x_0^-}f(x)=\infty $，或$lim_{x\to x_0^+}f(x)=\infty $，则</p>
+<p>$x=x_0$称为$y=f(x)$的铅直渐近线。</p>
+<p>(3)斜渐近线   若$a=lim_{x\to \infty }\frac{f(x)}{x},\quad b=lim_{x\to \infty }[f(x)-ax]$，则<br>$y=ax+b$称为$y=f(x)$的斜渐近线。</p>
+<h2 id="函数凹凸性的判断"><a href="#函数凹凸性的判断" class="headerlink" title="函数凹凸性的判断"></a><strong>函数凹凸性的判断</strong></h2><p><strong>Th1:</strong> (凹凸性的判别定理）若在I上$f’’(x)&lt;0$（或$f’’(x)&gt;0$），则$f(x)$在I上是凸的（或凹的）。</p>
+<p><strong>Th2:</strong> (拐点的判别定理1)若在$x_0$处$f’’(x)=0$，（或$f’’(x)$不存在），当$x$变动经过$x_0$时，$f’’(x)$变号，则$(x_0,f(x_0))$为拐点。</p>
+<p><strong>Th3:</strong> (拐点的判别定理2)设$f(x)$在$x_0$点的某邻域内有三阶导数，且$f’’(x)=0$，$f’’’(x)\ne 0$，则$(x_0,f(x_0))$为拐点。</p>
+<h2 id="弧微分"><a href="#弧微分" class="headerlink" title="弧微分"></a><strong>弧微分</strong></h2><p>$dS=\sqrt{1+y’^2}dx$</p>
+<h2 id="曲率"><a href="#曲率" class="headerlink" title="曲率"></a><strong>曲率</strong></h2><p>曲线$y=f(x)$在点$(x,y)$处的曲率$k=\frac{|y’’|}{(1+y’^2)^{\tfrac{3}{2}}}$。</p>
+<p>对于参数方程<br>$\left{\begin{matrix}<br>x=\varphi (t)\<br>y=\psi (t)<br>\end{matrix}\right.,k=\frac{|\varphi(t)’\psi (t)’’-\varphi(t)’’\psi(t)’|}{[\varphi ‘^2(t)+\psi ‘^2(t)]^{\tfrac{3}{2}}}$</p>
+<h2 id="曲率半径"><a href="#曲率半径" class="headerlink" title="曲率半径"></a><strong>曲率半径</strong></h2><p>曲线在点$M$处的曲率$k(k\ne 0)$与曲线在点$M$处的曲率半径$\rho $有如下关系：$\rho =\frac{1}{k}$。</p>
+<h1 id="线性代数"><a href="#线性代数" class="headerlink" title="线性代数"></a>线性代数</h1><h2 id="行列式"><a href="#行列式" class="headerlink" title="行列式"></a>行列式</h2><p><strong>行列式按行（列）展开定理</strong></p>
+<p>(1) 设$A = ( a_ )<em>{n \times n}$，则：$a</em>{i1}A_{j1} +a_{i2}A_{j2} + \cdots + a_A_ = \begin{cases}|A|,i=j\ 0,i \neq j\end{cases}$</p>
+<p>或$a_{1i}A_{1j} + a_{2i}A_{2j} + \cdots + a_A_ = \begin{cases}|A|,i=j\ 0,i \neq j\end{cases}$即 $AA^{<em>} = A^{</em>}A = \left| A \right|E,$其中：$A^{*} = \begin{pmatrix} A_{11} &amp; A_{12} &amp; \ldots &amp; A_{1n} \ A_{21} &amp; A_{22} &amp; \ldots &amp; A_{2n} \ \ldots &amp; \ldots &amp; \ldots &amp; \ldots \ A_{n1} &amp; A_{n2} &amp; \ldots &amp; A_ \ \end{pmatrix} = (A_) = {(A_)}^{T}$</p>
+<p>$D_{n} = \begin{vmatrix} 1 &amp; 1 &amp; \ldots &amp; 1 \ x_{1} &amp; x_{2} &amp; \ldots &amp; x_{n} \ \ldots &amp; \ldots &amp; \ldots &amp; \ldots \ x_{1}^{n - 1} &amp; x_{2}^{n - 1} &amp; \ldots &amp; x_{n}^{n - 1} \ \end{vmatrix} = \prod_{1 \leq j &lt; i \leq n}^{},(x_{i} - x_{j})$</p>
+<p>(2) 设$A,B$为$n$阶方阵，则$\left| {AB} \right| = \left| A \right|\left| B \right| = \left| B \right|\left| A \right| = \left| {BA} \right|$，但$\left| A \pm B \right| = \left| A \right| \pm \left| B \right|$不一定成立。</p>
+<p>(3) $\left| {kA} \right| = k^{n}\left| A \right|$,$A$为$n$阶方阵。</p>
+<p>(4) 设$A$为$n$阶方阵，$|A^{T}| = |A|;|A^{- 1}| = |A|^{- 1}$（若$A$可逆），$|A^{*}| = |A|^{n - 1}$</p>
+<p>$n \geq 2$</p>
+<p>(5) $\left| \begin{matrix}  &amp; {A\quad O} \  &amp; {O\quad B} \ \end{matrix} \right| = \left| \begin{matrix}  &amp; {A\quad C} \  &amp; {O\quad B} \ \end{matrix} \right| = \left| \begin{matrix}  &amp; {A\quad O} \  &amp; {C\quad B} \ \end{matrix} \right| =| A||B|$<br>，$A,B$为方阵，但$\left| \begin{matrix} {O} &amp; A_{m \times m} \  B_{n \times n} &amp; { O} \ \end{matrix} \right| = ({- 1)}^|A||B|$ 。</p>
+<p>(6) 范德蒙行列式$D_{n} = \begin{vmatrix} 1 &amp; 1 &amp; \ldots &amp; 1 \ x_{1} &amp; x_{2} &amp; \ldots &amp; x_{n} \ \ldots &amp; \ldots &amp; \ldots &amp; \ldots \ x_{1}^{n - 1} &amp; x_{2}^{n 1} &amp; \ldots &amp; x_{n}^{n - 1} \ \end{vmatrix} =  \prod_{1 \leq j &lt; i \leq n}^{},(x_{i} - x_{j})$</p>
+<p>设$A$是$n$阶方阵，$\lambda_{i}(i = 1,2\cdots,n)$是$A$的$n$个特征值，则<br>$|A| = \prod_{i = 1}^{n}\lambda_{i}$</p>
+<h2 id="矩阵"><a href="#矩阵" class="headerlink" title="矩阵"></a>矩阵</h2><p>矩阵：$m \times n$个数$a_ij$排成$m$行$n$列的表格$\begin{bmatrix}  a_{11}\quad a_{12}\quad\cdots\quad a_{1n} \ a_{21}\quad a_{22}\quad\cdots\quad a_{2n} \ \quad\cdots\cdots\cdots\cdots\cdots \  a_{m1}\quad a_{m2}\quad\cdots\quad a_{mn} \ \end{bmatrix}$ 称为矩阵，简记为$A$，或者$\left( a_{ij} \right)_{m \times n}$ 。若$m = n$，则称$A$是$n$阶矩阵或$n$阶方阵。</p>
+<p><strong>矩阵的线性运算</strong></p>
+<p><strong>1.矩阵的加法</strong></p>
+<p>设$A = (a_{ij}),B = (b_{ij})$是两个$m \times n$矩阵，则$m \times n$ 矩阵$C = c_{ij} = a_{ij} + b_{ij}$称为矩阵$A$与$B$的和，记为$A + B = C$ 。</p>
+<p><strong>2.矩阵的数乘</strong></p>
+<p>设$A = (a_{ij})$是$m \times n$矩阵，$k$是一个常数，则$m \times n$矩阵$(ka_{ij})$称为数$k$与矩阵$A$的数乘，记为${kA}$。</p>
+<p><strong>3.矩阵的乘法</strong></p>
+<p>设$A = (a_{ij})$是$m \times n$矩阵，$B = (b_{ij})$是$n \times s$矩阵，那么$m \times s$矩阵$C = (c_{ij})$，其中$c_{ij} = a_{i1}b_{1j} + a_{i2}b_{2j} + \cdots + a_{in}b_{nj} = \sum_{k =1}^na_{ik}b_{kj}$称为${AB}$的乘积，记为$C = AB$ 。</p>
+<p><strong>4.</strong> $\mathbf{A}^{\mathbf T}$<strong>、</strong>$\mathbf{A}^{\mathbf -1}$<strong>、</strong>$\mathbf A^{\mathbf <em>}$*</em>三者之间的关系**</p>
+<p>(1) $(A^T)^T = A,(AB)^T = B^TA^T,(kA)^T = kA^T,{(A \pm B)}^T = A^T \pm B^T$</p>
+<p>(2) $(A^{- 1})^{- 1} = A,(AB)^{- 1} = B^{- 1}A^{- 1},({kA})^{- 1} = \frac{1}{k}A^{- 1},$</p>
+<p>但 ${(A \pm B)}^{- 1} = A^{- 1} \pm B^{- 1}$不一定成立。</p>
+<p>(3) $(A^<em>)^</em> = |A|^{n - 2}\ A\ \ (n \geq 3)$，$(AB)^* = B^<em>A^</em>,$ $({kA})^* = k^{n -1}A^*{\ \ }(n \geq 2)$</p>
+<p>但$(A \pm B)^* = A^* \pm B^*$不一定成立。</p>
+<p>(4) $(A^{- 1})^T = (A^T)^{- 1},\ (A^{- 1})^* =(AA^<em>)^{- 1},(A^</em>)^T = (A^T)^*$</p>
+<p><strong>5.有关</strong>$\mathbf{A}^{\mathbf{<em>}}$*</em>的结论**</p>
+<p>(4) $(A^{-1})^T = (A^T)^{-1},\ (A^{-1})^* =(AA^<em>)^{-1},(A^</em>)^T = (A^T)^*$</p>
+<p><strong>5.有关</strong>$\mathbf{A}^{\mathbf{<em>}}$*</em>的结论**</p>
+<p>(4) $(A^{-1})^T = (A^T)^{-1},\ (A^{-1})^* =(AA^<em>)^{-1},(A^</em>)^T = (A^T)^*$</p>
+<p><strong>5.有关</strong>$\mathbf A^{\mathbf <em>}$*</em>的结论**</p>
+<p>(4) $(A^{-1})^T = (A^T)^{-1},\ (A^{-1})^* =(AA^<em>)^{-1},(A^</em>)^T = (A^T)^*$</p>
+<p><strong>5.有关</strong>$\mathbf A^{\mathbf <em>}$*</em>的结论**</p>
+<p>(1) $AA^* = A^*A = |A|E$</p>
+<p>(2) $|A^<em>| = |A|^{n -1}\ (n \geq 2),\ \ \ \ {(kA)}^</em> = k^{n -1}A^<em>,\ \ (A^</em>)^* = |A|^{n - 2}A(n \geq 3)$</p>
+<p>(3) 若$A$可逆，则$A^* = |A|A^{-1},(A^<em>)^</em> = \frac{1}{|A|}A$(4) 若$A$为$n$阶方阵，则：</p>
+<p>$r(A^*)=\begin{cases}n,\quad r(A)=n\ 1,\quad r(A)=n-1\ 0,\quad r(A)&lt;n-1\end{cases}$</p>
+<p><strong>6.有关</strong>$\mathbf{A}^{\mathbf{-1}}$<strong>的结论</strong></p>
+<p>$A$可逆$\Leftrightarrow AB = E; \Leftrightarrow |A| \neq 0; \Leftrightarrow r(A) = n;$</p>
+<p>$\Leftrightarrow A$可以表示为初等矩阵的乘积；$\Leftrightarrow A;\Leftrightarrow Ax = 0$。</p>
+<p><strong>7.有关矩阵秩的结论</strong></p>
+<p>(1) 秩$r(A)$=行秩=列秩；</p>
+<p>(2) $r(A_{m \times n}) \leq \min(m,n);$</p>
+<p>(3) $A \neq 0 \Rightarrow r(A) \geq 1$；</p>
+<p>(4) $r(A \pm B) \leq r(A) + r(B);$</p>
+<p>(5) 初等变换不改变矩阵的秩</p>
+<p>(6) $r(A) + r(B) - n \leq r(AB) \leq \min(r(A),r(B)),$特别若$AB = O$<br>则：$r(A) + r(B) \leq n$</p>
+<p>(7) 若$A^{-1}$存在$\Rightarrow r(AB) = r(B);$ 若$B^{-1}$存在<br>$\Rightarrow r(AB) = r(A);$<br>若$r(A_{m \times n}) = n \Rightarrow r(AB) = r(B);$ 若$r(A_{m \times s}) = n\Rightarrow r(AB) = r(A)$。</p>
+<p>(8) $r(A_{m \times s}) = n \Leftrightarrow Ax = 0$只有零解</p>
+<p><strong>8.分块求逆公式</strong></p>
+<p>$\begin{pmatrix} A &amp; O \ O &amp; B \ \end{pmatrix}^{-1} = \begin{pmatrix} A^{-1} &amp; O \ O &amp; B^{-1} \ \end{pmatrix}$； $\begin{pmatrix} A &amp; C \ O &amp; B \\end{pmatrix}^{-1} = \begin{pmatrix} A^{-1}&amp; - A^{-1}CB^{-1} \ O &amp; B^{-1} \ \end{pmatrix}$；</p>
+<p>$\begin{pmatrix} A &amp; O \ C &amp; B \ \end{pmatrix}^{-1} = \begin{pmatrix}  A^{-1}&amp;{O} \   - B^{-1}CA^{-1} &amp; B^{-1} \\end{pmatrix}$； $\begin{pmatrix} O &amp; A \ B &amp; O \ \end{pmatrix}^{-1} =\begin{pmatrix} O &amp; B^{-1} \ A^{-1} &amp; O \ \end{pmatrix}$</p>
+<p>这里$A$，$B$均为可逆方阵。</p>
+<h2 id="向量"><a href="#向量" class="headerlink" title="向量"></a>向量</h2>
       
     </div>
 
@@ -895,7 +960,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#机器学习的数学基础"><span class="nav-number">1.</span> <span class="nav-text">机器学习的数学基础</span></a></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#高等数学"><span class="nav-number"></span> <span class="nav-text">高等数学</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#导数定义："><span class="nav-number">1.</span> <span class="nav-text">导数定义：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#左右导数导数的几何意义和物理意义"><span class="nav-number">2.</span> <span class="nav-text">左右导数导数的几何意义和物理意义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数的可导性与连续性之间的关系"><span class="nav-number">3.</span> <span class="nav-text">函数的可导性与连续性之间的关系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#平面曲线的切线和法线"><span class="nav-number">4.</span> <span class="nav-text">平面曲线的切线和法线</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四则运算法则"><span class="nav-number">5.</span> <span class="nav-text">四则运算法则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基本导数与微分表"><span class="nav-number">6.</span> <span class="nav-text">基本导数与微分表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#复合函数，反函数，隐函数以及参数方程所确定的函数的微分法"><span class="nav-number">7.</span> <span class="nav-text">复合函数，反函数，隐函数以及参数方程所确定的函数的微分法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常用高阶导数公式"><span class="nav-number">8.</span> <span class="nav-text">常用高阶导数公式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#微分中值定理，泰勒公式"><span class="nav-number">9.</span> <span class="nav-text">微分中值定理，泰勒公式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#洛必达法则"><span class="nav-number">10.</span> <span class="nav-text">洛必达法则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#泰勒公式"><span class="nav-number">11.</span> <span class="nav-text">泰勒公式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数单调性的判断"><span class="nav-number">12.</span> <span class="nav-text">函数单调性的判断</span></a></li></ol></li></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#机器学习的数学基础"><span class="nav-number">1.</span> <span class="nav-text">机器学习的数学基础</span></a></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#高等数学"><span class="nav-number"></span> <span class="nav-text">高等数学</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#导数定义："><span class="nav-number">1.</span> <span class="nav-text">导数定义：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#左右导数导数的几何意义和物理意义"><span class="nav-number">2.</span> <span class="nav-text">左右导数导数的几何意义和物理意义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数的可导性与连续性之间的关系"><span class="nav-number">3.</span> <span class="nav-text">函数的可导性与连续性之间的关系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#平面曲线的切线和法线"><span class="nav-number">4.</span> <span class="nav-text">平面曲线的切线和法线</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四则运算法则"><span class="nav-number">5.</span> <span class="nav-text">四则运算法则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基本导数与微分表"><span class="nav-number">6.</span> <span class="nav-text">基本导数与微分表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#复合函数，反函数，隐函数以及参数方程所确定的函数的微分法"><span class="nav-number">7.</span> <span class="nav-text">复合函数，反函数，隐函数以及参数方程所确定的函数的微分法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常用高阶导数公式"><span class="nav-number">8.</span> <span class="nav-text">常用高阶导数公式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#微分中值定理，泰勒公式"><span class="nav-number">9.</span> <span class="nav-text">微分中值定理，泰勒公式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#洛必达法则"><span class="nav-number">10.</span> <span class="nav-text">洛必达法则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#泰勒公式"><span class="nav-number">11.</span> <span class="nav-text">泰勒公式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数单调性的判断"><span class="nav-number">12.</span> <span class="nav-text">函数单调性的判断</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#渐近线的求法"><span class="nav-number">13.</span> <span class="nav-text">渐近线的求法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数凹凸性的判断"><span class="nav-number">14.</span> <span class="nav-text">函数凹凸性的判断</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#弧微分"><span class="nav-number">15.</span> <span class="nav-text">弧微分</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#曲率"><span class="nav-number">16.</span> <span class="nav-text">曲率</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#曲率半径"><span class="nav-number">17.</span> <span class="nav-text">曲率半径</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#线性代数"><span class="nav-number"></span> <span class="nav-text">线性代数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#行列式"><span class="nav-number">1.</span> <span class="nav-text">行列式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#矩阵"><span class="nav-number">2.</span> <span class="nav-text">矩阵</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#向量"><span class="nav-number">3.</span> <span class="nav-text">向量</span></a></li></ol></li></div>
             
 
           </div>
