@@ -170,7 +170,7 @@
 <meta property="og:image" content="https://loopvoid.github.io/2019/09/14/BP神经网络原理和简明理解/bp4.jpg">
 <meta property="og:image" content="https://loopvoid.github.io/2019/09/14/BP神经网络原理和简明理解/bp5.jpg">
 <meta property="og:image" content="https://loopvoid.github.io/2019/09/14/BP神经网络原理和简明理解/bp6.jpg">
-<meta property="og:updated_time" content="2019-09-14T12:18:19.234Z">
+<meta property="og:updated_time" content="2019-09-28T15:06:26.817Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="BP神经网络原理和简明理解">
 <meta name="twitter:description" content="单个神经元结构  输入：$x_1,x_2,…,x_n$  输出：$y$  输入和输出的关系(函数)：$y = (x_1\ast w_1+x_2\ast w_2+…+x_n\ast w_n+)+b = \sum_{i=1}^n x_i\ast w_i+b$，其中$w_i$是权重  将输入用矩阵表示：$X = [x_1,x_2,…,x_n]^T,X为一个n行1列的矩阵$  将权重用矩阵表示：$W=[w">
@@ -541,7 +541,7 @@
 <li>PS:这里使用这个简单的误差计算便于理解，实际上其效果有待提高。如果激活函数是饱和的，带来的缺陷就是系统迭代更新变慢，系统收敛就慢，当然这是可以有办法弥补的，一种方法是使用<strong>交叉熵函数</strong>作为损失函数。<a href="https://blog.csdn.net/lanchunhui/article/details/50086025" target="_blank" rel="noopener">这里</a>有更详细的介绍。</li>
 <li>交叉熵损失函数：<script type="math/tex">E_{total}=\frac{1}{m}\sum_{i=1}^m(O_i\cdot log OUT_{O_i}+(1-O_i)\cdot log(1-OUT_{O_i}))</script></li>
 <li>对输出求偏导：<script type="math/tex">\frac{\partial E_{total}}{\partial OUT_{O_i}}=\frac{1}{m}\sum_{i=1}^m(\frac{O_i}{OUT_{O_i}}-\frac{1-O_i}{1-OUT_{O_i}})</script><h3 id="隐藏层—-gt-输出层的权重的更新："><a href="#隐藏层—-gt-输出层的权重的更新：" class="headerlink" title="隐藏层—&gt;输出层的权重的更新："></a>隐藏层—&gt;输出层的权重的更新：</h3></li>
-<li>链式求导法则(详细可参考<a href="[https://loopvoid.github.io/2018/10/15/%E8%87%AA%E5%8A%A8%E5%BE%AE%E5%88%86%E6%B3%95/](https://loopvoid.github.io/2018/10/15/自动微分法/">这篇文章</a>))：<script type="math/tex">假设y是u的函数，而u是x的函数：y=f(u),u=g(x) \\ 那么对应的复合函数就是：y=f(g(x)) \\ 那么y对x的导数则有：\frac{dy}{dx}=\frac{dy}{du}\cdot \frac{du}{dx}</script></li>
+<li>链式求导法则(详细可参考<a href="https://loopvoid.github.io/2018/10/15/自动微分法/">这篇文章</a>：<script type="math/tex">假设y是u的函数，而u是x的函数：y=f(u),u=g(x) \\ 那么对应的复合函数就是：y=f(g(x)) \\ 那么y对x的导数则有：\frac{dy}{dx}=\frac{dy}{du}\cdot \frac{du}{dx}</script></li>
 <li><p>以权重$w_5$举例计算：权重$w$的大小能直接影响输出，$w$不合适会使输出有误差。要知道某个$w$对误差影响的程度，可以用<strong>误差对该$w$的变化率</strong>来表达。如果$w$的很少的变化，会导致误差增大很多，说明这个$w$对误差影响的程度就更大，也就是说，误差对该$w$的变化率越高。而误差对$w$的变化率就是误差对$w$的偏导。如图，总误差的大小首先受输出层神经元$O_1$的输出影响，继续反推，$O_1$的输出受它自己的输入的影响，而它自己的输入会受到$w_5$的影响。<img src="//loopvoid.github.io/2019/09/14/BP神经网络原理和简明理解/bp5.jpg" alt="bp5"></p>
 </li>
 <li><p>那么根据链式法则有：<script type="math/tex">\begin{aligned} \frac{\partial E_{total}}{\partial w_5}&=\frac{\partial E_{total}}{\partial OUT_{O_1}}\frac{\partial OUT_{O_1}}{\partial IN_{O_1}}\frac{\partial IN_{O_1}}{\partial w_5}\end{aligned}</script></p>
