@@ -166,7 +166,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://loopvoid.github.io/2019/10/14/MTCNN算法与代码理解/pipeline.png">
 <meta property="og:image" content="https://loopvoid.github.io/2019/10/14/MTCNN算法与代码理解/nets.png">
-<meta property="og:updated_time" content="2019-10-14T14:35:07.637Z">
+<meta property="og:updated_time" content="2019-10-14T14:43:42.186Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MTCNN算法与代码理解（待补充）">
 <meta name="twitter:description" content="前言原作主页：https://kpzhang93.github.io/MTCNN_face_detection_alignment/index.html arxiv论文：https://arxiv.org/abs/1604.02878 代码：官方matlab版、C++ caffe版  其他框架代码：tensorflow、mxnet MTCNN 《Joint Face Detection and A">
@@ -494,7 +494,7 @@
 <script type="math/tex; mode=display">L_i^{det}=-(y_i^{det}log(p_i)+(1-y_i^{det})(1-log(p_i)))</script><p>其中，$p_i$为该网络表示样本$x_i$是人脸的概率，$y_i^{det}\in \{0,1\}$为该区域的真实标签。</p>
 <h2 id="Bounding-box-regression"><a href="#Bounding-box-regression" class="headerlink" title="Bounding box regression"></a>Bounding box regression</h2><p>MTCNN通过每个样本$x_i$的欧氏距离作回归损失：</p>
 <script type="math/tex; mode=display">L_i^{box}=||\hat y_i^{box}-y_i^{box}||_2^2</script><p>其中，$\hat y_i^{box}$为对于第$i$个样本该网络预测得到的回归目标，$y_i^{box}$为第$i$个样本实际的真实的背景坐标。其中$y_i$为(左上角x，左上角y，长，宽)/(left,top,height,width)组成的四元组。</p>
-<p>在训练过程中，$\hat y_i^{box}$和$y_i^{box}$的交并集IoU(Intersection-over-Union)比例为：</p>
+<p>在训练过程中，$\hat y_i^{box}$和$y_i^{box}$的交并集IoU(<a href="https://loopvoid.github.io/2019/10/13/IoU-Intersection-over-Union/">Intersection-over-Union</a>)比例为：</p>
 <div class="table-container">
 <table>
 <thead>
