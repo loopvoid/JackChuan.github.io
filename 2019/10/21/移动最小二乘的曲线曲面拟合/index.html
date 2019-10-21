@@ -157,16 +157,17 @@
   <meta name="keywords" content="YenChuan's Blog">
 
 
-<meta name="description" content="Learn and record.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Chuan·Yen">
-<meta property="og:url" content="https://loopvoid.github.io/archives/2019/10/index.html">
+<meta name="description" content="拟合函数的建立在拟合区域的局部子域上，拟合函数  f(x)=\sum_{i=1}^m\alpha_{i}(x)p_i(x)=p^T(x)\alpha(x)\tag{1}其中： $\alpha(x)=[\alpha_1(x),\alpha_2(x),…,\alpha_m(x)]^T$为待求系数，它是坐标x的函数 $p(x)=[p_1(x),p_2(x),…,p_m(x)]^T$称为基函数，它是一个$">
+<meta property="og:type" content="article">
+<meta property="og:title" content="移动最小二乘的曲线曲面拟合(Draft)">
+<meta property="og:url" content="https://loopvoid.github.io/2019/10/21/移动最小二乘的曲线曲面拟合/index.html">
 <meta property="og:site_name" content="Chuan·Yen">
-<meta property="og:description" content="Learn and record.">
+<meta property="og:description" content="拟合函数的建立在拟合区域的局部子域上，拟合函数  f(x)=\sum_{i=1}^m\alpha_{i}(x)p_i(x)=p^T(x)\alpha(x)\tag{1}其中： $\alpha(x)=[\alpha_1(x),\alpha_2(x),…,\alpha_m(x)]^T$为待求系数，它是坐标x的函数 $p(x)=[p_1(x),p_2(x),…,p_m(x)]^T$称为基函数，它是一个$">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-10-21T15:03:22.051Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chuan·Yen">
-<meta name="twitter:description" content="Learn and record.">
+<meta name="twitter:title" content="移动最小二乘的曲线曲面拟合(Draft)">
+<meta name="twitter:description" content="拟合函数的建立在拟合区域的局部子域上，拟合函数  f(x)=\sum_{i=1}^m\alpha_{i}(x)p_i(x)=p^T(x)\alpha(x)\tag{1}其中： $\alpha(x)=[\alpha_1(x),\alpha_2(x),…,\alpha_m(x)]^T$为待求系数，它是坐标x的函数 $p(x)=[p_1(x),p_2(x),…,p_m(x)]^T$称为基函数，它是一个$">
 
 
 
@@ -175,7 +176,7 @@
 
 
 
-  <link rel="canonical" href="https://loopvoid.github.io/archives/2019/10/">
+  <link rel="canonical" href="https://loopvoid.github.io/2019/10/21/移动最小二乘的曲线曲面拟合/">
 
 
 
@@ -184,7 +185,7 @@
     sidebar: "",
   };
 </script>
-  <title>Archive | Chuan·Yen</title>
+  <title>移动最小二乘的曲线曲面拟合(Draft) | Chuan·Yen</title>
   
 
 
@@ -241,7 +242,7 @@
     
   
 
-  <div class="container sidebar-position-right page-archive">
+  <div class="container sidebar-position-right page-post-detail">
     <div class="headband"></div>
 
 
@@ -372,147 +373,277 @@
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
 
-      
-      <span class="archive-page-counter">
-        
-        
-         
-        
-        OK! 46 posts in total. Keep on posting.
-      </span>
-      
+  
 
-      
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://loopvoid.github.io/2019/10/21/移动最小二乘的曲线曲面拟合/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Chuan Yen">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/tt.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Chuan·Yen">
+    </span>
+
+    
+      <header class="post-header">
 
         
         
+          <h2 class="post-title" itemprop="name headline">移动最小二乘的曲线曲面拟合(Draft)</h2>
         
 
-        
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-10-21T22:58:30+08:00">2019-10-21</time>
+            
+
+            
+            
+
+            
+          </span>
+
           
-          <div class="collection-title">
-            <h2 class="archive-year" id="archive-year-2019">2019</h2>
-          </div>
-        
-        
 
-        
+          
+            
+          
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+          
+          
 
-      <h3 class="post-title">
-        
-            <a class="post-title-link" href="/2019/10/21/移动最小二乘的曲线曲面拟合/" itemprop="url">
-              
-                <span itemprop="name">移动最小二乘的曲线曲面拟合(Draft)</span>
-              
-            </a>
-        
-      </h3>
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             Views: 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-10-21T22:58:30+08:00" content="2019-10-21">
-          10-21
-        </time>
-      </div>
+          
 
-    </header>
-  </article>
+          
 
+        </div>
+      </header>
+    
 
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h3 class="post-title">
-        
-            <a class="post-title-link" href="/2019/10/14/MTCNN算法与代码理解/" itemprop="url">
-              
-                <span itemprop="name">MTCNN算法与代码理解（待补充）</span>
-              
-            </a>
-        
-      </h3>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-10-14T18:52:28+08:00" content="2019-10-14">
-          10-14
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
       
 
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h3 class="post-title">
-        
-            <a class="post-title-link" href="/2019/10/13/IoU-Intersection-over-Union/" itemprop="url">
-              
-                <span itemprop="name">IoU(Intersection over Union)</span>
-              
-            </a>
-        
-      </h3>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-10-13T22:17:39+08:00" content="2019-10-13">
-          10-13
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
+      
+        <h1 id="拟合函数的建立"><a href="#拟合函数的建立" class="headerlink" title="拟合函数的建立"></a>拟合函数的建立</h1><p>在拟合区域的局部子域上，拟合函数</p>
+<script type="math/tex; mode=display">
+f(x)=\sum_{i=1}^m\alpha_{i}(x)p_i(x)=p^T(x)\alpha(x)\tag{1}</script><p>其中：</p>
+<p>$\alpha(x)=[\alpha_1(x),\alpha_2(x),…,\alpha_m(x)]^T$为待求系数，它是坐标x的函数</p>
+<p>$p(x)=[p_1(x),p_2(x),…,p_m(x)]^T$称为基函数，它是一个$k$阶完备的多项式</p>
+<p>$m$是基函数的项数</p>
+<p>对于二维问题：</p>
+<p>线性基：$p(x)=[1,x,y]^T，m=3$</p>
+<p>二次基：$p(x)=[1,x,y,x^2,xy,y^2]^T，m=6$</p>
+<p>考虑加权离散$L_2$范式(向量$\mathbf{x}=[x_1,x_2,…,x_n]$的$L_2$范式$||\mathbf{x}||_2=(\sum_{i=1}^nx_i^2)^{1/2}$)</p>
+<script type="math/tex; mode=display">
+J=\sum_{i=1}^nw(x-x_i)[f(x)-y_i]^2 \\\\ 
+=\sum_{i=1}^nw(x-x_i)[p^T(x_i)\alpha(x)-y_i]^2 \tag{3}</script><p>其中：</p>
+<p>$n$是影响区域内节点的数目</p>
+<p>$f(x)$是拟合函数</p>
+<p>$y_i$是$x=x_i$处的节点值，$y_i=y(x_i)$</p>
+<p>$w(x-x_i)$是节点$x_i$的权函数</p>
+<p>为确定系数$\alpha(x)$，$J$应取极小值。对$\alpha$求导：</p>
+<script type="math/tex; mode=display">
+\frac{\partial J}{\partial \alpha}= A(x)\alpha(x)-B(x)y=0\tag{4}</script><script type="math/tex; mode=display">
+\alpha(x)= A^{-1}(x)B(x)y\tag{5}</script><p>其中：</p>
+<script type="math/tex; mode=display">
+A(x)= \sum_{i=1}^nw(x-x_i)p(x_i)p^T(x_i)\tag{6} \\\\
+或者(线性二维曲线)： \\\\
+A(x)= \sum_{i=1}^np^T(x_i)w(x-x_i)p(x_i) \\\\
+= \begin{bmatrix}
+\sum_{i=1}^nw(x-x_i) & \sum_{i=1}^nx_iw(x-x_i)\\ 
+\sum_{i=1}^nx_iw(x-x_i) & \sum_{i=1}^nx_i^2w(x-x_i)
+\end{bmatrix}</script><script type="math/tex; mode=display">
+B(x)= [w(x-x_1)p(x_1),w(x-x_2)p(x_2),...,w(x-x_n)p(x_n)]\tag{7}</script><script type="math/tex; mode=display">
+y^T= [y_1,y_2,...,y_n]\tag{8}</script><p>把式<strong>(5)</strong>代入式<strong>(1)</strong>，就可以得到<strong>MLS</strong>拟合函数：</p>
+<script type="math/tex; mode=display">
+f(x)=\sum_{i=1}^n\Phi_i^k(x)y_i=O^k(x)y\tag{9}</script><p>其中，$O^k(x)$叫<strong>形函数</strong>，$k$表示基函数的<strong>阶数</strong>：</p>
+<script type="math/tex; mode=display">
+O^k(x)=[\Phi_1^k,\Phi_2^k,...,\Phi_n^k]=p^T(x)A^{-1}(x)B(x)\tag{10}</script><p>如果$k=0$，则基函数$p(x)={1}$，这时的形函数为Shepard函数：</p>
+<script type="math/tex; mode=display">
+O_i^{Shepard}(x)=\frac{w(x-x_i)}{\sum_{j=1}^nw(x=x_j)}\tag{11}</script><p>即使基函数$p(x)$为多项式，式<strong>(9)</strong>中的$f(x)$也不再是多项式。</p>
+<p>若基函数$p\in C^r$，权函数$w\in C^s$，则拟合函数$f\in C^{min(r,s)}$。</p>
+<h1 id="权函数"><a href="#权函数" class="headerlink" title="权函数"></a>权函数</h1><p>移动最小二乘中的权函数$w(x-x_i)$，其在$x$的一个子领域内不等于0，在这个子域外全为0，这个子域称为权函数的支持域(即$x$的影响区域)。</p>
+<p>一般选择圆形作为权函数的支持域，其半径记为$s_{max}$</p>
+<p>只有包含在支持域内的数据对$x$的取值有影响</p>
+<p>权函数$w(x-x_i)$应该是<strong>非负</strong>的，并且随着$||x-x_i||_2$的增加单调递减。</p>
+<p>权函数还应该具有一定的光滑性，因为拟合函数会继承权函数的连续性。</p>
+<p>连续性：若权函数$w(x-x_i)$是$C^1$阶连续的，则拟合函数也是$C^1$阶连续的。</p>
+<p>常用的权函数是<strong>样条函数</strong>，记$s=x-x_i，\bar s=\frac{s}{s_{max}}$则三次样条函数如式<strong>(12)</strong>所示：</p>
+<script type="math/tex; mode=display">
+w(\bar s)=\left\{\begin{matrix}
+\frac{2}{3}-4\bar s^2 + 4\bar s^3 & (\bar s\le\frac{1}{2})\\ 
+\frac{4}{3}-4\bar s+4\bar s^2-\frac{4}{3}\bar s^3 & (\frac{1}{2}<\bar s \le 1)\\ 
+0 & (\bar s>1)
+\end{matrix}\right.\tag{12}</script><p>支持域应该包含足够多的节点，使得式<strong>(6)</strong>中$A(x)$可逆。</p>
+<p>如果式<strong>(1)</strong>使用的是线性基函数，则<strong>曲线拟合</strong>的支持域内应该至少包含不重叠的<strong>2个节点</strong>，<strong>曲面拟合</strong>的支持域内应该至少包含不在同一条直线上的<strong>3个节点</strong></p>
+<h1 id="MLS拟合流程"><a href="#MLS拟合流程" class="headerlink" title="MLS拟合流程"></a>MLS拟合流程</h1><p>基本思想：先讲拟合区域网格化，然后用公式<strong>(9)</strong>求出网格上节点值，最后连接网格节点形成拟合曲线（曲面）。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">MLS拟合流程</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">(1). 将拟合区域网格化:</td>
+</tr>
+<tr>
+<td style="text-align:left">(2). 对每个网格点$x$进行循环：</td>
+</tr>
+<tr>
+<td style="text-align:left">(a). 确定网格点$x$的支持域的大小；</td>
+</tr>
+<tr>
+<td style="text-align:left">(b). 确定包含在x的影响区域内的节点；</td>
+</tr>
+<tr>
+<td style="text-align:left">(c). 计算形函数$O^k(x)$；</td>
+</tr>
+<tr>
+<td style="text-align:left">(d). 计算网格点$x$处的节点值。</td>
+</tr>
+<tr>
+<td style="text-align:left">(3). 结束网格点循环；</td>
+</tr>
+<tr>
+<td style="text-align:left">(4). 连接网格点形成拟合曲线(曲面)。</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h1 id="误差分析"><a href="#误差分析" class="headerlink" title="误差分析"></a>误差分析</h1><p>为分析<strong>曲面拟合</strong>误差，定义误差项：</p>
+<script type="math/tex; mode=display">
+error=\int_U[f^{EXACT}(x,y)-f^{MLS}(x,y)]^2dU\tag{14}</script><p>其中，$f^{EXACT}(x,y)$是精确值，$f^{MLS}(x,y)$是移动最小二乘的计算值。</p>
+<h1 id="Coding（coming-soon-）"><a href="#Coding（coming-soon-）" class="headerlink" title="Coding（coming soon!）"></a>Coding（coming soon!）</h1><h1 id="References："><a href="#References：" class="headerlink" title="References："></a>References：</h1><p><a href="https://blog.csdn.net/baidu_38127162/article/details/82380914" target="_blank" rel="noopener">https://blog.csdn.net/baidu_38127162/article/details/82380914</a></p>
+<p><a href="https://blog.csdn.net/liumangmao1314/article/details/54179526" target="_blank" rel="noopener">https://blog.csdn.net/liumangmao1314/article/details/54179526</a></p>
+<p><a href="https://blog.csdn.net/hjimce/article/details/46550001" target="_blank" rel="noopener">https://blog.csdn.net/hjimce/article/details/46550001</a></p>
+<p><a href="https://wenku.baidu.com/view/fe7a74976f1aff00bed51eb1.html" target="_blank" rel="noopener">https://wenku.baidu.com/view/fe7a74976f1aff00bed51eb1.html</a></p>
+<p><a href="https://blog.csdn.net/liumangmao1314/article/details/89421806" target="_blank" rel="noopener">https://blog.csdn.net/liumangmao1314/article/details/89421806</a></p>
+<p><a href="https://en.wikipedia.org/wiki/Moving_least_squares" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/Moving_least_squares</a></p>
+<p>Final Project: Image Deformation Using Moving Least Squares</p>
+<p><a href="http://vision.gel.ulaval.ca/~jflalonde/cours/4105/h14/tps/results/project/jingweicao/index.html" target="_blank" rel="noopener">http://vision.gel.ulaval.ca/~jflalonde/cours/4105/h14/tps/results/project/jingweicao/index.html</a></p>
 
       
-
     </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+
+
+  <div>
+    
+      <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-heart"></i>感谢您的阅读-------------</div>
+    
+</div>
+     
+  </div>
+
+
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/10/14/MTCNN算法与代码理解/" rel="next" title="MTCNN算法与代码理解（待补充）">
+                <i class="fa fa-chevron-left"></i> MTCNN算法与代码理解（待补充）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
           
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zNDMxMy8xMDg1MA=="></div>
+    </div>
+
+  
+
+
 
         </div>
         
@@ -533,8 +664,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -780,6 +920,22 @@
       </section>
 
       
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#拟合函数的建立"><span class="nav-number">1.</span> <span class="nav-text">拟合函数的建立</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#权函数"><span class="nav-number">2.</span> <span class="nav-text">权函数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#MLS拟合流程"><span class="nav-number">3.</span> <span class="nav-text">MLS拟合流程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#误差分析"><span class="nav-number">4.</span> <span class="nav-text">误差分析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Coding（coming-soon-）"><span class="nav-number">5.</span> <span class="nav-text">Coding（coming soon!）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#References："><span class="nav-number">6.</span> <span class="nav-text">References：</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
 
       
 
@@ -927,6 +1083,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.0.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.0.4"></script>
+
+
 
   
 
@@ -951,6 +1111,17 @@
 
 
 
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
   
 
 
@@ -1315,6 +1486,29 @@
   
   
 
+  
+    
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    
   
 
 
