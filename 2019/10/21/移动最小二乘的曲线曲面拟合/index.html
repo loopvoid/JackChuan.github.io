@@ -164,7 +164,7 @@
 <meta property="og:site_name" content="Chuan·Yen">
 <meta property="og:description" content="拟合函数的建立在拟合区域的局部子域上，拟合函数  f(x)=\sum_{i=1}^m\alpha_{i}(x)p_i(x)=p^T(x)\alpha(x)\tag{1}其中： $\alpha(x)=[\alpha_1(x),\alpha_2(x),…,\alpha_m(x)]^T$为待求系数，它是坐标x的函数 $p(x)=[p_1(x),p_2(x),…,p_m(x)]^T$称为基函数，它是一个$">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-10-21T15:03:22.051Z">
+<meta property="og:updated_time" content="2019-10-22T13:36:52.657Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="移动最小二乘的曲线曲面拟合(Draft)">
 <meta name="twitter:description" content="拟合函数的建立在拟合区域的局部子域上，拟合函数  f(x)=\sum_{i=1}^m\alpha_{i}(x)p_i(x)=p^T(x)\alpha(x)\tag{1}其中： $\alpha(x)=[\alpha_1(x),\alpha_2(x),…,\alpha_m(x)]^T$为待求系数，它是坐标x的函数 $p(x)=[p_1(x),p_2(x),…,p_m(x)]^T$称为基函数，它是一个$">
@@ -553,14 +553,15 @@ w(\bar s)=\left\{\begin{matrix}
 <h1 id="误差分析"><a href="#误差分析" class="headerlink" title="误差分析"></a>误差分析</h1><p>为分析<strong>曲面拟合</strong>误差，定义误差项：</p>
 <script type="math/tex; mode=display">
 error=\int_U[f^{EXACT}(x,y)-f^{MLS}(x,y)]^2dU\tag{14}</script><p>其中，$f^{EXACT}(x,y)$是精确值，$f^{MLS}(x,y)$是移动最小二乘的计算值。</p>
-<h1 id="Coding（coming-soon-）"><a href="#Coding（coming-soon-）" class="headerlink" title="Coding（coming soon!）"></a>Coding（coming soon!）</h1><h1 id="References："><a href="#References：" class="headerlink" title="References："></a>References：</h1><p><a href="https://blog.csdn.net/baidu_38127162/article/details/82380914" target="_blank" rel="noopener">https://blog.csdn.net/baidu_38127162/article/details/82380914</a></p>
+<h1 id="Coding"><a href="#Coding" class="headerlink" title="Coding"></a>Coding</h1><p><a href="https://github.com/loopvoid/mls" target="_blank" rel="noopener">Matlab原理版本</a></p>
+<p><strong>C++版本(Todo)</strong></p>
+<h1 id="References："><a href="#References：" class="headerlink" title="References："></a>References：</h1><p><a href="https://blog.csdn.net/baidu_38127162/article/details/82380914" target="_blank" rel="noopener">https://blog.csdn.net/baidu_38127162/article/details/82380914</a></p>
 <p><a href="https://blog.csdn.net/liumangmao1314/article/details/54179526" target="_blank" rel="noopener">https://blog.csdn.net/liumangmao1314/article/details/54179526</a></p>
 <p><a href="https://blog.csdn.net/hjimce/article/details/46550001" target="_blank" rel="noopener">https://blog.csdn.net/hjimce/article/details/46550001</a></p>
 <p><a href="https://wenku.baidu.com/view/fe7a74976f1aff00bed51eb1.html" target="_blank" rel="noopener">https://wenku.baidu.com/view/fe7a74976f1aff00bed51eb1.html</a></p>
 <p><a href="https://blog.csdn.net/liumangmao1314/article/details/89421806" target="_blank" rel="noopener">https://blog.csdn.net/liumangmao1314/article/details/89421806</a></p>
 <p><a href="https://en.wikipedia.org/wiki/Moving_least_squares" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/Moving_least_squares</a></p>
-<p>Final Project: Image Deformation Using Moving Least Squares</p>
-<p><a href="http://vision.gel.ulaval.ca/~jflalonde/cours/4105/h14/tps/results/project/jingweicao/index.html" target="_blank" rel="noopener">http://vision.gel.ulaval.ca/~jflalonde/cours/4105/h14/tps/results/project/jingweicao/index.html</a></p>
+<p><a href="http://vision.gel.ulaval.ca/~jflalonde/cours/4105/h14/tps/results/project/jingweicao/index.html" target="_blank" rel="noopener">Final Project: Image Deformation Using Moving Least Squares</a></p>
 
       
     </div>
@@ -929,7 +930,7 @@ error=\int_U[f^{EXACT}(x,y)-f^{MLS}(x,y)]^2dU\tag{14}</script><p>其中，$f^{EX
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#拟合函数的建立"><span class="nav-number">1.</span> <span class="nav-text">拟合函数的建立</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#权函数"><span class="nav-number">2.</span> <span class="nav-text">权函数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#MLS拟合流程"><span class="nav-number">3.</span> <span class="nav-text">MLS拟合流程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#误差分析"><span class="nav-number">4.</span> <span class="nav-text">误差分析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Coding（coming-soon-）"><span class="nav-number">5.</span> <span class="nav-text">Coding（coming soon!）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#References："><span class="nav-number">6.</span> <span class="nav-text">References：</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#拟合函数的建立"><span class="nav-number">1.</span> <span class="nav-text">拟合函数的建立</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#权函数"><span class="nav-number">2.</span> <span class="nav-text">权函数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#MLS拟合流程"><span class="nav-number">3.</span> <span class="nav-text">MLS拟合流程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#误差分析"><span class="nav-number">4.</span> <span class="nav-text">误差分析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Coding"><span class="nav-number">5.</span> <span class="nav-text">Coding</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#References："><span class="nav-number">6.</span> <span class="nav-text">References：</span></a></li></ol></div>
             
 
           </div>
