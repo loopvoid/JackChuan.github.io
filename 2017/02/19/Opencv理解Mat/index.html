@@ -157,18 +157,18 @@
   <meta name="keywords" content="Opencv,Mat,">
 
 
-<meta name="description" content="Mat基础 1、在计算机内存中，数字图像是采用矩阵的方式保存的。Opencv2中，保存图像像素信息的是数据结构Mat阵，它包含两部分：矩阵头和一个指向像素数据的矩阵针。矩阵头主要包含：矩阵尺寸、存储方式、存储地址、引用计数等。矩阵头的大小是一定的，不会随着图像的大小改变而改变，通常图像像素数据都会很大。因此，在图像的复制和传递过程中不需要复制整个Mat数据，只复制矩阵头和指向像素矩阵的指针即可。">
+<meta name="description" content="数据类型 CV_8UC1// 8位无符号单通道 CV_8UC3// 8位无符号3通道 CV_8UC4 CV_32FC1// 32位浮点型单通道 CV_32FC3// 32位浮点型3通道  包括数据位深度8位、32位，数据类型U:uchar、F:float型以及通道数C1：单通道、C3：三通道、C4：四通道。 构造函数1234567cv::Mat a(cv::Size(5,5),CV_8UC1);">
 <meta name="keywords" content="Opencv,Mat">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Opencv理解Mat">
+<meta property="og:title" content="Opencv理解Mat与基本操作">
 <meta property="og:url" content="https://loopvoid.github.io/2017/02/19/Opencv理解Mat/index.html">
 <meta property="og:site_name" content="Chuan·Yen">
-<meta property="og:description" content="Mat基础 1、在计算机内存中，数字图像是采用矩阵的方式保存的。Opencv2中，保存图像像素信息的是数据结构Mat阵，它包含两部分：矩阵头和一个指向像素数据的矩阵针。矩阵头主要包含：矩阵尺寸、存储方式、存储地址、引用计数等。矩阵头的大小是一定的，不会随着图像的大小改变而改变，通常图像像素数据都会很大。因此，在图像的复制和传递过程中不需要复制整个Mat数据，只复制矩阵头和指向像素矩阵的指针即可。">
+<meta property="og:description" content="数据类型 CV_8UC1// 8位无符号单通道 CV_8UC3// 8位无符号3通道 CV_8UC4 CV_32FC1// 32位浮点型单通道 CV_32FC3// 32位浮点型3通道  包括数据位深度8位、32位，数据类型U:uchar、F:float型以及通道数C1：单通道、C3：三通道、C4：四通道。 构造函数1234567cv::Mat a(cv::Size(5,5),CV_8UC1);">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-08-06T06:40:03.874Z">
+<meta property="og:updated_time" content="2019-10-27T14:18:44.174Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Opencv理解Mat">
-<meta name="twitter:description" content="Mat基础 1、在计算机内存中，数字图像是采用矩阵的方式保存的。Opencv2中，保存图像像素信息的是数据结构Mat阵，它包含两部分：矩阵头和一个指向像素数据的矩阵针。矩阵头主要包含：矩阵尺寸、存储方式、存储地址、引用计数等。矩阵头的大小是一定的，不会随着图像的大小改变而改变，通常图像像素数据都会很大。因此，在图像的复制和传递过程中不需要复制整个Mat数据，只复制矩阵头和指向像素矩阵的指针即可。">
+<meta name="twitter:title" content="Opencv理解Mat与基本操作">
+<meta name="twitter:description" content="数据类型 CV_8UC1// 8位无符号单通道 CV_8UC3// 8位无符号3通道 CV_8UC4 CV_32FC1// 32位浮点型单通道 CV_32FC3// 32位浮点型3通道  包括数据位深度8位、32位，数据类型U:uchar、F:float型以及通道数C1：单通道、C3：三通道、C4：四通道。 构造函数1234567cv::Mat a(cv::Size(5,5),CV_8UC1);">
 
 
 
@@ -186,7 +186,7 @@
     sidebar: "",
   };
 </script>
-  <title>Opencv理解Mat | Chuan·Yen</title>
+  <title>Opencv理解Mat与基本操作 | Chuan·Yen</title>
   
 
 
@@ -407,7 +407,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">Opencv理解Mat</h2>
+          <h2 class="post-title" itemprop="name headline">Opencv理解Mat与基本操作</h2>
         
 
         <div class="post-meta">
@@ -481,7 +481,349 @@
       
 
       
-        <h2 id="Mat基础"><a href="#Mat基础" class="headerlink" title="Mat基础"></a>Mat基础</h2><ul>
+        <hr>
+<h2 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h2><blockquote>
+<p>CV_8UC1<em>// 8位无符号单通道</em></p>
+<p>CV_8UC3<em>// 8位无符号3通道</em></p>
+<p>CV_8UC4</p>
+<p>CV_32FC1<em>// 32位浮点型单通道</em></p>
+<p>CV_32FC3<em>// 32位浮点型3通道</em></p>
+</blockquote>
+<p>包括数据位深度8位、32位，数据类型U:uchar、F:float型以及通道数C1：单通道、C3：三通道、C4：四通道。</p>
+<h2 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">cv::<span class="function">Mat <span class="title">a</span><span class="params">(cv::Size(<span class="number">5</span>,<span class="number">5</span>),CV_8UC1)</span></span>; <span class="comment">// 单通道</span></span><br><span class="line">cv::Mat b = cv::Mat(cv::Size(<span class="number">5</span>,<span class="number">5</span>),CV_8UC3); <span class="comment">//3通道每个矩阵元素包含3个uchar值</span></span><br><span class="line">cv::<span class="function">Mat <span class="title">img</span><span class="params">(<span class="number">20</span>, <span class="number">20</span>, CV_8UC3, cv::Scalar(<span class="number">0</span>,<span class="number">0</span>,<span class="number">255</span>))</span></span>; </span><br><span class="line">Mat m =(Mat_(<span class="number">3</span>,<span class="number">3</span>)&lt;&lt;<span class="number">-3</span>,<span class="number">-2</span>,<span class="number">-1</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>);</span><br><span class="line">cv::Mat e = cv::Mat::eye(<span class="number">4</span>,<span class="number">4</span>,CV_64F);</span><br><span class="line">cv::Mat o = cv::Mat::ones(<span class="number">2</span>,<span class="number">2</span>,CV_32F);</span><br><span class="line">cv::Mat z = cv::Mat::zeros(<span class="number">3</span>,<span class="number">3</span>,CV_8UC1);</span><br></pre></td></tr></table></figure>
+<h3 id="Create方法"><a href="#Create方法" class="headerlink" title="Create方法"></a>Create方法</h3><p>该方法不能为矩阵设置初始值，只是在改变尺寸时为矩阵数据重新分配内存。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//创建一个4行4列有2个通道的矩阵：</span></span><br><span class="line">Mat img;</span><br><span class="line">img.create(<span class="number">4</span>, <span class="number">4</span>, CV_8UC2);</span><br></pre></td></tr></table></figure></p>
+<h3 id="几种特殊矩阵初始化方式的说明"><a href="#几种特殊矩阵初始化方式的说明" class="headerlink" title="几种特殊矩阵初始化方式的说明"></a>几种特殊矩阵初始化方式的说明</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cv::Mat e = cv::Mat::eye(<span class="number">4</span>,<span class="number">4</span>,CV_64F);<span class="comment">// 4行4列的对角矩阵 </span></span><br><span class="line">cv::Mat o = cv::Mat::ones(<span class="number">2</span>,<span class="number">2</span>,CV_32F);<span class="comment">// 2行2列的单位矩阵</span></span><br><span class="line">cv::Mat z = cv::Mat::zeros(<span class="number">3</span>,<span class="number">3</span>,CV_8UC1);<span class="comment">// 3行3列的零矩阵</span></span><br></pre></td></tr></table></figure>
+<h3 id="小矩阵的初始化"><a href="#小矩阵的初始化" class="headerlink" title="小矩阵的初始化"></a>小矩阵的初始化</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Mat m =(Mat_(<span class="number">3</span>,<span class="number">3</span>)&lt;&lt;<span class="number">-3</span>,<span class="number">-2</span>,<span class="number">-1</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="矩阵运算"><a href="#矩阵运算" class="headerlink" title="矩阵运算"></a>矩阵运算</h2><h3 id="加减法"><a href="#加减法" class="headerlink" title="加减法"></a>加减法</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cv::Mat a= Mat::eye(Size(<span class="number">3</span>,<span class="number">2</span>), CV_32F);</span><br><span class="line">cv::Mat b= Mat::ones(Size(<span class="number">3</span>,<span class="number">2</span>), CV_32F);</span><br><span class="line">cv::Mat c= a+b;</span><br><span class="line">cv::Mat d= a-b;</span><br></pre></td></tr></table></figure>
+<script type="math/tex; mode=display">
+\begin{bmatrix}
+1 & 0 & 0 \\
+0 & 1 & 0 
+\end{bmatrix}+
+\begin{bmatrix}
+1 & 1 & 1 \\
+1 & 1 & 1 
+\end{bmatrix}=
+\begin{bmatrix}
+2 & 1 & 1 \\
+1 & 2 & 1 
+\end{bmatrix} \\\\
+\begin{bmatrix}
+1 & 0 & 0 \\
+0 & 1 & 0 
+\end{bmatrix}-
+\begin{bmatrix}
+1 & 1 & 1 \\
+1 & 1 & 1 
+\end{bmatrix}=
+\begin{bmatrix}
+0 & -1 & -1 \\
+-1 & 0 & -1 
+\end{bmatrix}</script><h3 id="矩阵乘法"><a href="#矩阵乘法" class="headerlink" title="矩阵乘法"></a>矩阵乘法</h3><p>1.按位相乘（$A_{m<em>n}.</em>B_{m*n}$）</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Mat in = Mat::eye(Size(<span class="number">3</span>,<span class="number">2</span>), CV_32F);</span><br><span class="line">Mat out = Mat::eye(Size(<span class="number">3</span>,<span class="number">2</span>), CV_32F);</span><br><span class="line">cv::multiply(in,out);</span><br></pre></td></tr></table></figure>
+<p>2.点乘法($A_{m<em>n}B_{n</em>p}$)</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Mat res = A*B;</span><br></pre></td></tr></table></figure>
+<script type="math/tex; mode=display">
+\begin{bmatrix}
+1 & 0 & 0 \\
+0 & 1 & 0
+\end{bmatrix}*2=
+\begin{bmatrix}
+2 & 0 & 0 \\
+0 & 2 & 0
+\end{bmatrix} \\\\
+\begin{bmatrix}
+2 & 1 & 1 \\
+1 & 2 & 1
+\end{bmatrix}.*
+\begin{bmatrix}
+4 & 3 & 3 \\
+3 & 4 & 3
+\end{bmatrix}=
+\begin{bmatrix}
+8 & 3 & 3 \\
+3 & 8 & 3
+\end{bmatrix}\\\\
+\begin{bmatrix}
+1 & 0 & 0 \\
+0 & 1 & 0
+\end{bmatrix}*
+\begin{bmatrix}
+1 & 1 \\
+1 & 1 \\
+1 & 1
+\end{bmatrix}=
+\begin{bmatrix}
+1 & 1 \\
+1 & 1 
+\end{bmatrix}</script><h3 id="矩阵的转置"><a href="#矩阵的转置" class="headerlink" title="矩阵的转置"></a>矩阵的转置</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Mat m1= Mat::eye(<span class="number">2</span>,<span class="number">3</span>, CV_32F);</span><br><span class="line">Mat <span class="keyword">m1_t</span> = m1.t();</span><br><span class="line">transpose(m1, <span class="keyword">m1_t</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="矩阵的逆"><a href="#矩阵的逆" class="headerlink" title="矩阵的逆"></a>矩阵的逆</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Mat me_inv = me.inv();</span><br><span class="line">invert(in, out);</span><br></pre></td></tr></table></figure>
+<h3 id="计算矩阵非零元素个数"><a href="#计算矩阵非零元素个数" class="headerlink" title="计算矩阵非零元素个数"></a>计算矩阵非零元素个数</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> nonZerosNum = countNonZero(me);</span><br></pre></td></tr></table></figure>
+<h3 id="矩阵的均值和标准差"><a href="#矩阵的均值和标准差" class="headerlink" title="矩阵的均值和标准差"></a>矩阵的均值和标准差</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">meanStdDev(src, mean, stddev);</span><br><span class="line">* src - 输入矩阵或图像</span><br><span class="line">* mean - 均值，OutputArray</span><br><span class="line">* stddev - 标准差,OutputArray</span><br><span class="line">    </span><br><span class="line">Mat mean, stddev;</span><br><span class="line">meanStdDev(me, mean, stddev);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//多通道矩阵,则分别计算不同通道的均值与标准差</span></span><br><span class="line"><span class="function">Mat <span class="title">m3</span><span class="params">(cv::Size(<span class="number">5</span>,<span class="number">5</span>),CV_8UC3,Scalar(<span class="number">255</span>,<span class="number">200</span>,<span class="number">100</span>))</span></span>;</span><br><span class="line">Mat mean3,stddev3;</span><br><span class="line">meanStdDev(m3, mean3, stddev3);</span><br></pre></td></tr></table></figure>
+<h3 id="求最大最小值"><a href="#求最大最小值" class="headerlink" title="求最大最小值"></a>求最大最小值</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">minMaxLoc</span><span class="params">(InputArray src, CV_OUT <span class="keyword">double</span>* minVal,</span></span></span><br><span class="line"><span class="function"><span class="params">                           CV_OUT <span class="keyword">double</span>* maxVal=<span class="number">0</span>, CV_OUT Point* minLoc=<span class="number">0</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">                           CV_OUT Point* maxLoc=<span class="number">0</span>, InputArray mask=noArray())</span></span>;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>src – 输入单通道矩阵（图像）.</li>
+<li>minVal – 指向最小值的指针， 如果未指定则使用NULL</li>
+<li>maxVal – 指向最大值的指针， 如果未指定则使用NULL</li>
+<li>minLoc – 指向最小值位置（2维情况）的指针， 如果未指定则使用NULL</li>
+<li>maxLoc – 指向最大值位置（2维情况）的指针， 如果未指定则使用NULL</li>
+<li>mask – 可选的蒙版，用于选择待处理子区域</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 求极值 最大、最小值及其位置</span></span><br><span class="line">	Mat img = imread(<span class="string">"Lena.jpg"</span>,<span class="number">0</span>);</span><br><span class="line">	imshow(<span class="string">"original image"</span>,img);</span><br><span class="line"> </span><br><span class="line">	<span class="keyword">double</span> minVal=<span class="number">0</span>,maxVal=<span class="number">0</span>;</span><br><span class="line">	cv::Point minPt, maxPt;</span><br><span class="line">	minMaxLoc(img,&amp;minVal,&amp;maxVal,&amp;minPt,&amp;maxPt);</span><br><span class="line">	<span class="built_in">cout</span>&lt;&lt;<span class="string">"min value  = "</span>&lt;&lt;minVal&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cout</span>&lt;&lt;<span class="string">"max value  = "</span>&lt;&lt;maxVal&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cout</span>&lt;&lt;<span class="string">"minPt = ("</span>&lt;&lt;minPt.x&lt;&lt;<span class="string">","</span>&lt;&lt;minPt.y&lt;&lt;<span class="string">")"</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cout</span>&lt;&lt;<span class="string">"maxPt = ("</span>&lt;&lt;maxPt.x&lt;&lt;<span class="string">","</span>&lt;&lt;maxPt.y&lt;&lt;<span class="string">")"</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cout</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line"> </span><br><span class="line">	cv::<span class="function">Rect <span class="title">rectMin</span><span class="params">(minPt.x<span class="number">-10</span>,minPt.y<span class="number">-10</span>,<span class="number">20</span>,<span class="number">20</span>)</span></span>;</span><br><span class="line">	cv::<span class="function">Rect <span class="title">rectMax</span><span class="params">(maxPt.x<span class="number">-10</span>,maxPt.y<span class="number">-10</span>,<span class="number">20</span>,<span class="number">20</span>)</span></span>;</span><br><span class="line"> </span><br><span class="line">	cv::rectangle(img,rectMin,cv::Scalar(<span class="number">200</span>),<span class="number">2</span>);</span><br><span class="line">	cv::rectangle(img,rectMax,cv::Scalar(<span class="number">255</span>),<span class="number">2</span>);</span><br><span class="line"> </span><br><span class="line">	imshow(<span class="string">"image with min max location"</span>,img);</span><br><span class="line">	cv::waitKey();</span><br></pre></td></tr></table></figure>
+<h2 id="其他矩阵运算"><a href="#其他矩阵运算" class="headerlink" title="其他矩阵运算"></a>其他矩阵运算</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Function (函数名)</th>
+<th>Use (函数用处)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>add</td>
+<td>矩阵加法，A+B的更高级形式，支持mask</td>
+</tr>
+<tr>
+<td>scaleAdd</td>
+<td>矩阵加法，一个带有缩放因子dst(I) = scale * src1(I) + src2(I)</td>
+</tr>
+<tr>
+<td>addWeighted</td>
+<td>矩阵加法，两个带有缩放因子dst(I) = saturate(src1(I) <em> alpha + src2(I) </em> beta + gamma)</td>
+</tr>
+<tr>
+<td>subtract</td>
+<td>矩阵减法，A-B的更高级形式，支持mask</td>
+</tr>
+<tr>
+<td>multiply</td>
+<td>矩阵逐元素乘法，同Mat::mul()函数，与A*B区别，支持mask</td>
+</tr>
+<tr>
+<td>gemm</td>
+<td>一个广义的矩阵乘法操作</td>
+</tr>
+<tr>
+<td>divide</td>
+<td>矩阵逐元素除法，与A/B区别，支持mask</td>
+</tr>
+<tr>
+<td>abs</td>
+<td>对每个元素求绝对值</td>
+</tr>
+<tr>
+<td>absdiff</td>
+<td>两个矩阵的差的绝对值</td>
+</tr>
+<tr>
+<td>exp</td>
+<td>求每个矩阵元素 src(I) 的自然数 e 的 src(I) 次幂 dst[I] = esrc(I)</td>
+</tr>
+<tr>
+<td>pow</td>
+<td>求每个矩阵元素 src(I) 的 p 次幂 dst[I] = src(I)p</td>
+</tr>
+<tr>
+<td>log</td>
+<td>求每个矩阵元素的自然数底 dst[I] = log</td>
+</tr>
+<tr>
+<td>sqrt</td>
+<td>求每个矩阵元素的平方根</td>
+</tr>
+<tr>
+<td>min, max</td>
+<td>求每个元素的最小值或最大值返回这个矩阵 dst(I) = min(src1(I), src2(I)), max同</td>
+</tr>
+<tr>
+<td>minMaxLoc</td>
+<td>定位矩阵中最小值、最大值的位置</td>
+</tr>
+<tr>
+<td>compare</td>
+<td>返回逐个元素比较结果的矩阵</td>
+</tr>
+<tr>
+<td>bitwise_and, bitwise_not, bitwise_or, bitwise_xor</td>
+<td>每个元素进行位运算，分别是和、非、或、异或</td>
+</tr>
+<tr>
+<td>cvarrToMat</td>
+<td>旧版数据CvMat,IplImage,CvMatND转换到新版数据Mat</td>
+</tr>
+<tr>
+<td>extractImageCOI</td>
+<td>从旧版数据中提取指定的通道矩阵给新版数据Mat</td>
+</tr>
+<tr>
+<td>randu</td>
+<td>以Uniform分布产生随机数填充矩阵，同 RNG::fill(mat, RNG::UNIFORM)</td>
+</tr>
+<tr>
+<td>randn</td>
+<td>以Normal分布产生随机数填充矩阵，同 RNG::fill(mat, RNG::NORMAL)</td>
+</tr>
+<tr>
+<td>randShuffle</td>
+<td>随机打乱一个一维向量的元素顺序</td>
+</tr>
+<tr>
+<td>theRNG()</td>
+<td>返回一个默认构造的RNG类的对象 theRNG()::fill(…)</td>
+</tr>
+<tr>
+<td>reduce</td>
+<td>矩阵缩成向量</td>
+</tr>
+<tr>
+<td>repeat</td>
+<td>矩阵拷贝的时候指定按x/y方向重复</td>
+</tr>
+<tr>
+<td>split</td>
+<td>多通道矩阵分解成多个单通道矩阵</td>
+</tr>
+<tr>
+<td>merge</td>
+<td>多个单通道矩阵合成一个多通道矩阵</td>
+</tr>
+<tr>
+<td>mixChannels</td>
+<td>矩阵间通道拷贝，如Rgba[]到Rgb[]和Alpha[]</td>
+</tr>
+<tr>
+<td>sort, sortIdx</td>
+<td>为矩阵的每行或每列元素排序</td>
+</tr>
+<tr>
+<td>setIdentity</td>
+<td>设置单元矩阵</td>
+</tr>
+<tr>
+<td>completeSymm</td>
+<td>矩阵上下三角拷贝</td>
+</tr>
+<tr>
+<td>inRange</td>
+<td>检查元素的取值范围是否在另两个矩阵的元素取值之间，返回验证矩阵</td>
+</tr>
+<tr>
+<td>checkRange</td>
+<td>检查矩阵的每个元素的取值是否在最小值与最大值之间，返回验证结果bool</td>
+</tr>
+<tr>
+<td>sum</td>
+<td>求矩阵的元素和</td>
+</tr>
+<tr>
+<td>mean</td>
+<td>求均值</td>
+</tr>
+<tr>
+<td>meanStdDev</td>
+<td>均值和标准差</td>
+</tr>
+<tr>
+<td>countNonZero</td>
+<td>统计非零值个数</td>
+</tr>
+<tr>
+<td>cartToPolar, polarToCart</td>
+<td>笛卡尔坐标与极坐标之间的转换</td>
+</tr>
+<tr>
+<td>flip</td>
+<td>矩阵翻转</td>
+</tr>
+<tr>
+<td>transpose</td>
+<td>矩阵转置，比较 Mat::t() AT</td>
+</tr>
+<tr>
+<td>trace</td>
+<td>矩阵的迹</td>
+</tr>
+<tr>
+<td>determinant</td>
+<td>行列式</td>
+</tr>
+<tr>
+<td>eigen</td>
+<td>矩阵的特征值和特征向量</td>
+</tr>
+<tr>
+<td>invert</td>
+<td>矩阵的逆或者伪逆，比较 Mat::inv()</td>
+</tr>
+<tr>
+<td>magnitude</td>
+<td>向量长度计算 dst(I) = sqrt(x(I)2 + y(I)2)</td>
+</tr>
+<tr>
+<td>Mahalanobis</td>
+<td>Mahalanobis距离计算</td>
+</tr>
+<tr>
+<td>phase</td>
+<td>相位计算，即两个向量之间的夹角</td>
+</tr>
+<tr>
+<td>norm</td>
+<td>求范数，1-范数、2-范数、无穷范数</td>
+</tr>
+<tr>
+<td>normalize</td>
+<td>标准化</td>
+</tr>
+<tr>
+<td>mulTransposed</td>
+<td>矩阵和它自己的转置相乘 AT * A, dst = scale(src - delta)T(src - delta)</td>
+</tr>
+<tr>
+<td>convertScaleAbs</td>
+<td>先缩放元素再取绝对值，最后转换格式为8bit型</td>
+</tr>
+<tr>
+<td>calcCovarMatrix</td>
+<td>计算协方差阵</td>
+</tr>
+<tr>
+<td>solve</td>
+<td>求解1个或多个线性系统或者求解最小平方问题(least-squares problem)</td>
+</tr>
+<tr>
+<td>solveCubic</td>
+<td>求解三次方程的根</td>
+</tr>
+<tr>
+<td>solvePoly</td>
+<td>求解多项式的实根和重根</td>
+</tr>
+<tr>
+<td>dct, idct</td>
+<td>正、逆离散余弦变换，idct同dct(src, dst, flags</td>
+</tr>
+<tr>
+<td>dft, idft</td>
+<td>正、逆离散傅立叶变换, idft同dft(src, dst, flags</td>
+</tr>
+<tr>
+<td>LUT</td>
+<td>查表变换</td>
+</tr>
+<tr>
+<td>getOptimalDFTSize</td>
+<td>返回一个优化过的DFT大小</td>
+</tr>
+<tr>
+<td>mulSpecturms</td>
+<td>两个傅立叶频谱间逐元素的乘法</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr>
+<h2 id="Mat基础"><a href="#Mat基础" class="headerlink" title="Mat基础"></a>Mat基础</h2><ul>
 <li>1、在计算机内存中，数字图像是采用矩阵的方式保存的。Opencv2中，保存图像像素信息的是数据结构Mat阵，它包含两部分：矩阵头和一个指向像素数据的矩阵针。矩阵头主要包含：矩阵尺寸、存储方式、存储地址、引用计数等。矩阵头的大小是一定的，不会随着图像的大小改变而改变，通常图像像素数据都会很大。因此，在图像的复制和传递过程中不需要复制整个Mat数据，只复制矩阵头和指向像素矩阵的指针即可。        </li>
 <li>2、由此会出现多个Mat共用一个矩阵数据的情况，那么内存回收的时候会存在什么时候释放矩阵数据的问题，对于释放内存的时候引用计数就会起作用了，当Mat对象被复制一次时，引用计数会加一，而销毁一个Mat对象(共用同一个图像矩阵数据)时引用计数减一，当引用计数为0的时候，矩阵数据就会被除。</li>
 <li>3、在使用Mat的时候：<br> a、OpenCV中内存通常是自动分配，特殊情况需要特别指定。<br> b、使用OpenCV的C++接口时不用考虑内存释放问题。<br> c、需要复制矩阵数据，可以使用Image.clone()和Image1.copyTo(Image2)。</li>
@@ -891,7 +1233,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Mat基础"><span class="nav-number">1.</span> <span class="nav-text">Mat基础</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Mat存储方法"><span class="nav-number">2.</span> <span class="nav-text">Mat存储方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Mat的创建"><span class="nav-number">3.</span> <span class="nav-text">Mat的创建</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、构造函数"><span class="nav-number">3.1.</span> <span class="nav-text">1、构造函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、Create方法"><span class="nav-number">3.2.</span> <span class="nav-text">2、Create方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、几种特殊矩阵初始化方式的说明"><span class="nav-number">3.3.</span> <span class="nav-text">3、几种特殊矩阵初始化方式的说明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4、小矩阵的初始化"><span class="nav-number">3.4.</span> <span class="nav-text">4、小矩阵的初始化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Mat的输入输出"><span class="nav-number">4.</span> <span class="nav-text">Mat的输入输出</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#数据类型"><span class="nav-number">1.</span> <span class="nav-text">数据类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#构造函数"><span class="nav-number">2.</span> <span class="nav-text">构造函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Create方法"><span class="nav-number">2.1.</span> <span class="nav-text">Create方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#几种特殊矩阵初始化方式的说明"><span class="nav-number">2.2.</span> <span class="nav-text">几种特殊矩阵初始化方式的说明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#小矩阵的初始化"><span class="nav-number">2.3.</span> <span class="nav-text">小矩阵的初始化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#矩阵运算"><span class="nav-number">3.</span> <span class="nav-text">矩阵运算</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#加减法"><span class="nav-number">3.1.</span> <span class="nav-text">加减法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#矩阵乘法"><span class="nav-number">3.2.</span> <span class="nav-text">矩阵乘法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#矩阵的转置"><span class="nav-number">3.3.</span> <span class="nav-text">矩阵的转置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#矩阵的逆"><span class="nav-number">3.4.</span> <span class="nav-text">矩阵的逆</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#计算矩阵非零元素个数"><span class="nav-number">3.5.</span> <span class="nav-text">计算矩阵非零元素个数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#矩阵的均值和标准差"><span class="nav-number">3.6.</span> <span class="nav-text">矩阵的均值和标准差</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#求最大最小值"><span class="nav-number">3.7.</span> <span class="nav-text">求最大最小值</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他矩阵运算"><span class="nav-number">4.</span> <span class="nav-text">其他矩阵运算</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Mat基础"><span class="nav-number">5.</span> <span class="nav-text">Mat基础</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Mat存储方法"><span class="nav-number">6.</span> <span class="nav-text">Mat存储方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Mat的创建"><span class="nav-number">7.</span> <span class="nav-text">Mat的创建</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、构造函数"><span class="nav-number">7.1.</span> <span class="nav-text">1、构造函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、Create方法"><span class="nav-number">7.2.</span> <span class="nav-text">2、Create方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、几种特殊矩阵初始化方式的说明"><span class="nav-number">7.3.</span> <span class="nav-text">3、几种特殊矩阵初始化方式的说明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4、小矩阵的初始化"><span class="nav-number">7.4.</span> <span class="nav-text">4、小矩阵的初始化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Mat的输入输出"><span class="nav-number">8.</span> <span class="nav-text">Mat的输入输出</span></a></li></ol></div>
             
 
           </div>

@@ -157,17 +157,20 @@
   <meta name="keywords" content="YenChuan's Blog">
 
 
-<meta name="description" content="拟合函数的建立在拟合区域的局部子域上，拟合函数  f(x)=\sum_{i=1}^m\alpha_{i}(x)p_i(x)=p^T(x)\alpha(x)\tag{1}其中： $\alpha(x)=[\alpha_1(x),\alpha_2(x),…,\alpha_m(x)]^T$为待求系数，它是坐标x的函数 $p(x)=[p_1(x),p_2(x),…,p_m(x)]^T$称为基函数，它是一个$">
+<meta name="description" content="LS Approximation(Least-squares)Question.给定N个点$x_i\in\mathbb{R}^d,where\ i\in[1…N]$.希望得到$f(x)$能近似出点$x_i$处的$f_i$ 值。误差函数为$J_{LS}=\sum_i||f(\mathbb{x}_i)-f_i||^2$。那么得到最小化问题：  min_{f_x\in\prod_m^d}\sum_i||">
 <meta property="og:type" content="article">
-<meta property="og:title" content="移动最小二乘的曲线曲面拟合">
+<meta property="og:title" content="最小二乘的曲线曲面拟合">
 <meta property="og:url" content="https://loopvoid.github.io/2019/10/21/移动最小二乘的曲线曲面拟合/index.html">
 <meta property="og:site_name" content="Chuan·Yen">
-<meta property="og:description" content="拟合函数的建立在拟合区域的局部子域上，拟合函数  f(x)=\sum_{i=1}^m\alpha_{i}(x)p_i(x)=p^T(x)\alpha(x)\tag{1}其中： $\alpha(x)=[\alpha_1(x),\alpha_2(x),…,\alpha_m(x)]^T$为待求系数，它是坐标x的函数 $p(x)=[p_1(x),p_2(x),…,p_m(x)]^T$称为基函数，它是一个$">
+<meta property="og:description" content="LS Approximation(Least-squares)Question.给定N个点$x_i\in\mathbb{R}^d,where\ i\in[1…N]$.希望得到$f(x)$能近似出点$x_i$处的$f_i$ 值。误差函数为$J_{LS}=\sum_i||f(\mathbb{x}_i)-f_i||^2$。那么得到最小化问题：  min_{f_x\in\prod_m^d}\sum_i||">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-10-22T13:54:38.565Z">
+<meta property="og:image" content="https://loopvoid.github.io/2019/10/21/移动最小二乘的曲线曲面拟合/fig1.png">
+<meta property="og:image" content="https://loopvoid.github.io/2019/10/21/移动最小二乘的曲线曲面拟合/fit.png">
+<meta property="og:updated_time" content="2019-10-27T14:15:35.303Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="移动最小二乘的曲线曲面拟合">
-<meta name="twitter:description" content="拟合函数的建立在拟合区域的局部子域上，拟合函数  f(x)=\sum_{i=1}^m\alpha_{i}(x)p_i(x)=p^T(x)\alpha(x)\tag{1}其中： $\alpha(x)=[\alpha_1(x),\alpha_2(x),…,\alpha_m(x)]^T$为待求系数，它是坐标x的函数 $p(x)=[p_1(x),p_2(x),…,p_m(x)]^T$称为基函数，它是一个$">
+<meta name="twitter:title" content="最小二乘的曲线曲面拟合">
+<meta name="twitter:description" content="LS Approximation(Least-squares)Question.给定N个点$x_i\in\mathbb{R}^d,where\ i\in[1…N]$.希望得到$f(x)$能近似出点$x_i$处的$f_i$ 值。误差函数为$J_{LS}=\sum_i||f(\mathbb{x}_i)-f_i||^2$。那么得到最小化问题：  min_{f_x\in\prod_m^d}\sum_i||">
+<meta name="twitter:image" content="https://loopvoid.github.io/2019/10/21/移动最小二乘的曲线曲面拟合/fig1.png">
 
 
 
@@ -185,7 +188,7 @@
     sidebar: "",
   };
 </script>
-  <title>移动最小二乘的曲线曲面拟合 | Chuan·Yen</title>
+  <title>最小二乘的曲线曲面拟合 | Chuan·Yen</title>
   
 
 
@@ -406,7 +409,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">移动最小二乘的曲线曲面拟合</h2>
+          <h2 class="post-title" itemprop="name headline">最小二乘的曲线曲面拟合</h2>
         
 
         <div class="post-meta">
@@ -462,7 +465,72 @@
       
 
       
-        <h1 id="拟合函数的建立"><a href="#拟合函数的建立" class="headerlink" title="拟合函数的建立"></a>拟合函数的建立</h1><p>在拟合区域的局部子域上，拟合函数</p>
+        <h1 id="LS-Approximation-Least-squares"><a href="#LS-Approximation-Least-squares" class="headerlink" title="LS Approximation(Least-squares)"></a>LS Approximation(Least-squares)</h1><p><strong>Question.</strong>给定N个点$x_i\in\mathbb{R}^d,where\ i\in[1…N]$.希望得到$f(x)$能近似出点$x_i$处的$f_i$</p>
+<p>值。误差函数为$J_{LS}=\sum_i||f(\mathbb{x}_i)-f_i||^2$。那么得到最小化问题：</p>
+<script type="math/tex; mode=display">
+min_{f_x\in\prod_m^d}\sum_i||f(\mathbb{x}_i)-f_i||^2\tag 1</script><p>$f$ 取自$\prod_m^d$,d维空间上为total degree为m的多项式空间，则可以写作：</p>
+<script type="math/tex; mode=display">
+f(x)=b(x)^Tc=b(x)\cdot c \tag 2</script><p>其中：$\mathbb{b}(x)=[b_1(x),…,b_k(x)]^T$是多项式的基向量，$\mathbb{c}=[c_1,…,c_k]^T$是需要最小化求解的未知系数向量。</p>
+<p>多项式的基：</p>
+<ul>
+<li>$(m=2,d=2)，\mathbb{b(x)}=[1,x,y,x^2,xy,y^2]^T$</li>
+<li>$\mathbb{R^3}(m=1,d=3)$的线性拟合，$\mathbb{b(x)}=[1,x,y,z]^T$</li>
+<li>任意维度常数拟合，$\mathbb{b(x)}=[1]$</li>
+</ul>
+<p><strong>Solution.</strong>误差函数$J_{LS}$的偏导为0.$\bigtriangledown J_{LS}=0,\bigtriangledown=[\partial/\partial_{c_1},…,\partial/\partial_{c_k}]$ </p>
+<p>因此，可以得到一个线性方程组(<strong>LSE</strong>)：</p>
+<script type="math/tex; mode=display">
+\begin{align}
+\partial J_{LS}/\partial c_1=0 &: \sum_i2b_1(\mathbb{x_i})[\mathbb{b(x_i)}^T\mathbb{c}-f_i]=0\\\\
+\partial J_{LS}/\partial c_2=0 &: \sum_i2b_2(\mathbb{x_i})[\mathbb{b(x_i)}^T\mathbb{c}-f_i]=0\\\\
+&\ \vdots\\\\
+\partial J_{LS}/\partial c_k=0 &: \sum_i2b_k(\mathbb{x_i})[\mathbb{b(x_i)}^T\mathbb{c}-f_i]=0\\\\
+\end{align}</script><p>可以向量表示为：</p>
+<script type="math/tex; mode=display">
+2\sum_i\mathbb{[b(x_i)b(x_i)}^T\mathbb{c}-\mathbb{b(x_i)}f_i]=0\\\\
+\Rightarrow \\\\
+c=[\sum_ib(x_i)b(x_i)^T]^{-1}\sum_ib(x_i)f_i</script><p><strong>Example.</strong></p>
+<p>在$\mathbb{R}^2$拟合一个二元二次多项式，i.e. $d=2,m=2$，那么有$\mathbb{b(x)}=[1,x,y,x^2,xy,y^2]^T$，那么线性方程组为：</p>
+<script type="math/tex; mode=display">
+\begin{bmatrix}
+1 & x_i & y_i & x_i^2 & x_iy_i & y_i^2 \\
+x_i & x_i^2 & x_iy_i & x_i^3 & x_i^2y_i & x_iy_i^2\\
+y_i & x_iy_i & y_i^2 & x_i^2y_i & x_iy_i^2 & y_i^3\\
+x_i^2 & x_i^3 & x_i^2y_i & x_i^4 & x_i^3y_i & x_i^2y_i^2\\
+x_iy_i & x_i^2y_i & x_iy_i^2 & x_i^3y_i & x_i^2y_i^2 & x_iy_i^3\\
+y_i^2 & x_iy_i^2 & y_i^3 & x_i^2y_i^2 & x_iy_i^3 & y_i^4
+\end{bmatrix}
+\begin{bmatrix}
+c_1\\c_2\\c_3\\c_4\\c_5\\c_6
+\end{bmatrix}=
+\sum_i
+\begin{bmatrix}
+1\\x_i\\y_i\\x_i^2\\x_iy_i\\y_i^2
+\end{bmatrix}
+f_i</script><p>考虑一组二维平面上的点$P_i={(1,1),(1,-1),(-1,1),(-1,-1),(0,0),(1,0),(-1,0),(0,1),(0,-1)}$有两组对应的函数值$f_i^1={1.0, -0.5, 1.0, 1.0, -1.0, 0.0, 0.0, 0.0, 0.0}$和$f_i^2={1.0, -1.0, 0.0, 0.0, 1.0, 0.0, -1.0, -1.0, 1.0}$。</p>
+<p>图1为该数据的拟合：</p>
+<p><img src="//loopvoid.github.io/2019/10/21/移动最小二乘的曲线曲面拟合/fig1.png" alt="fig1"></p>
+<p>图1. 二元二次多相似局部拟合：第一行为2组9个数据点，第二行是LS拟合函数。对应的参数向量$[c_1,…,c_6]^T$分别左为$[.0.834,.0.25,0.75,0.25,0.375,0.75]^T$，右为$[0.334,0.167,0.0,.0.5,0.5,0.0]^T$.</p>
+<hr>
+<h1 id="WLS-Approximation-Weighted-Least-Squates"><a href="#WLS-Approximation-Weighted-Least-Squates" class="headerlink" title="WLS Approximation(Weighted Least Squates)"></a>WLS Approximation(Weighted Least Squates)</h1><p>在<strong>WLS</strong>方法中使用误差函数$J_{WLS}=\sum_i\theta(||\mathbb{\bar x-x_i}||)||f(\mathbb{x_i})-f_i||^2$，$\bar x \in \mathbb{R}^d$为固定点。因此需要最小化：</p>
+<script type="math/tex; mode=display">
+min_{f_x\in\prod_m^d}\sum_i\theta(||\mathbb{\bar x-x_i}||)||f(\mathbb{x}_i)-f_i||^2\tag 1</script><p>其中：权重$\theta(d)$由数据点$\mathbb{x_i}$到$\mathbb{\bar x}$之间的欧氏距离表示。</p>
+<p>未知系数也与上述权重有关，则：</p>
+<script type="math/tex; mode=display">
+f_{\mathbb{\bar x}}(\mathbb{x})=\mathbb{b(x)^Tc(\bar x)}=\mathbb{b(x)\cdot c(\bar x)},||x-\bar x||<h\\\\
+b(x)=[b_1(x),...,b_k(x)]^T \\\\
+Gaussian:\theta (d)=e^{-\frac{d^2}{h^2}}\\\\
+Wendland:\theta (d)=(1-\frac{d}{h})^4(4\frac{d}{h}+1)\\\\
+c(\bar x)=[\sum_i\theta (d_i)b(x_i)b(x_i)^T]^{-1}\sum_i\theta (d_i)b(x_i)f_i\\\\</script><h1 id="MLS-Approximation-Moving-least-squares"><a href="#MLS-Approximation-Moving-least-squares" class="headerlink" title="MLS Approximation(Moving least squares)"></a>MLS Approximation(Moving least squares)</h1><p>与<strong>WLS</strong>很类似，不同点：</p>
+<blockquote>
+<p>n <strong>move</strong> this point ($\bar x$) over the entire parameter domain, where a weighted least squares fit is computed and evaluated for each point individually.</p>
+</blockquote>
+<p>因此：</p>
+<script type="math/tex; mode=display">
+f(x)=f_x(x),min_{f_x\in\prod_m^d}\sum_i\theta(||x-x_i||)||f_x(x_i)-f_i||^2\\\\
+f_{\bar x}(x)=b(x)\cdot c(\bar x)\\\\
+c(\bar x)=[\sum_i\theta (d_i)b(x_i)b(x_i)^T]^{-1}\sum_i\theta (d_i)b(x_i)f_i</script><hr>
+<h2 id="拟合函数的建立"><a href="#拟合函数的建立" class="headerlink" title="拟合函数的建立"></a>拟合函数的建立</h2><p>在拟合区域的局部子域上，拟合函数</p>
 <script type="math/tex; mode=display">
 f(x)=\sum_{i=1}^m\alpha_{i}(x)p_i(x)=p^T(x)\alpha(x)\tag{1}</script><p>其中：</p>
 <p>$\alpha(x)=[\alpha_1(x),\alpha_2(x),…,\alpha_m(x)]^T$为待求系数，它是坐标x的函数</p>
@@ -500,7 +568,7 @@ O^k(x)=[\Phi_1^k,\Phi_2^k,...,\Phi_n^k]=p^T(x)A^{-1}(x)B(x)\tag{10}</script><p>�
 <script type="math/tex; mode=display">
 O_i^{Shepard}(x)=\frac{w(x-x_i)}{\sum_{j=1}^nw(x=x_j)}\tag{11}</script><p>即使基函数$p(x)$为多项式，式<strong>(9)</strong>中的$f(x)$也不再是多项式。</p>
 <p>若基函数$p\in C^r$，权函数$w\in C^s$，则拟合函数$f\in C^{min(r,s)}$。</p>
-<h1 id="权函数"><a href="#权函数" class="headerlink" title="权函数"></a>权函数</h1><p>移动最小二乘中的权函数$w(x-x_i)$，其在$x$的一个子领域内不等于0，在这个子域外全为0，这个子域称为权函数的支持域(即$x$的影响区域)。</p>
+<h2 id="权函数"><a href="#权函数" class="headerlink" title="权函数"></a>权函数</h2><p>移动最小二乘中的权函数$w(x-x_i)$，其在$x$的一个子领域内不等于0，在这个子域外全为0，这个子域称为权函数的支持域(即$x$的影响区域)。</p>
 <p>一般选择圆形作为权函数的支持域，其半径记为$s_{max}$</p>
 <p>只有包含在支持域内的数据对$x$的取值有影响</p>
 <p>权函数$w(x-x_i)$应该是<strong>非负</strong>的，并且随着$||x-x_i||_2$的增加单调递减。</p>
@@ -514,45 +582,27 @@ w(\bar s)=\left\{\begin{matrix}
 0 & (\bar s>1)
 \end{matrix}\right.\tag{12}</script><p>支持域应该包含足够多的节点，使得式<strong>(6)</strong>中$A(x)$可逆。</p>
 <p>如果式<strong>(1)</strong>使用的是线性基函数，则<strong>曲线拟合</strong>的支持域内应该至少包含不重叠的<strong>2个节点</strong>，<strong>曲面拟合</strong>的支持域内应该至少包含不在同一条直线上的<strong>3个节点</strong></p>
-<h1 id="MLS拟合流程"><a href="#MLS拟合流程" class="headerlink" title="MLS拟合流程"></a>MLS拟合流程</h1><p>基本思想：先讲拟合区域网格化，然后用公式<strong>(9)</strong>求出网格上节点值，最后连接网格节点形成拟合曲线（曲面）。</p>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:left">MLS拟合流程</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">(1). 将拟合区域网格化:</td>
-</tr>
-<tr>
-<td style="text-align:left">(2). 对每个网格点$x$进行循环：</td>
-</tr>
-<tr>
-<td style="text-align:left">(a). 确定网格点$x$的支持域的大小；</td>
-</tr>
-<tr>
-<td style="text-align:left">(b). 确定包含在x的影响区域内的节点；</td>
-</tr>
-<tr>
-<td style="text-align:left">(c). 计算形函数$O^k(x)$；</td>
-</tr>
-<tr>
-<td style="text-align:left">(d). 计算网格点$x$处的节点值。</td>
-</tr>
-<tr>
-<td style="text-align:left">(3). 结束网格点循环；</td>
-</tr>
-<tr>
-<td style="text-align:left">(4). 连接网格点形成拟合曲线(曲面)。</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h1 id="误差分析"><a href="#误差分析" class="headerlink" title="误差分析"></a>误差分析</h1><p>为分析<strong>曲面拟合</strong>误差，定义误差项：</p>
+<h2 id="MLS拟合流程"><a href="#MLS拟合流程" class="headerlink" title="MLS拟合流程"></a>MLS拟合流程</h2><p>基本思想：先讲拟合区域网格化，然后用公式<strong>(9)</strong>求出网格上节点值，最后连接网格节点形成拟合曲线（曲面）。</p>
+<ul>
+<li>将拟合区域网格化；</li>
+<li>对每个网格点x进行循环：<ul>
+<li>确定网格点x的支持域(半径)的大小；</li>
+<li>确定包含在x的影响区域内的节点；</li>
+<li>计算行函数$O^k(x)$；</li>
+<li>计算网格点x处的函数值</li>
+</ul>
+</li>
+<li>结束网格点循环；</li>
+<li>连接网格点形成拟合曲线(曲面)。</li>
+</ul>
+<h2 id="误差分析"><a href="#误差分析" class="headerlink" title="误差分析"></a>误差分析</h2><p>为分析<strong>曲面拟合</strong>误差，定义误差项：</p>
 <script type="math/tex; mode=display">
 error=\int_U[f^{EXACT}(x,y)-f^{MLS}(x,y)]^2dU\tag{14}</script><p>其中，$f^{EXACT}(x,y)$是精确值，$f^{MLS}(x,y)$是移动最小二乘的计算值。</p>
+<hr>
+<h1 id="Applications"><a href="#Applications" class="headerlink" title="Applications"></a>Applications</h1><p><img src="//loopvoid.github.io/2019/10/21/移动最小二乘的曲线曲面拟合/fit.png" alt="fit.png"></p>
+<blockquote>
+<p>The MLS surface of a point-set with varying density (the<br>density is reduced along the vertical axis from top to bottom). The<br>surface is obtained by applying the projection operation described<br>by Alexa et. al. [2003]. Image courtesy of Marc Alexa.</p>
+</blockquote>
 <hr>
 <h1 id="Coding"><a href="#Coding" class="headerlink" title="Coding"></a>Coding</h1><ul>
 <li><p><a href="https://github.com/loopvoid/mls" target="_blank" rel="noopener">Matlab原理版本</a></p>
@@ -561,13 +611,7 @@ error=\int_U[f^{EXACT}(x,y)-f^{MLS}(x,y)]^2dU\tag{14}</script><p>其中，$f^{EX
 </li>
 </ul>
 <hr>
-<h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1><p><a href="https://blog.csdn.net/baidu_38127162/article/details/82380914" target="_blank" rel="noopener">https://blog.csdn.net/baidu_38127162/article/details/82380914</a></p>
-<p><a href="https://blog.csdn.net/liumangmao1314/article/details/54179526" target="_blank" rel="noopener">https://blog.csdn.net/liumangmao1314/article/details/54179526</a></p>
-<p><a href="https://blog.csdn.net/hjimce/article/details/46550001" target="_blank" rel="noopener">https://blog.csdn.net/hjimce/article/details/46550001</a></p>
-<p><a href="https://wenku.baidu.com/view/fe7a74976f1aff00bed51eb1.html" target="_blank" rel="noopener">https://wenku.baidu.com/view/fe7a74976f1aff00bed51eb1.html</a></p>
-<p><a href="https://blog.csdn.net/liumangmao1314/article/details/89421806" target="_blank" rel="noopener">https://blog.csdn.net/liumangmao1314/article/details/89421806</a></p>
-<p><a href="https://en.wikipedia.org/wiki/Moving_least_squares" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/Moving_least_squares</a></p>
-<p><a href="http://vision.gel.ulaval.ca/~jflalonde/cours/4105/h14/tps/results/project/jingweicao/index.html" target="_blank" rel="noopener">Final Project: Image Deformation Using Moving Least Squares</a></p>
+<h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1><p><a href="http://www.google.com/url?sa=t&amp;rct=j&amp;q=&amp;esrc=s&amp;source=web&amp;cd=1&amp;cad=rja&amp;uact=8&amp;ved=2ahUKEwiHrcX4z7zlAhXDAYgKHeS_Cj8QFjAAegQIBBAC&amp;url=http%3A%2F%2Fwww.nealen.de%2Fprojects%2Fmls%2Fasapmls.pdf&amp;usg=AOvVaw0mQQFav7cDFU1l9-OYOf7y" target="_blank" rel="noopener">asapmls</a><br><a href="https://blog.csdn.net/baidu_38127162/article/details/82380914" target="_blank" rel="noopener">https://blog.csdn.net/baidu_38127162/article/details/82380914</a><br><a href="https://blog.csdn.net/liumangmao1314/article/details/54179526" target="_blank" rel="noopener">https://blog.csdn.net/liumangmao1314/article/details/54179526</a><br><a href="https://blog.csdn.net/hjimce/article/details/46550001" target="_blank" rel="noopener">https://blog.csdn.net/hjimce/article/details/46550001</a><br><a href="https://wenku.baidu.com/view/fe7a74976f1aff00bed51eb1.html" target="_blank" rel="noopener">https://wenku.baidu.com/view/fe7a74976f1aff00bed51eb1.html</a><br><a href="https://blog.csdn.net/liumangmao1314/article/details/89421806" target="_blank" rel="noopener">https://blog.csdn.net/liumangmao1314/article/details/89421806</a><br><a href="https://en.wikipedia.org/wiki/Moving_least_squares" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/Moving_least_squares</a><br><a href="http://vision.gel.ulaval.ca/~jflalonde/cours/4105/h14/tps/results/project/jingweicao/index.html" target="_blank" rel="noopener">Final Project: Image Deformation Using Moving Least Squares</a></p>
 
       
     </div>
@@ -936,7 +980,7 @@ error=\int_U[f^{EXACT}(x,y)-f^{MLS}(x,y)]^2dU\tag{14}</script><p>其中，$f^{EX
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#拟合函数的建立"><span class="nav-number">1.</span> <span class="nav-text">拟合函数的建立</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#权函数"><span class="nav-number">2.</span> <span class="nav-text">权函数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#MLS拟合流程"><span class="nav-number">3.</span> <span class="nav-text">MLS拟合流程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#误差分析"><span class="nav-number">4.</span> <span class="nav-text">误差分析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Coding"><span class="nav-number">5.</span> <span class="nav-text">Coding</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#References"><span class="nav-number">6.</span> <span class="nav-text">References</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#LS-Approximation-Least-squares"><span class="nav-number">1.</span> <span class="nav-text">LS Approximation(Least-squares)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#WLS-Approximation-Weighted-Least-Squates"><span class="nav-number">2.</span> <span class="nav-text">WLS Approximation(Weighted Least Squates)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#MLS-Approximation-Moving-least-squares"><span class="nav-number">3.</span> <span class="nav-text">MLS Approximation(Moving least squares)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#拟合函数的建立"><span class="nav-number">3.1.</span> <span class="nav-text">拟合函数的建立</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#权函数"><span class="nav-number">3.2.</span> <span class="nav-text">权函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MLS拟合流程"><span class="nav-number">3.3.</span> <span class="nav-text">MLS拟合流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#误差分析"><span class="nav-number">3.4.</span> <span class="nav-text">误差分析</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Applications"><span class="nav-number">4.</span> <span class="nav-text">Applications</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Coding"><span class="nav-number">5.</span> <span class="nav-text">Coding</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#References"><span class="nav-number">6.</span> <span class="nav-text">References</span></a></li></ol></div>
             
 
           </div>
