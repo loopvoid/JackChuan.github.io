@@ -167,7 +167,7 @@
 <meta property="og:image" content="https://loopvoid.github.io/2019/10/14/MTCNN算法与代码理解/pipeline.png">
 <meta property="og:image" content="https://loopvoid.github.io/2019/10/14/MTCNN算法与代码理解/nets.png">
 <meta property="og:image" content="https://loopvoid.github.io/2019/10/14/MTCNN算法与代码理解/mtcnn.gif">
-<meta property="og:updated_time" content="2019-10-22T13:54:30.300Z">
+<meta property="og:updated_time" content="2019-11-09T08:06:01.270Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MTCNN算法与代码理解">
 <meta name="twitter:description" content="前言原作主页：https://kpzhang93.github.io/MTCNN_face_detection_alignment/index.html arxiv论文：https://arxiv.org/abs/1604.02878 代码：官方matlab版、C++ caffe版  其他框架代码：pytorch、tensorflow、mxnet MTCNN 《Joint Face Detecti">
@@ -515,7 +515,7 @@
 <p>全卷积网络就是去除了传统卷积网络的全连接层，然后对其进行反卷积对最后一个卷积层（或者其他合适的卷积层）的feature map进行上采样，使其恢复到原有图像的尺寸（或者其他），并对反卷积图像的每个像素点都可以进行一个类别的预测，同时保留了原有图像的空间信息。同时，在反卷积对图像进行操作的过程中，也可以通过提取其他卷积层的反卷积结果对最终图像进行预测，合适的选择会使得结果更好、更精细。</p>
 <p><strong>输入(Input)可以是任意大小的图片</strong></p>
 </blockquote>
-<p>输入是一个$12\times 12$大小的图片，所以训练前需要把生成的训练数据(通过生存bounding box，然后把该bounding box 剪切成$12\times 12$大小的图片)，转换成$12\times 12\times 3$的结构。</p>
+<p>输入是一个$12\times 12$大小的图片，所以训练前需要把生成的训练数据(通过生成bounding box，然后把该bounding box 剪切成$12\times 12$大小的图片)，转换成$12\times 12\times 3$的结构。</p>
 <p>1.通过10个$3\times 3\times 3$的卷积核，$2\times 2$的Max Pooling(stride=2)操作，生成10个$5\times 5$的特征图。</p>
 <p>2.通过16个$3\times 3\times 10$的卷积核，生成16个$3\times 3$的特征图。</p>
 <p>3.通过32个$3\times 3\times 16$的卷积核，生成32个$1\times 1$的特征图</p>
@@ -600,43 +600,13 @@
 <li>传统的难样本的处理方法是检测过一次以后，手动检测哪些困难的样本无法被分类，本文采用online hard sample mining的方法。具体就是在每个mini-batch中，取loss最大的70%进行反向传播，忽略那些简单的样本。</li>
 </ul>
 </li>
-<li>人脸检测对其联合学习（joint face detecion and alignment）</li>
+<li>人脸检测和对齐联合学习（joint face detecion and alignment）</li>
 </ul>
-<h1 id="代码-coming-soon"><a href="#代码-coming-soon" class="headerlink" title="代码(coming soon!)"></a>代码(coming soon!)</h1><h1 id="实现效果"><a href="#实现效果" class="headerlink" title="实现效果"></a>实现效果</h1><p>环境：</p>
-<p>Intel(R) Core(TM) i7-4790K CPU @ 4.00GHz</p>
-<p>Logitech HD Pro Webcam c920</p>
-<p>图像大小：640*640</p>
-<p>效果：(compressed gif)</p>
-<p><img src="//loopvoid.github.io/2019/10/14/MTCNN算法与代码理解/mtcnn.gif" alt="mtcnn"></p>
+<h1 id="代码-coming-soon"><a href="#代码-coming-soon" class="headerlink" title="代码(coming soon!)"></a>代码(coming soon!)</h1><h1 id="实现效果"><a href="#实现效果" class="headerlink" title="实现效果"></a>实现效果</h1><p>环境：<br>Intel(R) Core(TM) i7-4790K CPU @ 4.00GHz<br>Logitech HD Pro Webcam c920<br>图像大小：640*640<br>效果：(compressed gif)<br><img src="//loopvoid.github.io/2019/10/14/MTCNN算法与代码理解/mtcnn.gif" alt="mtcnn"></p>
 <hr>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://kpzhang93.github.io/MTCNN_face_detection_alignment/paper/spl.pdf" target="_blank" rel="noopener">Joint Face Detection and Alignment using Multi-task Cascaded Convolutional Networks</a></p>
-<p><a href="https://www.cnblogs.com/shine-lee/p/10115582.html" target="_blank" rel="noopener">https://www.cnblogs.com/shine-lee/p/10115582.html</a></p>
-<p><a href="https://zhuanlan.zhihu.com/p/31913064" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/31913064</a> </p>
-<p><a href="https://www.cnblogs.com/shine-lee/p/10115582.html" target="_blank" rel="noopener">https://www.cnblogs.com/shine-lee/p/10115582.html</a></p>
-<p><a href="https://blog.csdn.net/qq_14845119/article/details/52680940" target="_blank" rel="noopener">https://blog.csdn.net/qq_14845119/article/details/52680940</a></p>
-<p><a href="http://www.sfinst.com/?p=1683" target="_blank" rel="noopener">http://www.sfinst.com/?p=1683</a></p>
-<p><a href="https://blog.csdn.net/qq_36782182/article/details/83624357" target="_blank" rel="noopener">https://blog.csdn.net/qq_36782182/article/details/83624357</a></p>
-<p>训练：</p>
-<p> <a href="https://github.com/dlunion/mtcnn/tree/master/train" target="_blank" rel="noopener">https://github.com/dlunion/mtcnn/tree/master/train</a> </p>
-<p> <a href="https://www.cnblogs.com/helloworld0604/p/9808795.html" target="_blank" rel="noopener">https://www.cnblogs.com/helloworld0604/p/9808795.html</a> </p>
-<p> <a href="https://joshua19881228.github.io/2018-09-11-training-mtcnn/" target="_blank" rel="noopener">https://joshua19881228.github.io/2018-09-11-training-mtcnn/</a> </p>
-<p> <a href="https://github.com/dlunion/mtcnn" target="_blank" rel="noopener">https://github.com/dlunion/mtcnn</a> </p>
-<p><a href="https://github.com/BobLiu20/mtcnn_tf" target="_blank" rel="noopener">https://github.com/BobLiu20/mtcnn_tf</a></p>
-<p>实现</p>
-<p> <a href="https://github.com/imistyrain/MTCNN/blob/master/MTCNN-light/src/main.cpp" target="_blank" rel="noopener">https://github.com/imistyrain/MTCNN/blob/master/MTCNN-light/src/main.cpp</a> </p>
-<p><a href="https://github.com/cpuimage/MTCNN" target="_blank" rel="noopener">https://github.com/cpuimage/MTCNN</a></p>
-<p><a href="https://github.com/AITTSMD/MTCNN-Tensorflow/blob/master/train_models/mtcnn_model.py" target="_blank" rel="noopener">https://github.com/AITTSMD/MTCNN-Tensorflow/blob/master/train_models/mtcnn_model.py</a></p>
-<p><a href="https://github.com/davidsandberg/facenet/blob/master/src/align/detect_face.py" target="_blank" rel="noopener">https://github.com/davidsandberg/facenet/blob/master/src/align/detect_face.py</a></p>
-<p> <a href="https://github.com/TropComplique/mtcnn-pytorch" target="_blank" rel="noopener">https://github.com/TropComplique/mtcnn-pytorch</a> </p>
-<p> <a href="https://github.com/LeslieZhoa/tensorflow-MTCNN" target="_blank" rel="noopener">https://github.com/LeslieZhoa/tensorflow-MTCNN</a> </p>
-<p> <a href="https://github.com/imistyrain/MTCNN" target="_blank" rel="noopener">https://github.com/imistyrain/MTCNN</a> </p>
-<p><a href="https://github.com/davidsandberg/facenet" target="_blank" rel="noopener">https://github.com/davidsandberg/facenet</a></p>
-<p><a href="https://github.com/AlphaQi/MTCNN-light" target="_blank" rel="noopener">https://github.com/AlphaQi/MTCNN-light</a></p>
-<p><a href="https://github.com/BobLiu20/mtcnn_tf" target="_blank" rel="noopener">https://github.com/BobLiu20/mtcnn_tf</a></p>
-<p><a href="https://github.com/LucyLu-LX/MTCNN_face_detection_caffe" target="_blank" rel="noopener">https://github.com/LucyLu-LX/MTCNN_face_detection_caffe</a></p>
-<p><a href="https://github.com/pangyupo/mxnet_mtcnn_face_detection" target="_blank" rel="noopener">https://github.com/pangyupo/mxnet_mtcnn_face_detection</a></p>
-<p><a href="https://github.com/Longqi-S/ncnn-mtcnn" target="_blank" rel="noopener">https://github.com/Longqi-S/ncnn-mtcnn</a></p>
-<p> <a href="https://github.com/githublet/mtcnn/blob/master/caffemodel2txt/caffemodel2txt.py" target="_blank" rel="noopener">https://github.com/githublet/mtcnn/blob/master/caffemodel2txt/caffemodel2txt.py</a> </p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://kpzhang93.github.io/MTCNN_face_detection_alignment/paper/spl.pdf" target="_blank" rel="noopener">Joint Face Detection and Alignment using Multi-task Cascaded Convolutional Networks</a><br><a href="https://www.cnblogs.com/shine-lee/p/10115582.html" target="_blank" rel="noopener">https://www.cnblogs.com/shine-lee/p/10115582.html</a><br><a href="https://zhuanlan.zhihu.com/p/31913064" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/31913064</a><br><a href="https://www.cnblogs.com/shine-lee/p/10115582.html" target="_blank" rel="noopener">https://www.cnblogs.com/shine-lee/p/10115582.html</a><br><a href="https://blog.csdn.net/qq_14845119/article/details/52680940" target="_blank" rel="noopener">https://blog.csdn.net/qq_14845119/article/details/52680940</a><br><a href="http://www.sfinst.com/?p=1683" target="_blank" rel="noopener">http://www.sfinst.com/?p=1683</a><br><a href="https://blog.csdn.net/qq_36782182/article/details/83624357" target="_blank" rel="noopener">https://blog.csdn.net/qq_36782182/article/details/83624357</a></p>
+<p>训练：<br><a href="https://github.com/dlunion/mtcnn/tree/master/train" target="_blank" rel="noopener">https://github.com/dlunion/mtcnn/tree/master/train</a><br><a href="https://www.cnblogs.com/helloworld0604/p/9808795.html" target="_blank" rel="noopener">https://www.cnblogs.com/helloworld0604/p/9808795.html</a><br><a href="https://joshua19881228.github.io/2018-09-11-training-mtcnn/" target="_blank" rel="noopener">https://joshua19881228.github.io/2018-09-11-training-mtcnn/</a><br><a href="https://github.com/dlunion/mtcnn" target="_blank" rel="noopener">https://github.com/dlunion/mtcnn</a><br><a href="https://github.com/BobLiu20/mtcnn_tf" target="_blank" rel="noopener">https://github.com/BobLiu20/mtcnn_tf</a></p>
+<p>实现<br><a href="https://github.com/imistyrain/MTCNN/blob/master/MTCNN-light/src/main.cpp" target="_blank" rel="noopener">https://github.com/imistyrain/MTCNN/blob/master/MTCNN-light/src/main.cpp</a><br><a href="https://github.com/cpuimage/MTCNN" target="_blank" rel="noopener">https://github.com/cpuimage/MTCNN</a><br><a href="https://github.com/AITTSMD/MTCNN-Tensorflow/blob/master/train_models/mtcnn_model.py" target="_blank" rel="noopener">https://github.com/AITTSMD/MTCNN-Tensorflow/blob/master/train_models/mtcnn_model.py</a><br><a href="https://github.com/davidsandberg/facenet/blob/master/src/align/detect_face.py" target="_blank" rel="noopener">https://github.com/davidsandberg/facenet/blob/master/src/align/detect_face.py</a><br><a href="https://github.com/TropComplique/mtcnn-pytorch" target="_blank" rel="noopener">https://github.com/TropComplique/mtcnn-pytorch</a><br><a href="https://github.com/LeslieZhoa/tensorflow-MTCNN" target="_blank" rel="noopener">https://github.com/LeslieZhoa/tensorflow-MTCNN</a><br><a href="https://github.com/imistyrain/MTCNN" target="_blank" rel="noopener">https://github.com/imistyrain/MTCNN</a><br><a href="https://github.com/davidsandberg/facenet" target="_blank" rel="noopener">https://github.com/davidsandberg/facenet</a><br><a href="https://github.com/AlphaQi/MTCNN-light" target="_blank" rel="noopener">https://github.com/AlphaQi/MTCNN-light</a><br><a href="https://github.com/BobLiu20/mtcnn_tf" target="_blank" rel="noopener">https://github.com/BobLiu20/mtcnn_tf</a><br><a href="https://github.com/LucyLu-LX/MTCNN_face_detection_caffe" target="_blank" rel="noopener">https://github.com/LucyLu-LX/MTCNN_face_detection_caffe</a><br><a href="https://github.com/pangyupo/mxnet_mtcnn_face_detection" target="_blank" rel="noopener">https://github.com/pangyupo/mxnet_mtcnn_face_detection</a><br><a href="https://github.com/Longqi-S/ncnn-mtcnn" target="_blank" rel="noopener">https://github.com/Longqi-S/ncnn-mtcnn</a><br><a href="https://github.com/githublet/mtcnn/blob/master/caffemodel2txt/caffemodel2txt.py" target="_blank" rel="noopener">https://github.com/githublet/mtcnn/blob/master/caffemodel2txt/caffemodel2txt.py</a> </p>
 
       
     </div>
