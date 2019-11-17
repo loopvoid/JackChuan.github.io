@@ -164,7 +164,7 @@
 <meta property="og:site_name" content="Chuan·Yen">
 <meta property="og:description" content="推荐 将JS正则可视化的工具：regexper.com 在线练习：regex101.com 正则教程：Learn Regex the easy way  基础1.元字符    元字符 说明     . 匹配除换行符以外的任意字符   \w 匹配字母、数字、下划线、汉字   \s 匹配任意的空白符   \d 匹配数字   \b 匹配单词的开始或结束   [] 匹配方括号内的任意字符   [\^] 匹">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-11-17T10:58:15.830Z">
+<meta property="og:updated_time" content="2019-11-17T11:13:48.119Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="正则表达式">
 <meta name="twitter:description" content="推荐 将JS正则可视化的工具：regexper.com 在线练习：regex101.com 正则教程：Learn Regex the easy way  基础1.元字符    元字符 说明     . 匹配除换行符以外的任意字符   \w 匹配字母、数字、下划线、汉字   \s 匹配任意的空白符   \d 匹配数字   \b 匹配单词的开始或结束   [] 匹配方括号内的任意字符   [\^] 匹">
@@ -607,7 +607,6 @@
 <th>符号</th>
 <th>描述</th>
 <th>解释</th>
-<th>示例</th>
 </tr>
 </thead>
 <tbody>
@@ -615,34 +614,31 @@
 <td>?=pattern</td>
 <td>正先行断言-存在</td>
 <td>匹配pattern<strong>前面</strong>的内容</td>
-<td>`”(T\</td>
-<td>t)he(?=\sfat)” =&gt; <strong>The</strong> fat cat sat on the mat.`</td>
 </tr>
 <tr>
 <td>?&lt;=pattern</td>
 <td>正后发断言-存在</td>
 <td>匹配pattern<strong>后面</strong>的内容</td>
-<td>`”(?&lt;=(T\</td>
-<td>t)he\s)(fat\</td>
-<td>mat)” =&gt; The <strong>fat</strong> cat sat on the <strong>mat</strong>.`</td>
 </tr>
 <tr>
 <td>?!pattern</td>
 <td>负先行断言-排除</td>
 <td>匹配<strong>非</strong>pattern<strong>前面</strong>的内容</td>
-<td>`”(T\</td>
-<td>t)he(?!\sfat)” =&gt; The fat cat sat on <strong>the</strong> mat.`</td>
 </tr>
 <tr>
 <td>?&lt;!pattern</td>
 <td>负后发断言-排除</td>
 <td>匹配<strong>非</strong>pattern<strong>后面</strong>的内容</td>
-<td>`”(?&lt;!(T\</td>
-<td>t)he\s)(cat)” =&gt; The cat sat on <strong>cat</strong>.`</td>
 </tr>
 </tbody>
 </table>
 </div>
+<blockquote>
+<p>正先行断言-存在:    “(T|t)he(?=\sfat)” =&gt; <strong>The</strong> fat cat sat on the mat.</p>
+<p>正后发断言-存在:    “(?&lt;=(T|t)he\s)(fat|mat)” =&gt; The <strong>fat</strong> cat sat on the <strong>mat</strong>.  </p>
+<p>负先行断言-排除:    “(T|t)he(?!\sfat)” =&gt; The fat cat sat on <strong>the</strong> mat.</p>
+<p>负后发断言-排除:      “(?&lt;!(T|t)he\s)(cat)” =&gt; The cat sat on <strong>cat</strong>.</p>
+</blockquote>
 <p>例子：假设我们要用爬虫抓取csdn里的文章阅读量。通过查看源代码可以看到文章阅读量这个内容是这样的结构</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"read-count"</span>&gt;</span>阅读数：641<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>其中也就‘641’这个是变量，也就是说不同文章不同的值，当我们拿到这个字符串时，需要获得这里边的‘641’有很多种办法，但如果正则应该怎么匹配呢？</p>
