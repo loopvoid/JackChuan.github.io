@@ -157,17 +157,17 @@
   <meta name="keywords" content="YenChuan's Blog">
 
 
-<meta name="description" content="推荐 将JS正则可视化的工具：regexper.com 在线练习：regex101.com 正则教程：Learn Regex the easy way  基础1.元字符    元字符 说明     . 匹配除换行符以外的任意字符   \w 匹配字母、数字、下划线、汉字   \s 匹配任意的空白符   \d 匹配数字   \b 匹配单词的开始或结束   [] 匹配方括号内的任意字符    匹配除了方">
+<meta name="description" content="推荐 将JS正则可视化的工具：regexper.com 在线练习：regex101.com 正则教程：Learn Regex the easy way  基础1.元字符    元字符 说明     . 匹配除换行符以外的任意字符   \w 匹配字母、数字、下划线、汉字   \s 匹配任意的空白符   \d 匹配数字   \b 匹配单词的开始或结束   [] 匹配方括号内的任意字符   [\^] 匹">
 <meta property="og:type" content="article">
 <meta property="og:title" content="正则表达式">
 <meta property="og:url" content="https://loopvoid.github.io/2019/11/17/正则表达式/index.html">
 <meta property="og:site_name" content="Chuan·Yen">
-<meta property="og:description" content="推荐 将JS正则可视化的工具：regexper.com 在线练习：regex101.com 正则教程：Learn Regex the easy way  基础1.元字符    元字符 说明     . 匹配除换行符以外的任意字符   \w 匹配字母、数字、下划线、汉字   \s 匹配任意的空白符   \d 匹配数字   \b 匹配单词的开始或结束   [] 匹配方括号内的任意字符    匹配除了方">
+<meta property="og:description" content="推荐 将JS正则可视化的工具：regexper.com 在线练习：regex101.com 正则教程：Learn Regex the easy way  基础1.元字符    元字符 说明     . 匹配除换行符以外的任意字符   \w 匹配字母、数字、下划线、汉字   \s 匹配任意的空白符   \d 匹配数字   \b 匹配单词的开始或结束   [] 匹配方括号内的任意字符   [\^] 匹">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-11-17T10:52:30.280Z">
+<meta property="og:updated_time" content="2019-11-17T10:58:15.830Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="正则表达式">
-<meta name="twitter:description" content="推荐 将JS正则可视化的工具：regexper.com 在线练习：regex101.com 正则教程：Learn Regex the easy way  基础1.元字符    元字符 说明     . 匹配除换行符以外的任意字符   \w 匹配字母、数字、下划线、汉字   \s 匹配任意的空白符   \d 匹配数字   \b 匹配单词的开始或结束   [] 匹配方括号内的任意字符    匹配除了方">
+<meta name="twitter:description" content="推荐 将JS正则可视化的工具：regexper.com 在线练习：regex101.com 正则教程：Learn Regex the easy way  基础1.元字符    元字符 说明     . 匹配除换行符以外的任意字符   \w 匹配字母、数字、下划线、汉字   \s 匹配任意的空白符   \d 匹配数字   \b 匹配单词的开始或结束   [] 匹配方括号内的任意字符   [\^] 匹">
 
 
 
@@ -501,7 +501,7 @@
 <td>匹配方括号内的任意字符</td>
 </tr>
 <tr>
-<td><sup><a href="#fn_" id="reffn_"></a></sup></td>
+<td>[\^]</td>
 <td>匹配除了方括号里的任意字符集</td>
 </tr>
 <tr>
@@ -615,30 +615,30 @@
 <td>?=pattern</td>
 <td>正先行断言-存在</td>
 <td>匹配pattern<strong>前面</strong>的内容</td>
-<td>“(T\</td>
-<td>t)he(?=\sfat)” =&gt; <strong>The</strong> fat cat sat on the mat.</td>
+<td>`”(T\</td>
+<td>t)he(?=\sfat)” =&gt; <strong>The</strong> fat cat sat on the mat.`</td>
 </tr>
 <tr>
 <td>?&lt;=pattern</td>
 <td>正后发断言-存在</td>
 <td>匹配pattern<strong>后面</strong>的内容</td>
-<td>“(?&lt;=(T\</td>
+<td>`”(?&lt;=(T\</td>
 <td>t)he\s)(fat\</td>
-<td>mat)” =&gt; The <strong>fat</strong> cat sat on the <strong>mat</strong>.</td>
+<td>mat)” =&gt; The <strong>fat</strong> cat sat on the <strong>mat</strong>.`</td>
 </tr>
 <tr>
 <td>?!pattern</td>
 <td>负先行断言-排除</td>
 <td>匹配<strong>非</strong>pattern<strong>前面</strong>的内容</td>
-<td>“(T\</td>
-<td>t)he(?!\sfat)” =&gt; The fat cat sat on <strong>the</strong> mat.</td>
+<td>`”(T\</td>
+<td>t)he(?!\sfat)” =&gt; The fat cat sat on <strong>the</strong> mat.`</td>
 </tr>
 <tr>
 <td>?&lt;!pattern</td>
 <td>负后发断言-排除</td>
 <td>匹配<strong>非</strong>pattern<strong>后面</strong>的内容</td>
-<td>“(?&lt;!(T\</td>
-<td>t)he\s)(cat)” =&gt; The cat sat on <strong>cat</strong>.</td>
+<td>`”(?&lt;!(T\</td>
+<td>t)he\s)(cat)” =&gt; The cat sat on <strong>cat</strong>.`</td>
 </tr>
 </tbody>
 </table>
