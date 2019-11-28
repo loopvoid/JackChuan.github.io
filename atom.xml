@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://loopvoid.github.io/"/>
-  <updated>2019-11-17T11:13:48.119Z</updated>
+  <updated>2019-11-28T04:10:42.674Z</updated>
   <id>https://loopvoid.github.io/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Delaunay三角剖分</title>
+    <link href="https://loopvoid.github.io/2019/11/28/Delaunay%E4%B8%89%E8%A7%92%E5%89%96%E5%88%86/"/>
+    <id>https://loopvoid.github.io/2019/11/28/Delaunay三角剖分/</id>
+    <published>2019-11-28T04:04:41.000Z</published>
+    <updated>2019-11-28T04:10:42.674Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Delaunay-Triangle"><a href="#Delaunay-Triangle" class="headerlink" title="Delaunay Triangle"></a>Delaunay Triangle</h1><p>Delaunay三角剖分特点：</p><blockquote><p>最小角最大：在不出现奇异性的情况下,Delaunay三角剖分最小角之和均大于任何非 Delaunay剖分所形成三角形最小角之和 ,三角形的最小内角之和最大 ,从而使得划分的三角形不会出现某个内角过小的情况 ,比较有利于有限元的后续计算。</p><p>空外接圆：Delaunay三角剖分中任意三角形的外接圆内不包括其他结点。因此 ,在各种二维三角剖分中 ,只有 Delaunay三角剖分才同时满足全局和局部最优。</p></blockquote><p>Delaunay三角剖分优点：</p><blockquote><p>1.最接近：以最近的三点组成三角形，且三角形各边皆不相交。</p><p>2.唯一性：不论从何处区域开始构建，最终结果唯一。</p><p>3.最优解：任意两个相邻三角形形成的凸四边形的对角线若可以互换,那么两个三角形六个内角中最小的角度不会变大。</p><p>4.最规则：若将三角网中的每个三角形的最小角进行升序排列，则Delaunay三角网的排列得到的数值最大。</p><p>5.区域性：新增、删除、移动某一个顶点时只会影响临近的三角形。</p><p>6.具有凸多边形的外壳：三角网最外层的边界形成一个凸多边形的外壳。</p></blockquote><h1 id="Voronoi图"><a href="#Voronoi图" class="headerlink" title="Voronoi图"></a>Voronoi图</h1><p>离散点集P的Delaunay三角剖分和离散点集P的Voronoi图为<a href="https://en.wikipedia.org/wiki/Dual_graph" target="_blank" rel="noopener">对偶图</a>的关系。</p><p>Delaunay三角形的外心是Voronoi图的顶点。 </p><blockquote><p>对偶图：设G是平面图，在图G的每个面中指定一个新节点，对两个面公共的边，指定一条新边与其<strong>相交</strong>。由这些新结点和新边组成的图为G的对偶图。</p></blockquote><p>图中的蓝色虚线的图是红色实线的对偶图：</p><p><img src="//loopvoid.github.io/2019/11/28/Delaunay三角剖分/1280px-Duals_graphs.svg.png" alt="1280px-Duals_graphs.svg.png"></p><p>Delaunay三角形和其外接圆与圆心：</p><p><img src="//loopvoid.github.io/2019/11/28/Delaunay三角剖分/337px-Delaunay_circumcircles_centers.svg.png" alt="337px-Delaunay_circumcircles_centers.svg"></p><p>连接外接圆圆心生成Voronoi图：</p><p><img src="//loopvoid.github.io/2019/11/28/Delaunay三角剖分/441px-Delaunay_Voronoi.svg.png" alt="441px-Delaunay_Voronoi.svg"></p><h1 id="Delaunay三角剖分算法"><a href="#Delaunay三角剖分算法" class="headerlink" title="Delaunay三角剖分算法"></a>Delaunay三角剖分算法</h1><p>Delaunay三角剖分常见算法：翻边算法、分割归并法、逐点插入算法、三角网增长法。本文从常见的逐点插入的Bowyer-Watson算法来理解。</p><p>在<a href="http://paulbourke.net/papers/triangulate/" target="_blank" rel="noopener">《Triangulate》</a>里对该方法进行了分析，给出了伪代码：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">subroutine triangulate</span><br><span class="line">input : vertex list</span><br><span class="line">output : triangle list</span><br><span class="line">   initialize the triangle list</span><br><span class="line">   determine the supertriangle</span><br><span class="line">   add supertriangle vertices to the end of the vertex list</span><br><span class="line">   add the supertriangle to the triangle list</span><br><span class="line">   for each sample point in the vertex list</span><br><span class="line">      initialize the edge buffer</span><br><span class="line">      for each triangle currently in the triangle list</span><br><span class="line">         calculate the triangle circumcircle center and radius</span><br><span class="line">         if the point lies in the triangle circumcircle then</span><br><span class="line">            add the three triangle edges to the edge buffer</span><br><span class="line">            remove the triangle from the triangle list</span><br><span class="line">         endif</span><br><span class="line">      endfor</span><br><span class="line">      delete all doubly specified edges from the edge buffer</span><br><span class="line">         this leaves the edges of the enclosing polygon only</span><br><span class="line">      add to the triangle list all triangles formed between the point </span><br><span class="line">         and the edges of the enclosing polygon</span><br><span class="line">   endfor</span><br><span class="line">   remove any triangles from the triangle list that use the supertriangle vertices</span><br><span class="line">   remove the supertriangle vertices from the vertex list</span><br><span class="line">end</span><br></pre></td></tr></table></figure><p>因该算法效率不高，因此有网上给的优化后的伪代码：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">input: 顶点列表(vertices)　　　　　　　　　　　　　　　　　　　　  　//vertices为外部生成的随机或乱序顶点列表</span><br><span class="line">output:已确定的三角形列表(triangles)</span><br><span class="line">　　　　初始化顶点列表</span><br><span class="line">　　　　创建索引列表(indices = new Array(vertices.length))　　　　//indices数组中的值为0,1,2,3,......,vertices.length-1</span><br><span class="line">　　　　基于vertices中的顶点x坐标对indices进行sort　　  　　　　　  //sort后的indices值顺序为顶点坐标x从小到大排序（也可对y坐标，本例中针对x坐标）</span><br><span class="line">　　　　确定超级三角形</span><br><span class="line">　　　　将超级三角形保存至未确定三角形列表（temp triangles）</span><br><span class="line">　　　　将超级三角形push到triangles列表</span><br><span class="line">　　　　遍历基于indices顺序的vertices中每一个点　　　　　　　　　  　//基于indices后，则顶点则是由x从小到大出现</span><br><span class="line">　　　　　　初始化边缓存数组（edge buffer）</span><br><span class="line">　　　　　　遍历temp triangles中的每一个三角形</span><br><span class="line">　　　　　　　　计算该三角形的圆心和半径</span><br><span class="line">　　　　　　　　如果该点在外接圆的右侧</span><br><span class="line">　　　　　　　　　　则该三角形为Delaunay三角形，保存到triangles</span><br><span class="line">　　　　　　　　　　并在temp里去除掉</span><br><span class="line">　　　　　　　　　　跳过</span><br><span class="line">　　　　　　　　如果该点在外接圆外（即也不是外接圆右侧）</span><br><span class="line">　　　　　　　　　　则该三角形为不确定        　　　　　　　　　     //后面会在问题中讨论</span><br><span class="line">　　　　　　　　　　跳过</span><br><span class="line">　　　　　　　　如果该点在外接圆内</span><br><span class="line">　　　　　　　　　　则该三角形不为Delaunay三角形</span><br><span class="line">　　　　　　　　　　将三边保存至edge buffer</span><br><span class="line">　　　　　　　　　　在temp中去除掉该三角形</span><br><span class="line">　　　　　　对edge buffer进行去重</span><br><span class="line">　　　　　　将edge buffer中的边与当前的点进行组合成若干三角形并保存至temp triangles中</span><br><span class="line">　　　　将triangles与temp triangles进行合并</span><br><span class="line">　　　　除去与超级三角形有关的三角形</span><br><span class="line">end</span><br></pre></td></tr></table></figure><h1 id="Bowyer-Watson算法"><a href="#Bowyer-Watson算法" class="headerlink" title="Bowyer-Watson算法"></a>Bowyer-Watson算法</h1><p>基本思想:</p><blockquote><p>1.构造一个超级三角形，包含所有的散点，存入三角形链表</p><p>2.将点集中的离散点依次插入，在三角形链表中找出外接圆包含插入点的三角形（称为该点的影响三角形），删除影响三角形的<strong>公共边</strong>，将插入点同影响三角形的全部顶点连接起来，完成一个点在Delaunay三角形链表中的插入。</p><p>3.根据优化准则对局部新形成的三角形优化。将形成的三角形放入Delaunay三角形链表。</p><p>4.循环执行步骤2，直到所有离散点插入完毕。</p></blockquote><p>图示:(来自<a href="[https://baike.baidu.com/item/Delaunay%E4%B8%89%E8%A7%92%E5%89%96%E5%88%86%E7%AE%97%E6%B3%95](https://baike.baidu.com/item/Delaunay三角剖分算法">百度百科</a>))</p><p><img src="//loopvoid.github.io/2019/11/28/Delaunay三角剖分/d009b3de9c82d1582789d194800a19d8bc3e4288.jpg" alt="d009b3de9c82d1582789d194800a19d8bc3e4288.jpg"></p><p>借助三个点理解一遍。</p><p><img src="//loopvoid.github.io/2019/11/28/Delaunay三角剖分/Snipaste_2019-11-28_09-57-39.png" alt="Snipaste_2019-11-28_09-57-39.png"></p><p>根据离散点的最大分布得到一个随机超级三角形(即该三角形包含了整个离散点集P)，并将超级三角形放入temp triangles中</p><p><img src="//loopvoid.github.io/2019/11/28/Delaunay三角剖分/Snipaste_2019-11-28_10-01-38.png" alt="Snipaste_2019-11-28_10-01-38.png" style="zoom:75%;"></p><p>接下来对temp triangle中的三角形遍历画外接圆，这时先对左边第一个点a进行判断，其在圆内所以该三角形不为Delaunay三角形，将其三边保存至edge buffer中，temp triangles中删除该三角形</p><p><img src="//loopvoid.github.io/2019/11/28/Delaunay三角剖分/Snipaste_2019-11-28_10-03-32.png" alt="Snipaste_2019-11-28_10-03-32.png" style="zoom:75%;"></p><p>将a点与edge buffer中的每一个边相连，组成三个三角形，存入temp triangles中</p><p><img src="//loopvoid.github.io/2019/11/28/Delaunay三角剖分/Snipaste_2019-11-28_10-05-40.png" alt="Snipaste_2019-11-28_10-05-40.png" style="zoom:75%;"></p><p>再将重复对temp triangles的遍历并画外接圆，这时使用的是b点来进行判断</p><ul><li>b点在三角形1外接圆右侧，则表示左侧三角形为Delaunay三角形，将该三角形保存至triangles中</li><li>b点在三角形2外接圆外侧，为不确定三角形，跳过（后面处理），但并不在temp triangles中删除</li><li>b点在三角形3外接圆内侧，则这时向清空后的edge buffer加入该三角形的三条边，并用b点与edge buffer中的三角边进行组合，组合成了三个三角形并加入到temp triangles中</li></ul><p>这时，temp buffer 中有六条边，triangles中有两个三角形，temp triangles中有1个三角形</p><p>对temp buffer中的六条边进行去重，得到五条边，将该点与这五条边组合成五个三角形并加入到temp triangles 中，这时temp triangles中有6个三角形</p><p><img src="//loopvoid.github.io/2019/11/28/Delaunay三角剖分/Snipaste_2019-11-28_10-13-35.png" alt="Snipaste_2019-11-28_10-13-35.png" style="zoom:75%;"></p><p>由于三个点已经遍历结束，到了不会再对第三个点形成的三角形做外接圆，这时则将triangles与temp triangles合并，合并后的数组表示包含已经确定的Delaunay三角形和剩下的三角形</p><p>这时除去合并后数组中的和超级三角形三个点有关的所有三角形，即进行数组坐标的限定，则得到了最后的结果：</p><p><img src="//loopvoid.github.io/2019/11/28/Delaunay三角剖分/Snipaste_2019-11-28_10-18-12.png" alt="Snipaste_2019-11-28_10-18-12.png"></p><h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><p><a href="https://github.com/loopvoid/delaunay" target="_blank" rel="noopener">Delaunay-Cpp</a></p><h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1><p><a href="http://www.cs.cmu.edu/~quake/triangle.html" target="_blank" rel="noopener">http://www.cs.cmu.edu/~quake/triangle.html</a></p><p><a href="https://people.sc.fsu.edu/~jburkardt/c_src/triangle/triangle.html" target="_blank" rel="noopener">https://people.sc.fsu.edu/~jburkardt/c_src/triangle/triangle.html</a></p><p><a href="https://www.cnblogs.com/zhiyishou/p/4430017.html" target="_blank" rel="noopener">https://www.cnblogs.com/zhiyishou/p/4430017.html</a></p><p><a href="https://en.wikipedia.org/wiki/Delaunay_triangulation" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/Delaunay_triangulation</a></p><p><a href="http://local.wasp.uwa.edu.au/~pbourke/papers/triangulate/index.html" target="_blank" rel="noopener">http://local.wasp.uwa.edu.au/~pbourke/papers/triangulate/index.html</a></p><p><a href="http://local.wasp.uwa.edu.au/~pbourke/papers/triangulate/cpp.zip" target="_blank" rel="noopener">http://local.wasp.uwa.edu.au/~pbourke/papers/triangulate/cpp.zip</a></p><p><a href="https://github.com/obviousjim/ofxDelaunay" target="_blank" rel="noopener">https://github.com/obviousjim/ofxDelaunay</a></p><p><a href="https://github.com/delfrrr/delaunator-cpp/blob/master/include/delaunator.hpp" target="_blank" rel="noopener">https://github.com/delfrrr/delaunator-cpp/blob/master/include/delaunator.hpp</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;Delaunay-Triangle&quot;&gt;&lt;a href=&quot;#Delaunay-Triangle&quot; class=&quot;headerlink&quot; title=&quot;Delaunay Triangle&quot;&gt;&lt;/a&gt;Delaunay Triangle&lt;/h1&gt;&lt;p&gt;Delaunay三角
+      
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>正则表达式</title>
@@ -477,33 +498,6 @@
       
         &lt;h1 id=&quot;方法一&quot;&gt;&lt;a href=&quot;#方法一&quot; class=&quot;headerlink&quot; title=&quot;方法一&quot;&gt;&lt;/a&gt;方法一&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;命令行使用 &amp;lt; 和 &amp;gt;&lt;/strong&gt;&lt;/p&gt;
 &lt;figure class=&quot;highlight c+
-      
-    
-    </summary>
-    
-      <category term="Cpp" scheme="https://loopvoid.github.io/categories/Cpp/"/>
-    
-    
-      <category term="Cpp" scheme="https://loopvoid.github.io/tags/Cpp/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>G++编译模板类的问题</title>
-    <link href="https://loopvoid.github.io/2017/11/29/G-%E7%BC%96%E8%AF%91%E6%A8%A1%E6%9D%BF%E7%B1%BB%E7%9A%84%E9%97%AE%E9%A2%98/"/>
-    <id>https://loopvoid.github.io/2017/11/29/G-编译模板类的问题/</id>
-    <published>2017-11-29T04:36:45.000Z</published>
-    <updated>2019-09-26T14:41:36.832Z</updated>
-    
-    <content type="html"><![CDATA[<p><strong>g++目前不支持c++模板类 声明与实现分离，都要写到.h文件里面。</strong></p><p>以后记住了。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;&lt;strong&gt;g++目前不支持c++模板类 声明与实现分离，都要写到.h文件里面。&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;以后记住了。&lt;/p&gt;
-
       
     
     </summary>

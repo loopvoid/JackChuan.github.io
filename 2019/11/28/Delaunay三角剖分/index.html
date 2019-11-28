@@ -1,0 +1,1487 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+  <script>
+  (function(i,s,o,g,r,a,m){i["DaoVoiceObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;a.charset="utf-8";m.parentNode.insertBefore(a,m)})(window,document,"script",('https:' == document.location.protocol ? 'https:' : 'http:') + "//widget.daovoice.io/widget/0f81ff2f.js","daovoice")
+  daovoice('init', {
+      app_id: "5fc143b8"
+    });
+  daovoice('update');
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.0.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/tt.png?v=6.0.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/tt.png?v=6.0.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/tt.png?v=6.0.4">
+
+
+  <link rel="mask-icon" href="/images/tt.png?v=6.0.4" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '6.0.4',
+    sidebar: {"position":"right","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+
+
+
+
+  
+  <meta name="keywords" content="YenChuan's Blog">
+
+
+<meta name="description" content="Delaunay TriangleDelaunay三角剖分特点：  最小角最大：在不出现奇异性的情况下,Delaunay三角剖分最小角之和均大于任何非 Delaunay剖分所形成三角形最小角之和 ,三角形的最小内角之和最大 ,从而使得划分的三角形不会出现某个内角过小的情况 ,比较有利于有限元的后续计算。 空外接圆：Delaunay三角剖分中任意三角形的外接圆内不包括其他结点。因此 ,在各种二维三角">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Delaunay三角剖分">
+<meta property="og:url" content="https://loopvoid.github.io/2019/11/28/Delaunay三角剖分/index.html">
+<meta property="og:site_name" content="Chuan·Yen">
+<meta property="og:description" content="Delaunay TriangleDelaunay三角剖分特点：  最小角最大：在不出现奇异性的情况下,Delaunay三角剖分最小角之和均大于任何非 Delaunay剖分所形成三角形最小角之和 ,三角形的最小内角之和最大 ,从而使得划分的三角形不会出现某个内角过小的情况 ,比较有利于有限元的后续计算。 空外接圆：Delaunay三角剖分中任意三角形的外接圆内不包括其他结点。因此 ,在各种二维三角">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://loopvoid.github.io/2019/11/28/Delaunay三角剖分/1280px-Duals_graphs.svg.png">
+<meta property="og:image" content="https://loopvoid.github.io/2019/11/28/Delaunay三角剖分/337px-Delaunay_circumcircles_centers.svg.png">
+<meta property="og:image" content="https://loopvoid.github.io/2019/11/28/Delaunay三角剖分/441px-Delaunay_Voronoi.svg.png">
+<meta property="og:image" content="https://loopvoid.github.io/2019/11/28/Delaunay三角剖分/d009b3de9c82d1582789d194800a19d8bc3e4288.jpg">
+<meta property="og:image" content="https://loopvoid.github.io/2019/11/28/Delaunay三角剖分/Snipaste_2019-11-28_09-57-39.png">
+<meta property="og:image" content="https://loopvoid.github.io/2019/11/28/Delaunay三角剖分/Snipaste_2019-11-28_10-01-38.png">
+<meta property="og:image" content="https://loopvoid.github.io/2019/11/28/Delaunay三角剖分/Snipaste_2019-11-28_10-03-32.png">
+<meta property="og:image" content="https://loopvoid.github.io/2019/11/28/Delaunay三角剖分/Snipaste_2019-11-28_10-05-40.png">
+<meta property="og:image" content="https://loopvoid.github.io/2019/11/28/Delaunay三角剖分/Snipaste_2019-11-28_10-13-35.png">
+<meta property="og:image" content="https://loopvoid.github.io/2019/11/28/Delaunay三角剖分/Snipaste_2019-11-28_10-18-12.png">
+<meta property="og:updated_time" content="2019-11-28T04:10:42.674Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Delaunay三角剖分">
+<meta name="twitter:description" content="Delaunay TriangleDelaunay三角剖分特点：  最小角最大：在不出现奇异性的情况下,Delaunay三角剖分最小角之和均大于任何非 Delaunay剖分所形成三角形最小角之和 ,三角形的最小内角之和最大 ,从而使得划分的三角形不会出现某个内角过小的情况 ,比较有利于有限元的后续计算。 空外接圆：Delaunay三角剖分中任意三角形的外接圆内不包括其他结点。因此 ,在各种二维三角">
+<meta name="twitter:image" content="https://loopvoid.github.io/2019/11/28/Delaunay三角剖分/1280px-Duals_graphs.svg.png">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Chuan·Yen" type="application/atom+xml">
+
+
+
+
+  <link rel="canonical" href="https://loopvoid.github.io/2019/11/28/Delaunay三角剖分/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+  <title>Delaunay三角剖分 | Chuan·Yen</title>
+  
+
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?df155f6ce6a17f08be7a6a73822581d2";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+
+
+    <a href="https://github.com/loopvoid" class="github-corner" aria-label="View source on Github"><svg width="80" height="80" viewbox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+
+    
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"> <div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Chuan·Yen</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description"></h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-user"></i> <br>About</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>Schedule</a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Search</a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+  
+
+
+
+ </div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://loopvoid.github.io/2019/11/28/Delaunay三角剖分/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Chuan Yen">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/tt.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Chuan·Yen">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">Delaunay三角剖分</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-11-28T12:04:41+08:00">2019-11-28</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             Views: 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Delaunay-Triangle"><a href="#Delaunay-Triangle" class="headerlink" title="Delaunay Triangle"></a>Delaunay Triangle</h1><p>Delaunay三角剖分特点：</p>
+<blockquote>
+<p>最小角最大：在不出现奇异性的情况下,Delaunay三角剖分最小角之和均大于任何非 Delaunay剖分所形成三角形最小角之和 ,三角形的最小内角之和最大 ,从而使得划分的三角形不会出现某个内角过小的情况 ,比较有利于有限元的后续计算。</p>
+<p>空外接圆：Delaunay三角剖分中任意三角形的外接圆内不包括其他结点。因此 ,在各种二维三角剖分中 ,只有 Delaunay三角剖分才同时满足全局和局部最优。</p>
+</blockquote>
+<p>Delaunay三角剖分优点：</p>
+<blockquote>
+<p>1.最接近：以最近的三点组成三角形，且三角形各边皆不相交。</p>
+<p>2.唯一性：不论从何处区域开始构建，最终结果唯一。</p>
+<p>3.最优解：任意两个相邻三角形形成的凸四边形的对角线若可以互换,那么两个三角形六个内角中最小的角度不会变大。</p>
+<p>4.最规则：若将三角网中的每个三角形的最小角进行升序排列，则Delaunay三角网的排列得到的数值最大。</p>
+<p>5.区域性：新增、删除、移动某一个顶点时只会影响临近的三角形。</p>
+<p>6.具有凸多边形的外壳：三角网最外层的边界形成一个凸多边形的外壳。</p>
+</blockquote>
+<h1 id="Voronoi图"><a href="#Voronoi图" class="headerlink" title="Voronoi图"></a>Voronoi图</h1><p>离散点集P的Delaunay三角剖分和离散点集P的Voronoi图为<a href="https://en.wikipedia.org/wiki/Dual_graph" target="_blank" rel="noopener">对偶图</a>的关系。</p>
+<p>Delaunay三角形的外心是Voronoi图的顶点。 </p>
+<blockquote>
+<p>对偶图：设G是平面图，在图G的每个面中指定一个新节点，对两个面公共的边，指定一条新边与其<strong>相交</strong>。由这些新结点和新边组成的图为G的对偶图。</p>
+</blockquote>
+<p>图中的蓝色虚线的图是红色实线的对偶图：</p>
+<p><img src="//loopvoid.github.io/2019/11/28/Delaunay三角剖分/1280px-Duals_graphs.svg.png" alt="1280px-Duals_graphs.svg.png"></p>
+<p>Delaunay三角形和其外接圆与圆心：</p>
+<p><img src="//loopvoid.github.io/2019/11/28/Delaunay三角剖分/337px-Delaunay_circumcircles_centers.svg.png" alt="337px-Delaunay_circumcircles_centers.svg"></p>
+<p>连接外接圆圆心生成Voronoi图：</p>
+<p><img src="//loopvoid.github.io/2019/11/28/Delaunay三角剖分/441px-Delaunay_Voronoi.svg.png" alt="441px-Delaunay_Voronoi.svg"></p>
+<h1 id="Delaunay三角剖分算法"><a href="#Delaunay三角剖分算法" class="headerlink" title="Delaunay三角剖分算法"></a>Delaunay三角剖分算法</h1><p>Delaunay三角剖分常见算法：翻边算法、分割归并法、逐点插入算法、三角网增长法。本文从常见的逐点插入的Bowyer-Watson算法来理解。</p>
+<p>在<a href="http://paulbourke.net/papers/triangulate/" target="_blank" rel="noopener">《Triangulate》</a>里对该方法进行了分析，给出了伪代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">subroutine triangulate</span><br><span class="line">input : vertex list</span><br><span class="line">output : triangle list</span><br><span class="line">   initialize the triangle list</span><br><span class="line">   determine the supertriangle</span><br><span class="line">   add supertriangle vertices to the end of the vertex list</span><br><span class="line">   add the supertriangle to the triangle list</span><br><span class="line">   for each sample point in the vertex list</span><br><span class="line">      initialize the edge buffer</span><br><span class="line">      for each triangle currently in the triangle list</span><br><span class="line">         calculate the triangle circumcircle center and radius</span><br><span class="line">         if the point lies in the triangle circumcircle then</span><br><span class="line">            add the three triangle edges to the edge buffer</span><br><span class="line">            remove the triangle from the triangle list</span><br><span class="line">         endif</span><br><span class="line">      endfor</span><br><span class="line">      delete all doubly specified edges from the edge buffer</span><br><span class="line">         this leaves the edges of the enclosing polygon only</span><br><span class="line">      add to the triangle list all triangles formed between the point </span><br><span class="line">         and the edges of the enclosing polygon</span><br><span class="line">   endfor</span><br><span class="line">   remove any triangles from the triangle list that use the supertriangle vertices</span><br><span class="line">   remove the supertriangle vertices from the vertex list</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+<p>因该算法效率不高，因此有网上给的优化后的伪代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">input: 顶点列表(vertices)　　　　　　　　　　　　　　　　　　　　  　//vertices为外部生成的随机或乱序顶点列表</span><br><span class="line">output:已确定的三角形列表(triangles)</span><br><span class="line">　　　　初始化顶点列表</span><br><span class="line">　　　　创建索引列表(indices = new Array(vertices.length))　　　　//indices数组中的值为0,1,2,3,......,vertices.length-1</span><br><span class="line">　　　　基于vertices中的顶点x坐标对indices进行sort　　  　　　　　  //sort后的indices值顺序为顶点坐标x从小到大排序（也可对y坐标，本例中针对x坐标）</span><br><span class="line">　　　　确定超级三角形</span><br><span class="line">　　　　将超级三角形保存至未确定三角形列表（temp triangles）</span><br><span class="line">　　　　将超级三角形push到triangles列表</span><br><span class="line">　　　　遍历基于indices顺序的vertices中每一个点　　　　　　　　　  　//基于indices后，则顶点则是由x从小到大出现</span><br><span class="line">　　　　　　初始化边缓存数组（edge buffer）</span><br><span class="line">　　　　　　遍历temp triangles中的每一个三角形</span><br><span class="line">　　　　　　　　计算该三角形的圆心和半径</span><br><span class="line">　　　　　　　　如果该点在外接圆的右侧</span><br><span class="line">　　　　　　　　　　则该三角形为Delaunay三角形，保存到triangles</span><br><span class="line">　　　　　　　　　　并在temp里去除掉</span><br><span class="line">　　　　　　　　　　跳过</span><br><span class="line">　　　　　　　　如果该点在外接圆外（即也不是外接圆右侧）</span><br><span class="line">　　　　　　　　　　则该三角形为不确定        　　　　　　　　　     //后面会在问题中讨论</span><br><span class="line">　　　　　　　　　　跳过</span><br><span class="line">　　　　　　　　如果该点在外接圆内</span><br><span class="line">　　　　　　　　　　则该三角形不为Delaunay三角形</span><br><span class="line">　　　　　　　　　　将三边保存至edge buffer</span><br><span class="line">　　　　　　　　　　在temp中去除掉该三角形</span><br><span class="line">　　　　　　对edge buffer进行去重</span><br><span class="line">　　　　　　将edge buffer中的边与当前的点进行组合成若干三角形并保存至temp triangles中</span><br><span class="line">　　　　将triangles与temp triangles进行合并</span><br><span class="line">　　　　除去与超级三角形有关的三角形</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+<h1 id="Bowyer-Watson算法"><a href="#Bowyer-Watson算法" class="headerlink" title="Bowyer-Watson算法"></a>Bowyer-Watson算法</h1><p>基本思想:</p>
+<blockquote>
+<p>1.构造一个超级三角形，包含所有的散点，存入三角形链表</p>
+<p>2.将点集中的离散点依次插入，在三角形链表中找出外接圆包含插入点的三角形（称为该点的影响三角形），删除影响三角形的<strong>公共边</strong>，将插入点同影响三角形的全部顶点连接起来，完成一个点在Delaunay三角形链表中的插入。</p>
+<p>3.根据优化准则对局部新形成的三角形优化。将形成的三角形放入Delaunay三角形链表。</p>
+<p>4.循环执行步骤2，直到所有离散点插入完毕。</p>
+</blockquote>
+<p>图示:(来自<a href="[https://baike.baidu.com/item/Delaunay%E4%B8%89%E8%A7%92%E5%89%96%E5%88%86%E7%AE%97%E6%B3%95](https://baike.baidu.com/item/Delaunay三角剖分算法">百度百科</a>))</p>
+<p><img src="//loopvoid.github.io/2019/11/28/Delaunay三角剖分/d009b3de9c82d1582789d194800a19d8bc3e4288.jpg" alt="d009b3de9c82d1582789d194800a19d8bc3e4288.jpg"></p>
+<p>借助三个点理解一遍。</p>
+<p><img src="//loopvoid.github.io/2019/11/28/Delaunay三角剖分/Snipaste_2019-11-28_09-57-39.png" alt="Snipaste_2019-11-28_09-57-39.png"></p>
+<p>根据离散点的最大分布得到一个随机超级三角形(即该三角形包含了整个离散点集P)，并将超级三角形放入temp triangles中</p>
+<p><img src="//loopvoid.github.io/2019/11/28/Delaunay三角剖分/Snipaste_2019-11-28_10-01-38.png" alt="Snipaste_2019-11-28_10-01-38.png" style="zoom:75%;"></p>
+<p>接下来对temp triangle中的三角形遍历画外接圆，这时先对左边第一个点a进行判断，其在圆内所以该三角形不为Delaunay三角形，将其三边保存至edge buffer中，temp triangles中删除该三角形</p>
+<p><img src="//loopvoid.github.io/2019/11/28/Delaunay三角剖分/Snipaste_2019-11-28_10-03-32.png" alt="Snipaste_2019-11-28_10-03-32.png" style="zoom:75%;"></p>
+<p>将a点与edge buffer中的每一个边相连，组成三个三角形，存入temp triangles中</p>
+<p><img src="//loopvoid.github.io/2019/11/28/Delaunay三角剖分/Snipaste_2019-11-28_10-05-40.png" alt="Snipaste_2019-11-28_10-05-40.png" style="zoom:75%;"></p>
+<p>再将重复对temp triangles的遍历并画外接圆，这时使用的是b点来进行判断</p>
+<ul>
+<li>b点在三角形1外接圆右侧，则表示左侧三角形为Delaunay三角形，将该三角形保存至triangles中</li>
+<li>b点在三角形2外接圆外侧，为不确定三角形，跳过（后面处理），但并不在temp triangles中删除</li>
+<li>b点在三角形3外接圆内侧，则这时向清空后的edge buffer加入该三角形的三条边，并用b点与edge buffer中的三角边进行组合，组合成了三个三角形并加入到temp triangles中</li>
+</ul>
+<p>这时，temp buffer 中有六条边，triangles中有两个三角形，temp triangles中有1个三角形</p>
+<p>对temp buffer中的六条边进行去重，得到五条边，将该点与这五条边组合成五个三角形并加入到temp triangles 中，这时temp triangles中有6个三角形</p>
+<p><img src="//loopvoid.github.io/2019/11/28/Delaunay三角剖分/Snipaste_2019-11-28_10-13-35.png" alt="Snipaste_2019-11-28_10-13-35.png" style="zoom:75%;"></p>
+<p>由于三个点已经遍历结束，到了不会再对第三个点形成的三角形做外接圆，这时则将triangles与temp triangles合并，合并后的数组表示包含已经确定的Delaunay三角形和剩下的三角形</p>
+<p>这时除去合并后数组中的和超级三角形三个点有关的所有三角形，即进行数组坐标的限定，则得到了最后的结果：</p>
+<p><img src="//loopvoid.github.io/2019/11/28/Delaunay三角剖分/Snipaste_2019-11-28_10-18-12.png" alt="Snipaste_2019-11-28_10-18-12.png"></p>
+<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><p><a href="https://github.com/loopvoid/delaunay" target="_blank" rel="noopener">Delaunay-Cpp</a></p>
+<h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1><p><a href="http://www.cs.cmu.edu/~quake/triangle.html" target="_blank" rel="noopener">http://www.cs.cmu.edu/~quake/triangle.html</a></p>
+<p><a href="https://people.sc.fsu.edu/~jburkardt/c_src/triangle/triangle.html" target="_blank" rel="noopener">https://people.sc.fsu.edu/~jburkardt/c_src/triangle/triangle.html</a></p>
+<p><a href="https://www.cnblogs.com/zhiyishou/p/4430017.html" target="_blank" rel="noopener">https://www.cnblogs.com/zhiyishou/p/4430017.html</a></p>
+<p><a href="https://en.wikipedia.org/wiki/Delaunay_triangulation" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/Delaunay_triangulation</a></p>
+<p><a href="http://local.wasp.uwa.edu.au/~pbourke/papers/triangulate/index.html" target="_blank" rel="noopener">http://local.wasp.uwa.edu.au/~pbourke/papers/triangulate/index.html</a></p>
+<p><a href="http://local.wasp.uwa.edu.au/~pbourke/papers/triangulate/cpp.zip" target="_blank" rel="noopener">http://local.wasp.uwa.edu.au/~pbourke/papers/triangulate/cpp.zip</a></p>
+<p><a href="https://github.com/obviousjim/ofxDelaunay" target="_blank" rel="noopener">https://github.com/obviousjim/ofxDelaunay</a></p>
+<p><a href="https://github.com/delfrrr/delaunator-cpp/blob/master/include/delaunator.hpp" target="_blank" rel="noopener">https://github.com/delfrrr/delaunator-cpp/blob/master/include/delaunator.hpp</a></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+
+
+  <div>
+    
+      <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-heart"></i>感谢您的阅读-------------</div>
+    
+</div>
+     
+  </div>
+
+
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/11/17/正则表达式/" rel="next" title="正则表达式">
+                <i class="fa fa-chevron-left"></i> 正则表达式
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zNDMxMy8xMDg1MA=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/tt.png" alt="Chuan Yen">
+            
+              <p class="site-author-name" itemprop="name">Chuan Yen</p>
+              <p class="site-description motion-element" itemprop="description">Learn and record.</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">48</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">11</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">40</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/loopvoid" target="_blank" title="GitHub" rel="external nofollow"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:584714309@qq.com" target="_blank" title="E-Mail" rel="external nofollow"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/chuan-jie-92/activities" target="_blank" title="ZhiHu" rel="external nofollow"><i class="fa fa-fw fa-globe"></i>ZhiHu</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://weibo.com/sunyanchuan" target="_blank" title="Weibo" rel="external nofollow"><i class="fa fa-fw fa-globe"></i>Weibo</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://blog.csdn.net/ycj9090900" target="_blank" title="CSDN" rel="external nofollow"><i class="fa fa-fw fa-globe"></i>CSDN</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://loopvoid.github.io/minewiki/" title="mineWiki" target="_blank">mineWiki</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://docs.opencv.org" title="OpencvDocs" target="_blank">OpencvDocs</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://lib.csdn.net/base/opencv" title="OpencvKnowledgeMap" target="_blank">OpencvKnowledgeMap</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://zh.cppreference.com/w/%E9%A6%96%E9%A1%B5" title="CppRef" target="_blank">CppRef</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.freebuf.com" title="FreeBuf" target="_blank">FreeBuf</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.sec-wiki.com" title="SecWiki" target="_blank">SecWiki</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://theme-next.iissnan.com/" title="NexTDoc" target="_blank">NexTDoc</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Delaunay-Triangle"><span class="nav-number">1.</span> <span class="nav-text">Delaunay Triangle</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Voronoi图"><span class="nav-number">2.</span> <span class="nav-text">Voronoi图</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Delaunay三角剖分算法"><span class="nav-number">3.</span> <span class="nav-text">Delaunay三角剖分算法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Bowyer-Watson算法"><span class="nav-number">4.</span> <span class="nav-text">Bowyer-Watson算法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Code"><span class="nav-number">5.</span> <span class="nav-text">Code</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#References"><span class="nav-number">6.</span> <span class="nav-text">References</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">YenChuan</span>
+
+  
+
+  
+
+</div>
+
+
+  
+
+
+
+
+
+<div class="powered-by">
+<i class="fa fa-eye"></i><span id="busuanzi_container_site_pv">
+  :<span id="busuanzi_value_site_pv"></span>
+|<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  :<span id="busuanzi_value_site_uv"></span></span>
+</span></div>
+
+
+
+
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" rel="external nofollow" href="https://github.com/theme-next/hexo-theme-next">NexT.Mist</a></div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.0.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.0.4"></script>
+
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.0.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.0.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.0.4"></script>
+
+
+
+  
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "./public/search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>
