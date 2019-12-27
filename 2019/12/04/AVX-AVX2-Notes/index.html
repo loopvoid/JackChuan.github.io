@@ -173,7 +173,7 @@
 <meta property="og:image" content="https://www.officedaytime.com/tips/simdimg/shuffle.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20190701173738368.png">
 <meta property="og:image" content="https://www.officedaytime.com/tips/simdimg/blend.png">
-<meta property="og:updated_time" content="2019-12-05T02:56:17.441Z">
+<meta property="og:updated_time" content="2019-12-05T05:46:18.629Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SSE&#x2F;SSE2&#x2F;AVX&#x2F;AVX2 Notes">
 <meta name="twitter:description" content="AVX/AVX2/SSE/SSE2指令集数据类型    数据类型 描述     __m128 包含4个float类型数字的向量   __m128d 包含2个double类型数字的向量   __m128i 包含若干整形数字的向量   __m256 包含8个float类型数字的向量   __m256d 包含4个float类型数字的向量   __m256i 包含若干整形数字的向量      每一种类型，">
@@ -717,7 +717,18 @@
 </table>
 </div>
 <p>前面有一个(2)，代表函数只在AVX2中支持。</p>
-<p>将饱和度考虑在内的函数将结果限制到可以存储的最小/最大值。没有饱和的函数在饱和发生时忽略内存问题。</p>
+<p><code>_add_/_sub_</code>函数和<code>_adds_/_subs_</code>函数的区别在于。<code>s</code>表示饱和，即当结果需要更多的内存来保存结果也能存下。</p>
+<p><strong>例1：</strong>一个向量包含signed bytes，因此每个元素最大值是127(0x7F).若有98加85的操作，结果是183(0xB7).</p>
+<ul>
+<li>若用<code>_mm256_add_epi8</code>，溢出部分会被忽略存储结果为<strong>-73(0xB7)</strong></li>
+<li>若用<code>_mm256_adds_epi8</code>，结果会被限制在最大值即<strong>127(0x7F)</strong></li>
+</ul>
+<p><strong>例2：</strong>两个signed short整型向量，最小值为-32768。若计算-18000-19000，结果为-37000(0xFFFF6F78 as a 32-bit integer)</p>
+<ul>
+<li>若用<code>_mm256_sub_epi16</code>，溢出会被忽略存储结果为 <strong>28536(0x6F78)</strong></li>
+<li>若用<code>_mm256_subs_epi16</code>，结果会被限制在最小值<strong>-32768(0x8000)</strong></li>
+</ul>
+<p><code>_hadd_/_hsub_</code>函数为水平加减。即向量相邻元素做加减，而不是向量间做加减。</p>
 <p>而在水平方向上做加减法的意思如下图：</p>
 <p><img src="https://www.codeproject.com/KB/cpp/874396/Fig1.jpg" alt></p>
 <h3 id="乘除法"><a href="#乘除法" class="headerlink" title="乘除法"></a>乘除法</h3><div class="table-container">
@@ -891,6 +902,8 @@
 <p>Writing C++ Wrappers for SIMD Intrinsics (1-5)<br><a href="https://johanmabille.github.io/blog/2014/10/09/writing-c-plus-plus-wrappers-for-simd-intrinsics-1/" target="_blank" rel="noopener">https://johanmabille.github.io/blog/2014/10/09/writing-c-plus-plus-wrappers-for-simd-intrinsics-1/</a><br><a href="https://johanmabille.github.io/blog/2014/10/10/writing-c-plus-plus-wrappers-for-simd-intrinsics-2/" target="_blank" rel="noopener">https://johanmabille.github.io/blog/2014/10/10/writing-c-plus-plus-wrappers-for-simd-intrinsics-2/</a><br><a href="https://johanmabille.github.io/blog/2014/10/10/writing-c-plus-plus-wrappers-for-simd-intrinsics-3/" target="_blank" rel="noopener">https://johanmabille.github.io/blog/2014/10/10/writing-c-plus-plus-wrappers-for-simd-intrinsics-3/</a><br><a href="https://johanmabille.github.io/blog/2014/10/13/writing-c-plus-plus-wrappers-for-simd-intrinsics-4/" target="_blank" rel="noopener">https://johanmabille.github.io/blog/2014/10/13/writing-c-plus-plus-wrappers-for-simd-intrinsics-4/</a><br><a href="https://johanmabille.github.io/blog/2014/10/25/writing-c-plus-plus-wrappers-for-simd-intrinsics-5/" target="_blank" rel="noopener">https://johanmabille.github.io/blog/2014/10/25/writing-c-plus-plus-wrappers-for-simd-intrinsics-5/</a><br>Performance Considerations About SIMD Wrappers<br><a href="https://johanmabille.github.io/blog/2014/11/20/performance-considerations-about-simd-wrappers/" target="_blank" rel="noopener">https://johanmabille.github.io/blog/2014/11/20/performance-considerations-about-simd-wrappers/</a><br>Aligned Memory Allocator<br><a href="https://johanmabille.github.io/blog/2014/12/06/aligned-memory-allocator/" target="_blank" rel="noopener">https://johanmabille.github.io/blog/2014/12/06/aligned-memory-allocator/</a></p>
 <p>Ubuntu SSE指令集 编程实例—-复数乘法与共轭乘法</p>
 <p><a href="https://blog.csdn.net/jxwxg/article/details/53091376" target="_blank" rel="noopener">https://blog.csdn.net/jxwxg/article/details/53091376</a></p>
+<p>AVX2整数向量运算</p>
+<p><a href="https://blog.csdn.net/tigerisland45/article/details/54671536" target="_blank" rel="noopener">https://blog.csdn.net/tigerisland45/article/details/54671536</a></p>
 
       
     </div>
